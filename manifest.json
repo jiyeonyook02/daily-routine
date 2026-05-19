@@ -1,0 +1,15 @@
+{
+  "name": "S#01",
+  "short_name": "S#01",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#040608",
+  "theme_color": "#040608",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
