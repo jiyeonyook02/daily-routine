@@ -40,14 +40,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .tb-l{display:flex;align-items:center;gap:0.75rem;flex-shrink:0}
 .logo{font-family:'EB Garamond',serif;font-size:15px;font-weight:500;color:var(--t1);letter-spacing:0.05em;white-space:nowrap;font-style:italic;}
 .tb-divider{width:1px;height:14px;background:var(--border2);flex-shrink:0}
-.tb-status{display:flex;align-items:center;gap:5px}
+.tb-status{display:flex;align-items:center;gap:8px}
 .tb-r{display:flex;align-items:center;gap:0.5rem;flex-shrink:0}
 .tb-date{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:0.04em;white-space:nowrap}
 .status-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 3s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 6px var(--green)}50%{opacity:0.4;box-shadow:none}}
 .status-txt{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:0.12em;white-space:nowrap}
 .tb-prog{display:flex;align-items:center;gap:5px}
-.prog-track{width:50px;height:1px;background:var(--border2);position:relative;overflow:hidden;}
+.prog-track{width:120px;height:1px;background:var(--border2);position:relative;overflow:hidden;}
 .prog-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));width:0%;transition:width 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 8px rgba(245,158,11,0.6);}
 .prog-pct{font-family:var(--mono);font-size:10px;color:var(--acc);min-width:30px}
 .nav{position:sticky;top:52px;z-index:199;background:rgba(4,6,8,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 1.75rem;display:flex;overflow-x:auto;scrollbar-width:none;}
