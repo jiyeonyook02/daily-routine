@@ -37,7 +37,7 @@ export default async function handler(req, res) {
   }
 
   // 새로 만들기
-  const properties = { Name: { title: [{ text: { content: date } }] } };
+  const properties = { Date: { title: [{ text: { content: date } }] } };
   for (const [key, value] of Object.entries(checks)) {
     properties[key] = { checkbox: value };
   }
