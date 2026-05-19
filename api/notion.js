@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       'Notion-Version': '2022-06-28'
     },
     body: JSON.stringify({
-      filter: { property: 'Date', title: { equals: date } }
+      filter: { property: 'Name', title: { equals: date } }
     })
   });
   const queryResult = await query.json();
