@@ -126,6 +126,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .buy-empty{padding:0.8rem 1rem;font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:0.1em;text-transform:uppercase}
 .fab{position:fixed;bottom:1.75rem;right:1.75rem;background:var(--glass3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--t2);border:1px solid var(--border2);border-radius:8px;padding:0.55rem 1.1rem;font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;font-weight:400;cursor:pointer;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.5);transition:all 0.2s;}
 .fab:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-d)}
+.fab-save{position:fixed;bottom:1.75rem;right:8rem;background:var(--acc);color:var(--bg0);border:none;border-radius:8px;padding:0.55rem 1.1rem;font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;cursor:pointer;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.5);transition:all 0.2s;}
+.fab-save:hover{opacity:0.85}
 @media(max-width:580px){.page{padding:2rem 1rem 6rem}.hero{padding:1.75rem}.hero-h{font-size:2.2rem}.hero-stats{gap:1.5rem}}
 </style>
 </head>
@@ -315,6 +317,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 </div>
+<button class="fab-save" onclick="saveToNotion()">Save</button>
 <button class="fab" onclick="if(confirm('Reset all checks?')){document.querySelectorAll('.item.done').forEach(e=>e.classList.remove('done'));saveChecks();updateProg()}">↺ Reset</button>
 <script>
 const d=new Date(),days=['SUN','MON','TUE','WED','THU','FRI','SAT'];
@@ -334,6 +337,19 @@ function renderBuys(){const c=document.getElementById('buyItems'),e=document.get
 function addBuy(){const inp=document.getElementById('buyInput'),v=inp.value.trim();if(!v)return;buys.push({text:v,done:false});inp.value='';saveBuys();renderBuys();}
 function tgBuy(i){buys[i].done=!buys[i].done;saveBuys();renderBuys();}
 function delBuy(i){buys.splice(i,1);saveBuys();renderBuys();}
+async function saveToNotion(){
+  const items=document.querySelectorAll('.section .item');
+  const checks={};
+  const labels=['Wake Up','Oil Pulling','Brush Teeth','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Vitamin C Serum','Eye Cream AM','Moisturizer AM','Sunscreen','Deodorant','Review Plan','Morning Mindset','Music Podcast','Study A','Lunch','AM Supplements','Study B','Study C','Dinner','PM Supplements','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Acne','Driclor','Double Cleanse','PM Toner','AHA BHA','Essence','Retinol','Eye Cream PM','Moisturizer PM','Lip Care','Sheet Mask','Jaw Eye Massager','Retainer','Pillowcase','Phone Off','Set Alarm','Remove Lenses','Magnesium'];
+  items.forEach((item,i)=>{if(labels[i])checks[labels[i]]=item.classList.contains('done');});
+  const date=new Date();
+  const dateStr=`${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
+  try{
+    const res=await fetch('/api/notion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:dateStr,checks})});
+    if(res.ok)alert('Saved!');
+    else alert('Failed. Try again.');
+  }catch(e){alert('Error: '+e.message);}
+}
 loadChecks();updateProg();renderBuys();
 </script>
 </body>
