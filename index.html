@@ -2,1058 +2,357 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#050504">
-<title>ETERNAL LOOP</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S#01</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Barlow+Condensed:wght@200;300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --eternal-hand:'Homemade Apple',cursive;
-  --bg:#050504;
-  --bg2:#0a0a08;
-  --bone:#ece4d3;
-  --bone2:#bfb6a4;
-  --bone3:#7e776c;
-  --line:rgba(236,228,211,.13);
-  --line2:rgba(236,228,211,.23);
-  --veil:rgba(236,228,211,.052);
-  --veil2:rgba(236,228,211,.086);
-  --acid:#9fdcff;
-  --cyan:#a5efff;
-  --ember:#ff684d;
-  --green:#9cffc5;
-  --ink:#050504;
-  --safe-top:env(safe-area-inset-top);
-  --safe-bottom:env(safe-area-inset-bottom);
-  --sans:'Inter',system-ui,sans-serif;
+  --bg0:#040608;
+  --bg1:#070b10;
+  --bg2:#0a0f18;
+  --glass:rgba(255,255,255,0.04);
+  --glass2:rgba(255,255,255,0.07);
+  --glass3:rgba(255,255,255,0.10);
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --border3:rgba(255,255,255,0.18);
+  --t1:#eef2f8;
+  --t2:#7a8899;
+  --t3:#3a4455;
+  --t4:#1e2530;
+  --acc:#f59e0b;
+  --acc2:#fcd34d;
+  --acc-d:rgba(245,158,11,0.08);
+  --acc-d2:rgba(245,158,11,0.15);
+  --glow:rgba(245,158,11,0.12);
+  --green:#4ade80;
+  --green-d:rgba(74,222,128,0.08);
+  --red:#f87171;
+  --amber:#fbbf24;
   --mono:'JetBrains Mono',monospace;
-  --serif:'Cormorant Garamond',serif;
-}
-html{scroll-behavior:smooth;background:var(--bg)}
-body{
-  min-height:100svh;
-  background:
-    radial-gradient(ellipse 80% 44% at 50% -8%,rgba(159,220,255,.105),transparent 58%),
-    radial-gradient(ellipse 65% 36% at 100% 16%,rgba(165,239,255,.055),transparent 60%),
-    linear-gradient(180deg,#050504 0%,#0a0a08 52%,#050504 100%);
-  color:var(--bone);
-  font-family:var(--sans);
-  overflow-x:hidden;
-}
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:
-    linear-gradient(rgba(236,228,211,.012) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(236,228,211,.012) 1px,transparent 1px);
-  background-size:44px 44px;
-  mask-image:linear-gradient(180deg,black,transparent 86%);
-}
-body::after{
-  content:'';
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:radial-gradient(circle at 50% 45%,transparent 0 55%,rgba(0,0,0,.58) 100%);
-}
-.app{
-  width:min(100%,430px);
-  margin:0 auto;
-  min-height:100svh;
-  position:relative;
-  z-index:1;
-  padding:calc(12px + var(--safe-top)) 12px calc(106px + var(--safe-bottom));
-}
-.top{
-  position:sticky;
-  top:calc(8px + var(--safe-top));
-  z-index:80;
-  height:62px;
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:12px;
-  align-items:center;
-  padding:10px 12px 10px 16px;
-  border:1px solid var(--line2);
-  border-radius:999px;
-  background:rgba(5,5,4,.62);
-  backdrop-filter:blur(26px) saturate(128%);
-  -webkit-backdrop-filter:blur(26px) saturate(128%);
-  box-shadow:0 18px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.045);
-}
-.mark{
-  min-width:0;
-}
-.mark b{
-  display:block;
-  font-size:12px;
-  line-height:1;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  font-weight:700;
-}
-.mark span{
-  display:block;
-  margin-top:7px;
-  color:var(--bone3);
-  font-family:var(--mono);
-  font-size:8px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.moon{
-  --p:0deg;
-  width:42px;height:42px;border-radius:50%;
-  position:relative;
-  display:grid;
-  place-items:center;
-  background:conic-gradient(var(--acid) var(--p),rgba(236,228,211,.09) 0);
-  box-shadow:0 0 38px rgba(159,220,255,.10);
-}
-.moon::before{
-  content:'';
-  position:absolute;
-  inset:-5px;
-  border:1px solid rgba(236,228,211,.12);
-  border-radius:50%;
-}
-.moon::after{
-  content:'';
-  position:absolute;
-  inset:6px;
-  border-radius:50%;
-  background:var(--bg);
-  border:1px solid var(--line);
-}
-.moon span{
-  position:relative;
-  z-index:1;
-  font-family:var(--mono);
-  font-size:8px;
-  color:var(--bone);
-}
-.hero{
-  margin:18px 0 16px;
-  min-height:330px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line2);
-  border-radius:36px;
-  background:
-    linear-gradient(180deg,rgba(236,228,211,.082),rgba(236,228,211,.026)),
-    radial-gradient(circle at 50% 42%,rgba(159,220,255,.08),transparent 43%);
-  box-shadow:0 34px 100px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.04);
-}
-.ritual-orb{
-  position:absolute;
-  left:50%;
-  top:43%;
-  width:254px;
-  height:254px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  border:1px solid rgba(236,228,211,.13);
-  background:
-    radial-gradient(circle at center,transparent 0 34%,rgba(236,228,211,.034) 35% 36%,transparent 37% 50%,rgba(159,220,255,.07) 51% 52%,transparent 53%),
-    conic-gradient(from 20deg,transparent,rgba(165,239,255,.13),transparent 38%,rgba(159,220,255,.12),transparent 72%);
-  animation:spin 26s linear infinite;
-}
-.ritual-orb::before{
-  content:'';
-  position:absolute;
-  inset:43px;
-  border-radius:50%;
-  border:1px solid rgba(236,228,211,.16);
-  background:radial-gradient(circle,rgba(236,228,211,.05),transparent 62%);
-}
-.ritual-orb::after{
-  content:'';
-  position:absolute;
-  left:50%;top:50%;
-  width:7px;height:7px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:var(--acid);
-  box-shadow:0 0 32px rgba(159,220,255,.55);
-}
-@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.hero-meta{
-  position:absolute;
-  top:18px;
-  left:18px;
-  right:18px;
-  display:flex;
-  justify-content:space-between;
-  color:var(--bone3);
-  font-family:var(--mono);
-  font-size:8px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.titlebox{
-  position:absolute;
-  left:18px;
-  right:18px;
-  bottom:98px;
-  z-index:2;
-}
-.titlebox h1{
-  font-size:clamp(45px,15.5vw,68px);
-  line-height:.82;
-  letter-spacing:-.07em;
-  font-weight:900;
-  text-transform:uppercase;
-}
-.titlebox h1 span{
-  display:block;
-  font-family:var(--serif);
-  font-style:italic;
-  font-weight:500;
-  letter-spacing:-.045em;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(236,228,211,.82);
-}
-.titlebox p{
-  margin-top:13px;
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  color:var(--acid);
-  font-family:var(--mono);
-  font-size:8px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.stats{
-  position:absolute;
-  left:14px;
-  right:14px;
-  bottom:14px;
-  z-index:3;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:8px;
-}
-.stat{
-  min-height:64px;
-  padding:12px 10px;
-  border:1px solid var(--line);
-  border-radius:23px;
-  background:rgba(5,5,4,.48);
-  backdrop-filter:blur(18px);
-}
-.stat b{
-  display:block;
-  font-size:20px;
-  line-height:1;
-  font-weight:800;
-  letter-spacing:-.05em;
-}
-.stat small{
-  display:block;
-  margin-top:8px;
-  color:var(--bone3);
-  font-family:var(--mono);
-  font-size:7px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-.nav-wrap{
-  position:sticky;
-  top:calc(82px + var(--safe-top));
-  z-index:70;
-  margin:0 -12px 14px;
-  padding:0 12px 10px;
-  background:linear-gradient(180deg,rgba(5,5,4,.96),rgba(5,5,4,.62),transparent);
-}
-#nav{
-  display:flex;
-  gap:7px;
-  overflow:auto;
-  scrollbar-width:none;
-  scroll-snap-type:x proximity;
-  padding:2px 0;
-}
-#nav::-webkit-scrollbar{display:none}
-#nav button{
-  flex:0 0 auto;
-  min-width:44px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:rgba(236,228,211,.045);
-  color:var(--bone3);
-  padding:10px 12px;
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-}
-#nav button.active{
-  background:var(--bone);
-  color:var(--ink);
-  border-color:var(--bone);
-  font-weight:700;
-}
-.section{
-  scroll-margin-top:138px;
-  margin-bottom:10px;
-  border:1px solid var(--line);
-  border-radius:30px;
-  background:rgba(236,228,211,.042);
-  overflow:hidden;
-  position:relative;
-  backdrop-filter:blur(16px);
-  content-visibility:auto;
-  contain-intrinsic-size:410px;
-}
-.section::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 100% 0%,rgba(159,220,255,.045),transparent 35%),
-    linear-gradient(135deg,rgba(165,239,255,.025),transparent 45%);
-}
-.section-head{
-  position:relative;
-  z-index:1;
-  display:grid;
-  grid-template-columns:50px 1fr auto;
-  align-items:center;
-  gap:12px;
-  padding:14px;
-  border-bottom:1px solid var(--line);
-}
-.code{
-  width:50px;height:50px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--line2);
-  border-radius:50%;
-  color:var(--acid);
-  background:rgba(5,5,4,.32);
-  font-family:var(--mono);
-  font-size:10px;
-}
-.section-head h2{
-  font-size:17px;
-  line-height:1.02;
-  font-weight:800;
-  letter-spacing:-.046em;
-}
-.section-head p{
-  margin-top:5px;
-  color:var(--bone3);
-  font-family:var(--mono);
-  font-size:8px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-.count{
-  min-width:42px;
-  text-align:center;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:rgba(5,5,4,.22);
-  color:var(--bone2);
-  padding:6px 8px;
-  font-family:var(--mono);
-  font-size:9px;
-}
-.task{
-  min-height:82px;
-  display:grid;
-  grid-template-columns:30px 1fr;
-  gap:12px;
-  align-items:flex-start;
-  padding:15px 14px;
-  border-bottom:1px solid var(--line);
-  background:rgba(5,5,4,.15);
-  cursor:pointer;
-  touch-action:manipulation;
-  position:relative;
-}
-.task:last-child{border-bottom:0}
-.task::before{
-  content:'';
-  position:absolute;
-  left:0;top:0;bottom:0;width:0;
-  background:linear-gradient(180deg,var(--acid),rgba(159,220,255,0));
-  transition:width .18s;
-}
-.check{
-  width:28px;height:28px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--line2);
-  border-radius:50%;
-  color:transparent;
-  background:rgba(236,228,211,.05);
-  font-family:var(--mono);
-  font-size:11px;
-  position:relative;
-  z-index:1;
-}
-.task h3{
-  position:relative;
-  z-index:1;
-  font-size:14.5px;
-  line-height:1.22;
-  letter-spacing:-.025em;
-  font-weight:650;
-}
-.task p{
-  position:relative;
-  z-index:1;
-  margin-top:6px;
-  color:var(--bone3);
-  font-size:12px;
-  line-height:1.42;
-}
-.task.done{
-  background:rgba(159,220,255,.065);
-}
-.task.done::before{width:3px}
-.task.done .check{
-  background:var(--acid);
-  border-color:var(--acid);
-  color:var(--ink);
-  box-shadow:0 0 24px rgba(159,220,255,.22);
-}
-.task.done p{color:#858d69}
-.dock{
-  position:fixed;
-  left:50%;
-  bottom:calc(11px + var(--safe-bottom));
-  transform:translateX(-50%);
-  z-index:100;
-  width:min(406px,calc(100vw - 22px));
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:8px;
-  padding:8px;
-  border:1px solid var(--line2);
-  border-radius:999px;
-  background:rgba(5,5,4,.72);
-  backdrop-filter:blur(26px) saturate(135%);
-  box-shadow:0 22px 82px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.05);
-}
-.dock button{
-  min-height:46px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:rgba(236,228,211,.06);
-  color:var(--bone3);
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.dock button.primary{
-  background:var(--bone);
-  color:var(--ink);
-  border-color:var(--bone);
-  font-weight:700;
-}
-.sheet{
-  position:fixed;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%) translateY(110%);
-  z-index:120;
-  width:min(430px,100vw);
-  max-height:78svh;
-  padding:14px 14px calc(18px + var(--safe-bottom));
-  border:1px solid var(--line2);
-  border-bottom:0;
-  border-radius:34px 34px 0 0;
-  background:rgba(10,10,8,.96);
-  backdrop-filter:blur(30px);
-  box-shadow:0 -24px 92px rgba(0,0,0,.6);
-  transition:transform .24s cubic-bezier(.2,.8,.2,1);
-}
-.sheet.open{transform:translateX(-50%) translateY(0)}
-.sheet-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:5px 2px 14px;
-}
-.sheet-head h2{
-  font-size:20px;
-  font-weight:800;
-  letter-spacing:-.05em;
-}
-.sheet-head button{
-  width:36px;height:36px;
-  border-radius:50%;
-  border:1px solid var(--line);
-  background:rgba(236,228,211,.07);
-  color:var(--bone);
-}
-.buybar{
-  display:flex;
-  border:1px solid var(--line);
-  border-radius:999px;
-  overflow:hidden;
-  background:rgba(236,228,211,.052);
-  margin-bottom:12px;
-}
-#buyInput{
-  flex:1;min-width:0;
-  border:0;background:transparent;color:var(--bone);
-  padding:15px;
-  outline:0;
-  font-family:var(--mono);
-  font-size:11px;
-}
-#buyAdd{
-  border:0;
-  border-left:1px solid var(--line);
-  background:var(--bone);
-  color:var(--ink);
-  padding:0 16px;
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:700;
-}
-#buyItems{max-height:46svh;overflow:auto}
-.buy{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:13px 2px;
-  border-bottom:1px solid var(--line);
-  color:var(--bone2);
-  font-family:var(--mono);
-  font-size:12px;
-}
-.buy span{flex:1}
-.buy.bought span{text-decoration:line-through;color:var(--bone3)}
-.buy button{border:0;background:transparent;color:var(--ember);width:30px;height:30px;font-size:18px}
-.empty{padding:16px 2px;color:var(--bone3);font-family:var(--mono);font-size:10px}
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:calc(84px + var(--safe-bottom));
-  transform:translateX(-50%) translateY(18px);
-  opacity:0;
-  z-index:130;
-  border:1px solid var(--line2);
-  border-radius:999px;
-  background:var(--bone);
-  color:var(--ink);
-  padding:10px 14px;
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transition:.18s;
-  pointer-events:none;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:380px){
-  .hero{min-height:312px}
-  .titlebox h1{font-size:43px}
-  .ritual-orb{width:226px;height:226px}
-  .section-head{grid-template-columns:46px 1fr auto}
-  .code{width:46px;height:46px}
-}
-@media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-}
-
-/* exact typography repair: Eternal keeps the old span font, Loop keeps old main font */
-.titlebox .eternal-loop-title,
-.hero-title .eternal-loop-title,
-.title .eternal-loop-title{
-  font-size:clamp(45px,15.5vw,68px)!important;
-  line-height:.82!important;
-  letter-spacing:-.07em!important;
-  font-weight:900!important;
-  text-transform:uppercase!important;
-}
-.titlebox .eternal-loop-title .eternal-word,
-.hero-title .eternal-loop-title .eternal-word,
-.title .eternal-loop-title .eternal-word{
-  display:block!important;
-  font-family:var(--serif)!important;
-  font-style:italic!important;
-  font-weight:500!important;
-  font-size:.70em!important;
-  line-height:.9!important;
-  letter-spacing:-.045em!important;
-  color:transparent!important;
-  -webkit-text-stroke:1px rgba(236,228,211,.82)!important;
-  opacity:1!important;
-  transform:none!important;
-}
-.titlebox .eternal-loop-title .loop-word,
-.hero-title .eternal-loop-title .loop-word,
-.title .eternal-loop-title .loop-word{
-  display:block!important;
-  font-family:var(--sans)!important;
-  font-style:normal!important;
-  font-weight:900!important;
-  font-size:1em!important;
-  line-height:.82!important;
-  letter-spacing:-.07em!important;
-  color:var(--bone)!important;
-  -webkit-text-stroke:0!important;
-  opacity:1!important;
-  transform:none!important;
-}
-
-
-/* Eternal only: Homemade Apple */
-.titlebox .eternal-loop-title .eternal-word,
-.hero-title .eternal-loop-title .eternal-word,
-.title .eternal-loop-title .eternal-word,
-.eternal-loop-title .eternal-word{
-  font-family:var(--eternal-hand)!important;
-  font-style:normal!important;
-  font-weight:400!important;
-  font-size:.42em!important;
-  line-height:1.15!important;
-  letter-spacing:-.055em!important;
-  text-transform:none!important;
-  color:var(--bone)!important;
-  -webkit-text-stroke:0!important;
-  opacity:.76!important;
-  transform:translateX(4px) translateY(3px)!important;
-}
-
-
-/* requested patch: Eternal blue + routine text thinner */
-.titlebox .eternal-loop-title .eternal-word,
-.hero-title .eternal-loop-title .eternal-word,
-.title .eternal-loop-title .eternal-word,
-.eternal-loop-title .eternal-word{
-  color:#9fdcff!important;
-  opacity:.92!important;
-  -webkit-text-stroke:0!important;
-}
-
-.section-head h2,
-.ll-section-title{
-  font-weight:420!important;
-  letter-spacing:-.018em!important;
-}
-
-.task h3,
-.ll-task-title{
-  font-weight:380!important;
-  letter-spacing:-.012em!important;
-}
-
-.task p,
-.ll-task-note{
-  font-weight:300!important;
-  opacity:.88!important;
-}
-
-
-/* final mixed text treatment
-   metrics = option 4 technical mono
-   section header = option 5 bigger hierarchy
-   task text = option 3 editorial contrast
-*/
-
-/* top stat cells: done / left / rate */
-.metric b,
-.stat b,
-.kpi b,
-.summary b{
-  font-family:'IBM Plex Mono', monospace!important;
-  font-size:18px!important;
-  font-weight:400!important;
-  letter-spacing:-.02em!important;
-}
-.metric small,
-.stat small,
-.kpi small,
-.summary small{
-  font-family:'IBM Plex Mono', monospace!important;
-  font-size:9px!important;
-  font-weight:400!important;
-  letter-spacing:.02em!important;
-  text-transform:uppercase!important;
-  color:rgba(236,228,211,.48)!important;
-}
-
-/* section header: Wake / Start */
-.section-head h2,
-.ll-section-title{
-  font-size:17px!important;
-  font-weight:480!important;
-  line-height:1.05!important;
-  letter-spacing:-.04em!important;
-}
-.section-head p,
-.ll-section-subtitle{
-  font-family:'IBM Plex Mono', monospace!important;
-  font-size:10px!important;
-  font-weight:400!important;
-  letter-spacing:.08em!important;
-  text-transform:uppercase!important;
-  color:#9fdcff!important;
-  opacity:.86!important;
-}
-.count,
-.section-count,
-.ll-count{
-  font-family:'IBM Plex Mono', monospace!important;
-  font-size:10px!important;
-  font-weight:400!important;
-  color:rgba(236,228,211,.46)!important;
-}
-
-/* task text: Get up immediately */
-.task h3,
-.ll-task-title{
-  font-size:15px!important;
-  line-height:1.22!important;
-  font-weight:300!important;
-  letter-spacing:-.03em!important;
-}
-.task p,
-.ll-task-note{
-  font-size:12px!important;
-  line-height:1.5!important;
-  font-weight:300!important;
-  letter-spacing:-.006em!important;
-  color:rgba(236,228,211,.48)!important;
-}
-
-
-/* remove ugly hero stats; keep hidden data targets for JS */
-.hero .stats-hidden,
-.stats-hidden{
-  position:absolute!important;
-  width:1px!important;
-  height:1px!important;
-  overflow:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-}
-
-
-/* corrected layout after stats removal:
-   the real empty space was from .titlebox bottom:98px */
-.hero{
-  min-height:318px!important;
-}
-.titlebox{
-  bottom:46px!important;
-}
-
-
-/* slight downward shift: title + orb only */
-.ritual-orb{
-  top:48%!important;
-}
-.titlebox{
-  bottom:34px!important;
-}
-
+  --sans:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:14px;line-height:1.6;font-weight:300;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 20%, rgba(245,158,11,0.06) 0%, transparent 60%),radial-gradient(ellipse 50% 40% at 80% 70%, rgba(99,102,241,0.05) 0%, transparent 60%),radial-gradient(ellipse 40% 60% at 50% 100%, rgba(16,185,129,0.03) 0%, transparent 60%);pointer-events:none;z-index:0;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(4,6,8,0.8);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:52px;padding:0 1rem;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;overflow:hidden;}
+.tb-l{display:flex;align-items:center;gap:0.75rem;flex-shrink:0}
+.logo{font-family:'EB Garamond',serif;font-size:15px;font-weight:500;color:var(--t1);letter-spacing:0.05em;white-space:nowrap;font-style:italic;}
+.tb-divider{width:1px;height:14px;background:var(--border2);flex-shrink:0}
+.tb-status{display:flex;align-items:center;gap:8px}
+.tb-r{display:flex;align-items:center;gap:0;flex-shrink:0}
+.tb-date{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:0.04em;white-space:nowrap}
+.status-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 6px var(--green)}50%{opacity:0.4;box-shadow:none}}
+.status-txt{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:0.12em;white-space:nowrap}
+.tb-prog{display:flex;align-items:center;gap:5px}
+.prog-track{width:120px;height:1px;background:var(--border2);position:relative;overflow:hidden;}
+.prog-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));width:0%;transition:width 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 8px rgba(245,158,11,0.6);}
+.prog-pct{font-family:var(--mono);font-size:10px;color:var(--acc);min-width:0;margin-right:0.8rem;}
+.nav{position:sticky;top:52px;z-index:199;background:rgba(4,6,8,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 1.75rem;display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none}
+.nb{height:40px;padding:0 0.9rem;font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);background:none;border:none;border-bottom:1px solid transparent;cursor:pointer;white-space:nowrap;transition:color 0.15s,border-color 0.15s;}
+.nb:hover{color:var(--t2)}
+.nb.active{color:var(--acc);border-bottom-color:var(--acc)}
+.page{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:3rem 1.75rem 7rem;}
+.hero{margin-bottom:4rem;padding:2.5rem;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border2);border-radius:16px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(245,158,11,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-40px;left:30%;width:160px;height:160px;background:radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{font-family:var(--mono);font-size:9px;color:var(--acc);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;}
+.hero-tag::before{content:'';width:16px;height:1px;background:var(--acc);opacity:0.6}
+.hero-h{font-family:'EB Garamond',serif;font-size:clamp(2.4rem,6vw,4.2rem);font-weight:500;color:var(--t1);letter-spacing:-0.01em;line-height:0.95;margin-bottom:1.75rem;font-style:italic;}
+.hero-h .word-zero{display:block;color:var(--t2);font-weight:400;}
+.hero-h .word-friction{display:block;color:var(--acc);font-style:normal;font-weight:600;}
+.hero-stats{display:flex;gap:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.stat-v{font-family:"EB Garamond",serif;font-size:1.1rem;font-weight:500;color:var(--t1);letter-spacing:-0.02em;line-height:1;display:block;}
+.stat-v.hi{color:var(--acc);text-shadow:0 0 20px rgba(245,158,11,0.4)}
+.stat-k{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:0.15em;text-transform:uppercase;display:block;margin-top:4px}
+.section{margin-bottom:3rem;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.sec-n{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:0.1em}
+.sec-t{font-size:13px;font-weight:500;color:var(--t1);letter-spacing:0.02em}
+.sec-line{flex:1;height:1px;background:var(--border)}
+.card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:4px;transition:border-color 0.2s;}
+.card:hover{border-color:var(--border2)}
+.card-lbl{padding:0.4rem 1rem;background:var(--glass2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:0.12em;text-transform:uppercase;}
+.item{display:flex;align-items:flex-start;gap:11px;padding:0.75rem 1rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s;user-select:none;position:relative;}
+.item:last-child{border-bottom:none}
+.item:hover{background:var(--glass2)}
+.item.done{background:var(--green-d)}
+.item.done::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--green),transparent);border-radius:0 0 0 10px;}
+.item.done .im{text-decoration:line-through;color:var(--t3)}
+.item.done .in,.item.done .sub li{color:var(--t4);opacity:0.7}
+.cb{width:15px;height:15px;flex-shrink:0;margin-top:2px;border:1px solid var(--border2);border-radius:3px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;background:transparent;}
+.item.done .cb{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(74,222,128,0.4);}
+.tick{display:none;font-size:9px;color:var(--bg0);font-family:var(--mono);font-weight:700;line-height:1}
+.item.done .tick{display:block}
+.ib{flex:1;min-width:0}
+.im{font-size:13.5px;font-weight:400;color:var(--t1);line-height:1.4;letter-spacing:-0.01em}
+.in{font-size:11.5px;color:var(--t2);margin-top:3px;line-height:1.55;font-weight:300}
+.sub{margin-top:5px;list-style:none;padding:0}
+.sub li{font-family:var(--mono);font-size:10px;color:var(--t3);padding:1.5px 0 1.5px 14px;position:relative;letter-spacing:0.02em;}
+.sub li::before{content:'›';position:absolute;left:1px;color:var(--t3);font-size:10px}
+.b{display:inline-block;font-family:var(--mono);font-size:8px;padding:1px 7px;border-radius:20px;margin-left:6px;vertical-align:middle;letter-spacing:0.05em;font-weight:400;}
+.b-b{background:var(--acc-d2);color:var(--acc);border:1px solid rgba(245,158,11,0.25)}
+.b-r{background:rgba(248,113,113,0.1);color:var(--red);border:1px solid rgba(248,113,113,0.25)}
+.b-a{background:rgba(251,191,36,0.1);color:var(--amber);border:1px solid rgba(251,191,36,0.25)}
+.b-n{background:var(--glass2);color:var(--t2);border:1px solid var(--border2)}
+.b-g{background:var(--green-d);color:var(--green);border:1px solid rgba(74,222,128,0.2)}
+.callout{border-left:2px solid var(--acc);padding:0.55rem 0.9rem;margin:3px 0 5px;font-family:var(--mono);font-size:10px;color:var(--t2);line-height:1.6;background:var(--acc-d);border-radius:0 6px 6px 0;}
+.callout.warn{border-left-color:var(--amber);background:rgba(251,191,36,0.06);color:var(--amber)}
+.callout strong{color:var(--acc);font-weight:500}
+.callout.warn strong{color:var(--amber)}
+.day-block{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:6px;}
+.day-hd{display:flex;align-items:center;padding:0.85rem 1rem;background:var(--glass2);border-bottom:1px solid var(--border);gap:1rem;}
+.day-letter{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--acc);letter-spacing:-0.04em;line-height:1;text-shadow:0 0 20px rgba(245,158,11,0.4);}
+.day-name{font-size:12px;font-weight:500;color:var(--t1);letter-spacing:0.01em}
+.day-time{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:0.06em;margin-top:2px}
+.buy-wrap{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.buy-row{display:flex;border-bottom:1px solid var(--border)}
+.buy-input{flex:1;background:transparent;border:none;padding:0.7rem 1rem;color:var(--t1);font-size:13px;font-family:var(--sans);font-weight:300;outline:none;}
+.buy-input::placeholder{color:var(--t3);font-size:11px;font-family:var(--mono);letter-spacing:0.06em}
+.buy-add{padding:0 1rem;background:transparent;border:none;border-left:1px solid var(--border);color:var(--acc);font-family:var(--mono);font-size:9px;cursor:pointer;transition:background 0.15s;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;}
+.buy-add:hover{background:var(--acc-d)}
+.buy-item{display:flex;align-items:center;gap:10px;padding:0.6rem 1rem;border-bottom:1px solid var(--border);transition:background 0.1s}
+.buy-item:last-child{border-bottom:none}
+.buy-item:hover{background:var(--glass2)}
+.buy-item-txt{flex:1;font-size:12.5px;color:var(--t2);cursor:pointer;font-weight:300}
+.buy-item.bought .buy-item-txt{text-decoration:line-through;color:var(--t3)}
+.buy-item.bought .cb{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(74,222,128,0.3)}
+.buy-del{font-size:14px;color:var(--t3);cursor:pointer;opacity:0;background:none;border:none;padding:0 2px;transition:all 0.12s;font-family:var(--mono)}
+.buy-item:hover .buy-del{opacity:1}
+.buy-del:hover{color:var(--red)}
+.buy-empty{padding:0.8rem 1rem;font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:0.1em;text-transform:uppercase}
+.fab{position:fixed;bottom:1.75rem;right:1.75rem;background:var(--glass3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--t2);border:1px solid var(--border2);border-radius:8px;padding:0.55rem 1.1rem;font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;font-weight:400;cursor:pointer;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.5);transition:all 0.2s;}
+.fab:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-d)}
+.fab-save{position:fixed;bottom:1.75rem;right:8rem;background:var(--acc);color:var(--bg0);border:none;border-radius:8px;padding:0.55rem 1.1rem;font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;cursor:pointer;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.5);transition:all 0.2s;}
+.fab-save:hover{opacity:0.85}
+@media(max-width:580px){.page{padding:2rem 1rem 6rem}.hero{padding:1.75rem}.hero-h{font-size:2.2rem}.hero-stats{gap:1.5rem}}
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="app">
-  <header class="top">
-    <div class="mark">
-      <b>S#01 / ETERNAL LOOP</b>
-      <span id="date">0000.00.00</span>
+<div class="topbar">
+  <div class="tb-l">
+    <div class="logo">S#01</div>
+    <div class="tb-divider"></div>
+    <div class="tb-status">
+      <div class="status-dot"></div>
+      <div class="status-txt">PROTOCOL ACTIVE</div>
     </div>
-    <div class="moon" id="moon"><span data-pct>0%</span></div>
-  </header>
-
-  <section class="hero">
-    <div class="ritual-orb"></div>
-    <div class="hero-meta"><span>S#01</span><span>PRIVATE RITE</span></div>
-    <div class="titlebox">
-      <h1 class="eternal-loop-title"><span class="eternal-word">Eternal</span><strong class="loop-word">Loop</strong></h1>
-      <p><span>Daily ritual system</span><span></span></p>
+  </div>
+  <div class="tb-r">
+    <div class="tb-prog">
+      <div class="prog-track"><div class="prog-fill" id="pFill"></div></div>
+      <div class="prog-pct" id="pPct">0%</div>
     </div>
-    <div class="stats-hidden" aria-hidden="true">
-      <b data-done>0</b><b data-left>0</b><b data-pct>0%</b>
-    </div>
-  </section>
-
-  <div class="nav-wrap"><nav id="nav"></nav></div>
-  <main id="root"></main>
+    <div class="tb-date" id="tDate"></div>
+  </div>
 </div>
-
-<div class="dock">
-  <button class="primary" id="export">Save</button>
-  <button id="openSheet">Notes</button>
-  <button id="reset">Reset</button>
+<div class="nav" id="mainNav">
+  <button class="nb active" data-target="s-wake">Wake</button>
+  <button class="nb" data-target="s-morning">Morning</button>
+  <button class="nb" data-target="s-shower">Shower</button>
+  <button class="nb" data-target="s-lens">Lens</button>
+  <button class="nb" data-target="s-skin-am">AM Skin</button>
+  <button class="nb" data-target="s-commute">Commute</button>
+  <button class="nb" data-target="s-school">Konkuk Univ</button>
+  <button class="nb" data-target="s-home">Return</button>
+  <button class="nb" data-target="s-exercise">Work Out</button>
+  <button class="nb" data-target="s-shower-pm">PM Shower</button>
+  <button class="nb" data-target="s-skin-pm">PM Skin</button>
+  <button class="nb" data-target="s-massage">Massage</button>
+  <button class="nb" data-target="s-sleep">Sleep</button>
+  <button class="nb" data-target="s-buy">Wish List & Notes</button>
 </div>
-
-<section class="sheet" id="sheet">
-  <div class="sheet-head"><h2>Wish List & Notes</h2><button id="closeSheet">×</button></div>
-  <div class="buybar"><input id="buyInput" placeholder="// add item"><button id="buyAdd">ADD</button></div>
-  <div id="buyItems"></div>
-</section>
-<div class="toast" id="toast">Saved</div>
-
-<script>
-const ROUTINE = [["01", "Wake", "initiation", [["Get up immediately", "Move within 5 seconds. No snooze."]]], ["02", "Morning", "first circle", [["Oil pulling", "5 min. Empty stomach. Spit into tissue."], ["Brush teeth", "2+ min. Include tongue scraping."], ["Check weather", "Fine dust, outfit, SPF strength."], ["Hydration", "200–300ml water."]]], ["03", "Shower", "purification", [["Lukewarm shower", "38–40°C. End with cold water."], ["Shampoo routine", "Shampoo → conditioner → cold rinse."], ["Hair oil", "70% damp. Ends only."], ["Hair mask", "2–3×/wk. Skip conditioner that day."], ["Body lotion", "Apply while skin is damp."], ["Exfoliate", "1–2×/wk. Never daily."]]], ["04", "Lens", "sight layer", [["Insert lenses", "Rewetting drops. Max 8 hours."], ["Accessories", "Watch, rings, necklace."]]], ["05", "Skin AM", "day shield", [["Cleanser", "Mild acidic pH 5.5."], ["Toner", "HA + niacinamide."], ["Vitamin C", "10–20%. AM only."], ["Eye cream", "Peptides + caffeine."], ["Moisturizer", "Ceramide + peptides."], ["Sunscreen", "SPF50+ PA++++. Non-negotiable."], ["Deodorant", "Only on completely dry skin."]]], ["06", "Commute", "transit", [["Review plan", "Todoist + Mindkit + Notion Calendar."], ["Mindset", "One intention or 30 sec visualization."], ["Audio", "Music/podcast under 60%."]]], ["07", "Konkuk", "main rite", [["Study A", "08:00–13:00. Deep work."], ["Lunch", "12:00. Eat light. 80% full."], ["AM supplements", "C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen."], ["Study B", "13:00–18:00. Deep work."], ["Study C", "18:00–23:00. Deep work."], ["Dinner", "18:00. Eat light."], ["PM supplements", "NAC, magnesium, zinc, B complex, probiotics."]]], ["08", "Return", "release", [["Decompress", "Drama, film, music, or reading."]]], ["09", "Workout", "kinetic rite", [["Strength training", "3×/week. Big compound lifts."], ["Cardio", "3–4×/week. 20–30 min."], ["Stretching", "Daily 10 min. Foam rolling."]]], ["10", "Shower PM", "second cleanse", [["PM shower", "Within 30 min after workout."], ["Back acne care", "Acnon or BHA body wash."], ["Driclor", "2–3×/week. Dry underarms."]]], ["11", "Skin PM", "repair rite", [["Double cleanse", "Oil/balm → mild acidic foam."], ["Toner", "HA + niacinamide."], ["AHA / BHA", "1–2×/wk. Not with retinol."], ["Essence", "Niacinamide 5–10% + peptides."], ["Retinol", "3–4×/wk. PM only."], ["Eye cream", "Peptides + low-dose retinol."], ["Moisturizer", "Thicker than morning."], ["Lip care", "Lip balm or sleeping mask."], ["Sheet mask", "1–2×/wk. Non-retinol days."]]], ["12", "Face", "alignment", [["Jaw + eye massager", "4×/wk. Lymph flow route."], ["Retainer", "Clean and insert."]]], ["13", "Sleep", "closed loop", [["Pillowcase", "2×/wk. Satin or cotton."], ["Phone off", "30 min before bed."], ["Set alarm", "90-min cycles. One alarm."], ["Remove lenses", "Never sleep in contacts."], ["Magnesium", "200–400mg before bed."]]]];
-const KEY = 's01_loop_eternal_sanctum_checks_v1';
-const BUYKEY = 's01_loop_eternal_sanctum_buys_v1';
-const qs = s => document.querySelector(s);
-const qsa = s => [...document.querySelectorAll(s)];
-let observer;
-
-function today(){
-  const d = new Date();
-  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-}
-function loadState(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
-function saveState(s){localStorage.setItem(KEY,JSON.stringify(s))}
-function haptic(ms=8){if(navigator.vibrate) navigator.vibrate(ms)}
-
-function render(){
-  const state = loadState();
-  const nav = qs('#nav');
-  const root = qs('#root');
-  nav.innerHTML = '';
-  root.innerHTML = '';
-
-  ROUTINE.forEach(([code,title,mode,items], si)=>{
-    const nb = document.createElement('button');
-    nb.textContent = code;
-    nb.onclick = () => {
-      qs(`#sec-${si}`).scrollIntoView({behavior:'smooth', block:'start'});
-      setActive(si);
-    };
-    nav.appendChild(nb);
-
-    const sec = document.createElement('section');
-    sec.className = 'section';
-    sec.id = `sec-${si}`;
-    sec.innerHTML = `
-      <div class="section-head">
-        <div class="code">${code}</div>
-        <div><h2>${title}</h2><p>${mode}</p></div>
-        <div class="count">0/${items.length}</div>
+<div class="page">
+  <div class="hero">
+    <div class="hero-tag">Personal Protocol · Daily Execution</div>
+    <div class="hero-h">
+      <span class="word-zero">ZERO</span>
+      <span class="word-friction">FRICTION.</span>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-v hi" id="sDone">0</span><span class="stat-k">Executed</span></div>
+      <div class="stat"><span class="stat-v" id="sLeft">0</span><span class="stat-k">Remaining</span></div>
+      <div class="stat"><span class="stat-v" id="sPct">0%</span><span class="stat-k">Protocol Complete</span></div>
+    </div>
+  </div>
+  <div class="section" id="s-wake">
+    <div class="sec-head"><div class="sec-n">01</div><div class="sec-t">Wake Up</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Get up immediately at alarm</div><div class="in">Move within 5 seconds. No snooze.</div><ul class="sub"><li>One alarm only — multiple alarms train your brain to ignore them</li><li>Gradually increasing alarm (Galaxy: Sunrise / iPhone: Slow Rise)</li><li>Keep phone across the room</li></ul></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-morning">
+    <div class="sec-head"><div class="sec-n">02</div><div class="sec-t">Morning Routine</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Oil pulling (5 min)</div><div class="in">First thing, empty stomach. 1 tsp coconut oil.</div><ul class="sub"><li>Reduces oral bacteria, improves gum health, reduces bad breath</li><li>Spit into tissue — not the drain</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Brush teeth</div><div class="in">After oil pulling. 2+ min, include tongue scraping.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Check weather</div><div class="in">Fine dust levels. Decide outfit and SPF strength.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Morning hydration</div><div class="in">200–300ml water. Replenish fluids lost during sleep.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-shower">
+    <div class="sec-head"><div class="sec-n">03</div><div class="sec-t">Shower & Hair</div><div class="sec-line"></div></div>
+    <div class="card"><div class="card-lbl">Shower</div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Lukewarm shower (38–40°C)</div><div class="in">Hot water destroys lipid barrier. End with cold water.</div></div></div></div>
+    <div class="card"><div class="card-lbl">Hair — Daily</div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Shampoo → Conditioner (2–3 min) → Cold rinse</div><div class="in">Mid-lengths to ends only. Never on scalp.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Towel dry → Moroccan hair oil</div><div class="in">Apply at 70% damp. Ends only, avoid scalp.</div><ul class="sub"><li>Short: 1–2 pumps / Medium: 2–3 pumps — more = greasy</li></ul></div></div>
+    </div>
+    <div class="card"><div class="card-lbl">Hair Mask Day <span class="b b-b">2–3×/wk · Mon Wed Fri</span></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Shampoo → Hair mask (5–10 min) → Cold rinse → Oil</div><div class="in">Skip conditioner on hair mask days — together causes product overload.</div></div></div>
+    </div>
+    <div class="callout">Skip the rinse-out conditioner. Hair mask + conditioner do the same job. Using all three makes hair heavy and causes scalp issues.</div>
+    <div class="card"><div class="card-lbl">Body</div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Body lotion — while skin is still slightly damp</div><div class="in">Ceramide + shea butter. Maximizes absorption.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Exfoliate <span class="b b-n">1–2×/wk · Wed Sat</span></div><div class="in">Daily exfoliation damages the skin barrier.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-lens">
+    <div class="sec-head"><div class="sec-n">04</div><div class="sec-t">Lens & Accessories</div><div class="sec-line"></div></div>
+    <div class="card"><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Insert lenses + rewetting drops</div><div class="in">Apply drops before dryness sets in. HA 0.1–0.3%, preservative-free single-use vials. Max 8 hours.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Accessories</div><div class="in">Watch, rings, necklace, daily accessories.</div></div></div></div>
+  </div>
+  <div class="section" id="s-skin-am">
+    <div class="sec-head"><div class="sec-n">05</div><div class="sec-t">AM Skincare</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">① Mild acidic cleanser</div><div class="in">pH 5.5 foam cleanser. Always use cleanser.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">② Toner</div><div class="in">Hyaluronic acid + niacinamide. Pat gently.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">③ Vitamin C serum</div><div class="in">AM only. 10–20%, opaque airless pump bottle.</div><ul class="sub"><li>Brown tint = oxidized = inactive — replace immediately</li><li>Vitamin E + ferulic acid formula = best stability</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">④ Eye cream</div><div class="in">Pat with ring finger. Peptides + caffeine.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑤ Moisturizer</div><div class="in">Ceramide + peptides.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑥ Sunscreen + body spray <span class="b b-r">NON-NEGOTIABLE</span></div><div class="in">SPF50+ PA++++. ¼ tsp minimum. 80% of aging is UV damage.</div><ul class="sub"><li>Reapply every 2–3 hours outdoors</li></ul></div></div>
+    </div>
+    <div class="card"><div class="card-lbl">Deodorant</div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Apply deodorant</div><div class="in">Only when skin is completely dry after showering.</div></div></div></div>
+    <div class="callout warn">Driclor goes on at night. Apply to completely dry underarms after PM shower, sleep with it on, rinse in the morning. 2–3× per week.</div>
+  </div>
+  <div class="section" id="s-commute">
+    <div class="sec-head"><div class="sec-n">06</div><div class="sec-t">Commute</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Review today's plan</div><div class="in">Todoist + Mindkit + Notion Calendar. Set focus blocks in Emphasis.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Morning mindset</div><div class="in">Pick one, same method every day.</div><ul class="sub"><li>Journaling — one intention + 3 things you're grateful for</li><li>Visualization — 30 sec picturing yourself nailing the day</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Music or podcast</div><div class="in">Volume under 60%.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-school">
+    <div class="sec-head"><div class="sec-n">07</div><div class="sec-t">Konkuk Univ</div><div class="sec-line"></div></div>
+    <div class="day-block">
+      <div class="day-hd"><div class="day-letter">A</div><div class="day-info"><div class="day-name">Morning Block</div><div class="day-time">08:00 — 13:00</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Study</div><div class="in">Pomodoro: 25 min + 5 min / Deep work: 90 min + 20 min</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Lunch — 12:00 <span class="b b-n">Eat light</span></div><div class="in">Stop at 80% full. Cut simple carbs and fried food. 1.5–2L water daily.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">AM Supplements — with lunch</div><div class="in">Fat-soluble supps need dietary fat to absorb properly.</div><ul class="sub"><li>Vitamin C 1000mg — smokers use 2× more. Lungs, skin, immunity</li><li>Omega-3 rTG — reduces smoking-induced vascular inflammation</li><li>Vitamin D3 + K2 — smokers absorb D poorly. Immunity, sleep quality</li><li>CoQ10 Ubiquinol — cellular energy, antioxidant, cardiovascular health</li><li>Astaxanthin 4–12mg — powerful antioxidant, UV protection assist</li><li>Collagen + Vitamin C — skin elasticity, anti-aging</li></ul></div></div>
+    </div>
+    <div class="day-block">
+      <div class="day-hd"><div class="day-letter">B</div><div class="day-info"><div class="day-name">Afternoon Block</div><div class="day-time">13:00 — 18:00</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Study</div><div class="in">Pomodoro: 25 min + 5 min / Deep work: 90 min + 20 min</div></div></div>
+    </div>
+    <div class="day-block">
+      <div class="day-hd"><div class="day-letter">C</div><div class="day-info"><div class="day-name">Evening Block</div><div class="day-time">18:00 — 23:00</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Study</div><div class="in">Pomodoro: 25 min + 5 min / Deep work: 90 min + 20 min</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Dinner — 18:00 <span class="b b-n">Eat light</span></div><div class="in">Stop at 80% full. Heavy meals late impact sleep quality.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">PM Supplements — with dinner</div><div class="in">Magnesium before bed. Probiotics 30 min before eating.</div><ul class="sub"><li>NAC — clears lung mucus, protects lung cells. Near-essential for smokers</li><li>Magnesium glycinate 200–400mg — sleep, focus, stress. Depletes faster in smokers</li><li>Zinc picolinate 15–30mg — skin repair, immunity. Deficiency common in smokers</li><li>Vitamin B complex (activated) — energy, focus, nervous system</li><li>Probiotics 10B+ CFU — gut health links to skin, immunity, mood</li></ul></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-home">
+    <div class="sec-head"><div class="sec-n">08</div><div class="sec-t">Return Commute</div><div class="sec-line"></div></div>
+    <div class="card"><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Decompress — drama, film, music, or reading</div><div class="in">Volume under 60%. Last 10 min: lightly think through tomorrow.</div></div></div></div>
+  </div>
+  <div class="section" id="s-exercise">
+    <div class="sec-head"><div class="sec-n">09</div><div class="sec-t">Work Out</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Strength training <span class="b b-g">3×/week</span></div><div class="in">Squat, deadlift, pull-up, bench press. Muscle mass determines rate of aging.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Cardio <span class="b b-g">3–4×/week · 20–30 min</span></div><div class="in">Brisk walk, cycling, swimming. Slightly breathless but sustainable. Critical for lung health.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Stretching + foam rolling <span class="b b-n">Daily · 10 min</span></div><div class="in">Protein within 30 min after training.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-shower-pm">
+    <div class="sec-head"><div class="sec-n">10</div><div class="sec-t">PM Shower & Back</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Shower — within 30 min of work out</div><div class="in">Rinse conditioner last. Residue on back causes back acne.</div><ul class="sub"><li>Conditioner left on back = primary back acne trigger</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Back acne treatment (Acnon or BHA body wash)</div><div class="in">BHA body wash during shower is most efficient.</div><ul class="sub"><li>Wear cotton underwear and pajamas</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Driclor <span class="b b-n">2–3×/week</span></div><div class="in">Completely dry underarms, before sleep. Rinse in the morning.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-skin-pm">
+    <div class="sec-head"><div class="sec-n">11</div><div class="sec-t">PM Skincare</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">① Double cleanse</div><div class="in">Oil cleanser / balm → mild acidic foam. Emulsify oil until white before rinsing.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">② Toner</div><div class="in">Hyaluronic acid + niacinamide.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">③ AHA / BHA <span class="b b-a">1–2×/wk · Tue Fri</span></div><div class="in">Never on the same day as retinol. Apply after toner.</div><ul class="sub"><li>AHA (glycolic acid) — surface exfoliation, drier skin</li><li>BHA (salicylic acid) — deep pore cleanse, oily / acne-prone / back acne</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">④ Essence / Ampoule</div><div class="in">Niacinamide 5–10% + peptide complex.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑤ Retinol <span class="b b-b">3–4×/wk · Mon Wed Thu Sat</span></div><div class="in">PM only. Never same day as AHA/BHA.</div><ul class="sub"><li>Start at 0.025–0.05%. Increase concentration as skin adapts.</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑥ Eye cream</div><div class="in">Peptides + low-dose retinol. Ring finger, pat gently.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑦ Moisturizer</div><div class="in">Ceramide + peptides. Thicker layer than morning.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑧ Lip care</div><div class="in">Lip balm or sleeping lip mask. Daily for smokers.</div><ul class="sub"><li>Shea butter, jojoba oil, ceramide</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑨ Sheet mask or sleeping pack <span class="b b-b">1–2×/wk · Wed Sun</span></div><div class="in">Non-retinol days. HA + EGF sheet mask or overnight sleeping pack.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-massage">
+    <div class="sec-head"><div class="sec-n">12</div><div class="sec-t">Massage & Retainer</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Jaw + eye massager <span class="b b-n">4×/wk · Mon Wed Fri Sun</span></div><div class="in">Over moisturizer. Ear → jawline → collarbone (lymph flow). 5–10 min.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Retainer — clean and insert</div><div class="in">Dedicated cleaner or baking soda in lukewarm water. No boiling. Insert after brushing.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-sleep">
+    <div class="sec-head"><div class="sec-n">13</div><div class="sec-t">Wind Down & Sleep</div><div class="sec-line"></div></div>
+    <div class="card">
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Check pillowcase <span class="b b-n">2×/wk · Tue Fri</span></div><div class="in">Satin or 100% cotton. Sebum and bacteria cause breakouts.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Phone off 30 min before bed</div><div class="in">Dim lights (warm tone). Reading or stretching instead.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Set tomorrow's alarm</div><div class="in">90-min sleep cycles. One alarm, no snooze.</div><ul class="sub"><li>Midnight → 6:00 (4 cycles) or 7:30 (5 cycles)</li><li>Weekends within ±1 hour — sleep debt compounds</li></ul></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Remove lenses</div><div class="in">Never sleep in contacts. Drop of artificial tears after removal.</div></div></div>
+      <div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Magnesium glycinate — before bed</div><div class="in">200–400mg. Take 30–60 min before sleep.</div></div></div>
+    </div>
+  </div>
+  <div class="section" id="s-buy">
+    <div class="sec-head"><div class="sec-n">+</div><div class="sec-t">Wish List & Notes</div><div class="sec-line"></div></div>
+    <div class="buy-wrap">
+      <div class="buy-row">
+        <input class="buy-input" id="buyInput" placeholder="// add item, press enter" onkeydown="if(event.key==='Enter')addBuy()">
+        <button class="buy-add" onclick="addBuy()">Add</button>
       </div>
-      <div class="list"></div>
-    `;
-    const list = sec.querySelector('.list');
-    items.forEach(([name,note],ii)=>{
-      const id = `${si}-${ii}`;
-      const row = document.createElement('article');
-      row.className = 'task' + (state[id] ? ' done' : '');
-      row.dataset.id = id;
-      row.innerHTML = `<div class="check">✓</div><div><h3>${name}</h3><p>${note}</p></div>`;
-      row.onclick = () => toggle(row);
-      list.appendChild(row);
-    });
-    root.appendChild(sec);
-  });
-
-  qs('#date').textContent = today();
-  observe();
-  update();
-  setActive(0);
-}
-
-function toggle(row){
-  const id = row.dataset.id;
-  const s = loadState();
-  s[id] = !s[id];
-  saveState(s);
-  row.classList.toggle('done', s[id]);
-  haptic();
-  update();
-}
-
-function update(){
-  const total = ROUTINE.reduce((a,s)=>a+s[3].length,0);
-  const done = qsa('.task.done').length;
-  const pct = total ? Math.round(done/total*100) : 0;
-  qsa('[data-done]').forEach(e=>e.textContent=done);
-  qsa('[data-left]').forEach(e=>e.textContent=total-done);
-  qsa('[data-pct]').forEach(e=>e.textContent=pct+'%');
-  qs('#moon').style.setProperty('--p', pct*3.6 + 'deg');
-
-  ROUTINE.forEach((section, si)=>{
-    const sec = qs(`#sec-${si}`);
-    if(!sec) return;
-    const d = sec.querySelectorAll('.task.done').length;
-    sec.querySelector('.count').textContent = `${d}/${section[3].length}`;
-  });
-}
-
-function setActive(si){
-  qsa('#nav button').forEach((b,i)=>b.classList.toggle('active',i===si));
-  const b = qsa('#nav button')[si];
-  if(b) b.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-}
-
-function observe(){
-  if(observer) observer.disconnect();
-  observer = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting) setActive(Number(e.target.id.replace('sec-','')));
-    });
-  },{threshold:.25,rootMargin:'-132px 0px -48% 0px'});
-  qsa('.section').forEach(s=>observer.observe(s));
-}
-
-function resetAll(){
-  if(!confirm('Reset all checks?')) return;
-  localStorage.removeItem(KEY);
-  render();
-}
-
-let buys=[];
-function loadBuys(){try{buys=JSON.parse(localStorage.getItem(BUYKEY)||'[]')}catch(e){buys=[]}}
-function saveBuys(){localStorage.setItem(BUYKEY,JSON.stringify(buys))}
-function renderBuys(){
-  const wrap=qs('#buyItems');
-  wrap.innerHTML = buys.length ? '' : '<p class="empty">// empty</p>';
-  buys.forEach((it,i)=>{
-    const el=document.createElement('div');
-    el.className='buy'+(it.done?' bought':'');
-    el.innerHTML=`<span>${it.text}</span><button>×</button>`;
-    el.querySelector('span').onclick=()=>{buys[i].done=!buys[i].done;saveBuys();renderBuys();};
-    el.querySelector('button').onclick=()=>{buys.splice(i,1);saveBuys();renderBuys();};
-    wrap.appendChild(el);
-  });
-}
-function addBuy(){
-  const input=qs('#buyInput');
-  const text=input.value.trim();
-  if(!text)return;
-  buys.push({text,done:false});
-  input.value='';
-  saveBuys();
-  renderBuys();
-}
-async async function exportSnapshot(){
-  const items = document.querySelectorAll(".section .task");
-  const checks = {};
-
-  const labels = [
-    "Wake Up",
-    "Oil Pulling",
-    "Brush Teeth",
-    "Check Weather",
-    "Morning Hydration",
-    "Shower",
-    "Hair Care - Shampoo",
-    "Hair Care - Oil",
-    "Hair Mask",
-    "Body Lotion",
-    "Exfoliate",
-    "Insert Lenses",
-    "Accessories",
-    "AM Cleanser",
-    "AM Toner",
-    "Vitamin C Serum",
-    "Eye Cream AM",
-    "Moisturizer AM",
-    "Sunscreen",
-    "Deodorant",
-    "Review Plan",
-    "Morning Mindset",
-    "Music Podcast",
-    "Study A",
-    "Lunch",
-    "AM Supplements",
-    "Study B",
-    "Study C",
-    "Dinner",
-    "PM Supplements",
-    "Decompress",
-    "Strength Training",
-    "Cardio",
-    "Stretching",
-    "PM Shower",
-    "Back Acne",
-    "Driclor",
-    "Double Cleanse",
-    "PM Toner",
-    "AHA BHA",
-    "Essence",
-    "Retinol",
-    "Eye Cream PM",
-    "Moisturizer PM",
-    "Lip Care",
-    "Sheet Mask",
-    "Jaw Eye Massager",
-    "Retainer",
-    "Pillowcase",
-    "Phone Off",
-    "Set Alarm",
-    "Remove Lenses",
-    "Magnesium"
-  ];
-
-  items.forEach((item, i) => {
-    if(labels[i]){
-      checks[labels[i]] = item.classList.contains("done");
-    }
-  });
-
-  const date = new Date();
-  const dateStr = `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,"0")}.${String(date.getDate()).padStart(2,"0")}`;
-
+      <div id="buyItems"></div>
+      <div class="buy-empty" id="buyEmpty">// empty</div>
+    </div>
+  </div>
+</div>
+<button class="fab-save" onclick="saveToNotion()">Save</button>
+<button class="fab" onclick="if(confirm('Reset all checks?')){document.querySelectorAll('.item.done').forEach(e=>e.classList.remove('done'));saveChecks();updateProg()}">↺ Reset</button>
+<script>
+const d=new Date(),days=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+document.getElementById('tDate').textContent=`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+function tog(el){el.classList.toggle('done');saveChecks();updateProg()}
+function saveChecks(){const items=document.querySelectorAll('.section .item');localStorage.setItem('routine_v4',JSON.stringify([...items].map(i=>i.classList.contains('done'))));}
+function loadChecks(){const state=JSON.parse(localStorage.getItem('routine_v4')||'[]');document.querySelectorAll('.section .item').forEach((item,i)=>{if(state[i])item.classList.add('done')});}
+function updateProg(){const all=document.querySelectorAll('.section .item');const done=document.querySelectorAll('.section .item.done');const t=all.length,dn=done.length,pct=t?Math.round(dn/t*100):0;document.getElementById('pFill').style.width=pct+'%';document.getElementById('pPct').textContent=pct+'%';document.getElementById('sDone').textContent=dn;document.getElementById('sLeft').textContent=t-dn;document.getElementById('sPct').textContent=pct+'%';}
+const sections=document.querySelectorAll('.section');
+const navBtns=document.querySelectorAll('.nb');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;navBtns.forEach(b=>b.classList.toggle('active',b.dataset.target===id));const ab=document.querySelector(`.nb[data-target="${id}"]`);if(ab)ab.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});}});},{threshold:0.25,rootMargin:'-90px 0px -50% 0px'});
+sections.forEach(s=>obs.observe(s));
+navBtns.forEach(btn=>btn.addEventListener('click',()=>{const t=document.getElementById(btn.dataset.target);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});navBtns.forEach(b=>b.classList.remove('active'));btn.classList.add('active');}));
+let buys=JSON.parse(localStorage.getItem('buys_v4')||'[]');
+const saveBuys=()=>localStorage.setItem('buys_v4',JSON.stringify(buys));
+function renderBuys(){const c=document.getElementById('buyItems'),e=document.getElementById('buyEmpty');c.innerHTML='';if(!buys.length){e.style.display='block';return}e.style.display='none';buys.forEach((item,i)=>{const el=document.createElement('div');el.className='buy-item'+(item.done?' bought':'');el.innerHTML=`<div class="cb" onclick="tgBuy(${i})" style="cursor:pointer;flex-shrink:0;margin-top:0"><span class="tick">✓</span></div><div class="buy-item-txt" onclick="tgBuy(${i})">${item.text}</div><button class="buy-del" onclick="delBuy(${i})">×</button>`;c.appendChild(el);});}
+function addBuy(){const inp=document.getElementById('buyInput'),v=inp.value.trim();if(!v)return;buys.push({text:v,done:false});inp.value='';saveBuys();renderBuys();}
+function tgBuy(i){buys[i].done=!buys[i].done;saveBuys();renderBuys();}
+function delBuy(i){buys.splice(i,1);saveBuys();renderBuys();}
+async function saveToNotion(){
+  const items=document.querySelectorAll('.section .item');
+  const checks={};
+  const labels=['Wake Up','Oil Pulling','Brush Teeth','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Vitamin C Serum','Eye Cream AM','Moisturizer AM','Sunscreen','Deodorant','Review Plan','Morning Mindset','Music Podcast','Study A','Lunch','AM Supplements','Study B','Study C','Dinner','PM Supplements','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Acne','Driclor','Double Cleanse','PM Toner','AHA BHA','Essence','Retinol','Eye Cream PM','Moisturizer PM','Lip Care','Sheet Mask','Jaw Eye Massager','Retainer','Pillowcase','Phone Off','Set Alarm','Remove Lenses','Magnesium'];
+  items.forEach((item,i)=>{if(labels[i])checks[labels[i]]=item.classList.contains('done');});
+  const date=new Date();
+  const dateStr=`${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
   try{
-    const res = await fetch("/api/notion", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        date: dateStr,
-        checks: checks
-      })
-    });
-
-    if(res.ok){
-      showToast("Saved");
-      alert("Saved!");
-    }else{
-      showToast("Failed");
-      alert("Failed. Try again.");
-    }
-  }catch(e){
-    showToast("Error");
-    alert("Error: " + e.message);
-  }
+    const res=await fetch('/api/notion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:dateStr,checks})});
+    if(res.ok)alert('Saved!');
+    else alert('Failed. Try again.');
+  }catch(e){alert('Error: '+e.message);}
 }
-function showToast(message = "Saved"){
-  const toast = qs("#toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  },1200);
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  render();
-  loadBuys();
-  renderBuys();
-  qs('#reset').onclick=resetAll;
-  qs('#export').onclick=exportSnapshot;
-  qs('#openSheet').onclick=()=>qs('#sheet').classList.add('open');
-  qs('#closeSheet').onclick=()=>qs('#sheet').classList.remove('open');
-  qs('#buyAdd').onclick=addBuy;
-  qs('#buyInput').addEventListener('keydown',e=>{if(e.key==='Enter')addBuy()});
-});
+loadChecks();updateProg();renderBuys();
 </script>
 </body>
 </html>
