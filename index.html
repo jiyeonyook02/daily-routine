@@ -793,14 +793,14 @@ body::after{
 </div>
 
 <div class="dock">
-  <button class="primary" id="export">Save</button>
-  <button id="openSheet">Notes</button>
-  <button id="reset">Reset</button>
+  <button class="primary" id="export" onclick="saveToNotion()">Save</button>
+  <button id="openSheet" onclick="document.getElementById('sheet').classList.add('open')">Notes</button>
+  <button id="reset" onclick="resetAll()">Reset</button>
 </div>
 
 <section class="sheet" id="sheet">
-  <div class="sheet-head"><h2>Wish List & Notes</h2><button id="closeSheet">×</button></div>
-  <div class="buybar"><input id="buyInput" placeholder="// add item"><button id="buyAdd">ADD</button></div>
+  <div class="sheet-head"><h2>Wish List & Notes</h2><button id="closeSheet" onclick="document.getElementById('sheet').classList.remove('open')">×</button></div>
+  <div class="buybar"><input id="buyInput" placeholder="// add item" onkeydown="if(event.key==='Enter')addBuy()"><button id="buyAdd" onclick="addBuy()">ADD</button></div>
   <div id="buyItems"></div>
 </section>
 <div class="toast" id="toast">Saved</div>
@@ -969,15 +969,10 @@ function showToast(){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  render();
-  loadBuys();
-  renderBuys();
-  qs('#reset').onclick=resetAll;
-  qs('#export').onclick=saveToNotion;
-  qs('#openSheet').onclick=()=>qs('#sheet').classList.add('open');
-  qs('#closeSheet').onclick=()=>qs('#sheet').classList.remove('open');
-  qs('#buyAdd').onclick=addBuy;
-  qs('#buyInput').addEventListener('keydown',e=>{if(e.key==='Enter')addBuy()});
+  try{ render(); }catch(e){ console.error('render() failed:', e); }
+  try{ loadBuys(); renderBuys(); }catch(e){ console.error('buys failed:', e); }
+  // NOTE: Save/Reset/Notes/Add buttons are wired via inline onclick= in the HTML
+  // so they still work even if something above throws.
 });
 </script>
 </body>
