@@ -940,18 +940,70 @@ function addBuy(){
   saveBuys();
   renderBuys();
 }
-async function exportSnapshot(){
+async async function exportSnapshot(){
+  const items = document.querySelectorAll(".section .task");
   const checks = {};
-  const sections = qsa(".section");
 
-  sections.forEach(section => {
-    const sectionTitle = section.querySelector(".section-head h2")?.textContent?.trim() || "Section";
-    section.querySelectorAll(".task").forEach(task => {
-      const taskTitle = task.querySelector("h3")?.textContent?.trim();
-      if(taskTitle){
-        checks[`${sectionTitle} - ${taskTitle}`] = task.classList.contains("done");
-      }
-    });
+  const labels = [
+    "Wake Up",
+    "Oil Pulling",
+    "Brush Teeth",
+    "Check Weather",
+    "Morning Hydration",
+    "Shower",
+    "Hair Care - Shampoo",
+    "Hair Care - Oil",
+    "Hair Mask",
+    "Body Lotion",
+    "Exfoliate",
+    "Insert Lenses",
+    "Accessories",
+    "AM Cleanser",
+    "AM Toner",
+    "Vitamin C Serum",
+    "Eye Cream AM",
+    "Moisturizer AM",
+    "Sunscreen",
+    "Deodorant",
+    "Review Plan",
+    "Morning Mindset",
+    "Music Podcast",
+    "Study A",
+    "Lunch",
+    "AM Supplements",
+    "Study B",
+    "Study C",
+    "Dinner",
+    "PM Supplements",
+    "Decompress",
+    "Strength Training",
+    "Cardio",
+    "Stretching",
+    "PM Shower",
+    "Back Acne",
+    "Driclor",
+    "Double Cleanse",
+    "PM Toner",
+    "AHA BHA",
+    "Essence",
+    "Retinol",
+    "Eye Cream PM",
+    "Moisturizer PM",
+    "Lip Care",
+    "Sheet Mask",
+    "Jaw Eye Massager",
+    "Retainer",
+    "Pillowcase",
+    "Phone Off",
+    "Set Alarm",
+    "Remove Lenses",
+    "Magnesium"
+  ];
+
+  items.forEach((item, i) => {
+    if(labels[i]){
+      checks[labels[i]] = item.classList.contains("done");
+    }
   });
 
   const date = new Date();
@@ -965,12 +1017,13 @@ async function exportSnapshot(){
       },
       body: JSON.stringify({
         date: dateStr,
-        checks
+        checks: checks
       })
     });
 
     if(res.ok){
       showToast("Saved");
+      alert("Saved!");
     }else{
       showToast("Failed");
       alert("Failed. Try again.");
