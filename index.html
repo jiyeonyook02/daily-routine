@@ -940,51 +940,44 @@ function addBuy(){
   saveBuys();
   renderBuys();
 }
-const NOTION_ENDPOINT = ""; 
-// 여기에 원래 쓰던 Notion / Make / Zapier / Apps Script Webhook URL 넣어야 함.
-// 예: const NOTION_ENDPOINT = "https://script.google.com/macros/s/XXXX/exec";
-
 async function exportSnapshot(){
-  const total = ROUTINE.reduce((sum,section) => sum + section[3].length,0);
-  const doneCount = qsa(".task.done").length;
-  const pct = total ? Math.round(doneCount / total * 100) : 0;
+  const checks = {};
+  const sections = qsa(".section");
 
-  const doneTasks = qsa(".task.done h3").map(el => el.textContent);
+  sections.forEach(section => {
+    const sectionTitle = section.querySelector(".section-head h2")?.textContent?.trim() || "Section";
+    section.querySelectorAll(".task").forEach(task => {
+      const taskTitle = task.querySelector("h3")?.textContent?.trim();
+      if(taskTitle){
+        checks[`${sectionTitle} - ${taskTitle}`] = task.classList.contains("done");
+      }
+    });
+  });
 
-  const payload = {
-    date: today(),
-    title: "ETERNAL LOOP",
-    done_count: doneCount,
-    left_count: total - doneCount,
-    rate: pct,
-    done_tasks: doneTasks,
-    buys,
-    created_at: new Date().toISOString()
-  };
-
-  if(!NOTION_ENDPOINT){
-    console.error("NOTION_ENDPOINT is empty.", payload);
-    showToast("Endpoint Missing");
-    return;
-  }
+  const date = new Date();
+  const dateStr = `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,"0")}.${String(date.getDate()).padStart(2,"0")}`;
 
   try{
-    const response = await fetch(NOTION_ENDPOINT,{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
+    const res = await fetch("/api/notion", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
       },
-      body:JSON.stringify(payload)
+      body: JSON.stringify({
+        date: dateStr,
+        checks
+      })
     });
 
-    if(!response.ok){
-      throw new Error("HTTP " + response.status);
+    if(res.ok){
+      showToast("Saved");
+    }else{
+      showToast("Failed");
+      alert("Failed. Try again.");
     }
-
-    showToast("Saved to Notion");
-  }catch(error){
-    console.error(error);
-    showToast("Save Failed");
+  }catch(e){
+    showToast("Error");
+    alert("Error: " + e.message);
   }
 }
 function showToast(message = "Saved"){
