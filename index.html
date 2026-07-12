@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#050504" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050504">
 <title>ETERNAL LOOP</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Homemade+Apple&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  -webkit-tap-highlight-color:transparent;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
+  --eternal-hand:'Homemade Apple',cursive;
   --bg:#050504;
   --bg2:#0a0a08;
   --bone:#ece4d3;
@@ -35,14 +28,9 @@
   --safe-bottom:env(safe-area-inset-bottom);
   --sans:'Inter',system-ui,sans-serif;
   --mono:'JetBrains Mono',monospace;
-  --hand:'Homemade Apple',cursive;
+  --serif:'Cormorant Garamond',serif;
 }
-
-html{
-  scroll-behavior:smooth;
-  background:var(--bg);
-}
-
+html{scroll-behavior:smooth;background:var(--bg)}
 body{
   min-height:100svh;
   background:
@@ -53,7 +41,6 @@ body{
   font-family:var(--sans);
   overflow-x:hidden;
 }
-
 body::before{
   content:'';
   position:fixed;
@@ -65,7 +52,6 @@ body::before{
   background-size:44px 44px;
   mask-image:linear-gradient(180deg,black,transparent 86%);
 }
-
 body::after{
   content:'';
   position:fixed;
@@ -73,7 +59,6 @@ body::after{
   pointer-events:none;
   background:radial-gradient(circle at 50% 45%,transparent 0 55%,rgba(0,0,0,.58) 100%);
 }
-
 .app{
   width:min(100%,430px);
   margin:0 auto;
@@ -82,8 +67,6 @@ body::after{
   z-index:1;
   padding:calc(12px + var(--safe-top)) 12px calc(106px + var(--safe-bottom));
 }
-
-/* top bar */
 .top{
   position:sticky;
   top:calc(8px + var(--safe-top));
@@ -101,11 +84,9 @@ body::after{
   -webkit-backdrop-filter:blur(26px) saturate(128%);
   box-shadow:0 18px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.045);
 }
-
 .mark{
   min-width:0;
 }
-
 .mark b{
   display:block;
   font-size:12px;
@@ -114,7 +95,6 @@ body::after{
   text-transform:uppercase;
   font-weight:700;
 }
-
 .mark span{
   display:block;
   margin-top:7px;
@@ -124,20 +104,15 @@ body::after{
   letter-spacing:.18em;
   text-transform:uppercase;
 }
-
-/* progress moon */
 .moon{
   --p:0deg;
-  width:42px;
-  height:42px;
-  border-radius:50%;
+  width:42px;height:42px;border-radius:50%;
   position:relative;
   display:grid;
   place-items:center;
   background:conic-gradient(var(--acid) var(--p),rgba(236,228,211,.09) 0);
   box-shadow:0 0 38px rgba(159,220,255,.10);
 }
-
 .moon::before{
   content:'';
   position:absolute;
@@ -145,7 +120,6 @@ body::after{
   border:1px solid rgba(236,228,211,.12);
   border-radius:50%;
 }
-
 .moon::after{
   content:'';
   position:absolute;
@@ -154,7 +128,6 @@ body::after{
   background:var(--bg);
   border:1px solid var(--line);
 }
-
 .moon span{
   position:relative;
   z-index:1;
@@ -162,11 +135,9 @@ body::after{
   font-size:8px;
   color:var(--bone);
 }
-
-/* hero */
 .hero{
   margin:18px 0 16px;
-  min-height:318px;
+  min-height:330px;
   position:relative;
   overflow:hidden;
   border:1px solid var(--line2);
@@ -176,11 +147,10 @@ body::after{
     radial-gradient(circle at 50% 42%,rgba(159,220,255,.08),transparent 43%);
   box-shadow:0 34px 100px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.04);
 }
-
 .ritual-orb{
   position:absolute;
   left:50%;
-  top:48%;
+  top:43%;
   width:254px;
   height:254px;
   transform:translate(-50%,-50%);
@@ -191,7 +161,6 @@ body::after{
     conic-gradient(from 20deg,transparent,rgba(165,239,255,.13),transparent 38%,rgba(159,220,255,.12),transparent 72%);
   animation:spin 26s linear infinite;
 }
-
 .ritual-orb::before{
   content:'';
   position:absolute;
@@ -200,26 +169,17 @@ body::after{
   border:1px solid rgba(236,228,211,.16);
   background:radial-gradient(circle,rgba(236,228,211,.05),transparent 62%);
 }
-
 .ritual-orb::after{
   content:'';
   position:absolute;
-  left:50%;
-  top:50%;
-  width:7px;
-  height:7px;
+  left:50%;top:50%;
+  width:7px;height:7px;
   transform:translate(-50%,-50%);
   border-radius:50%;
   background:var(--acid);
   box-shadow:0 0 32px rgba(159,220,255,.55);
 }
-
-@keyframes spin{
-  to{
-    transform:translate(-50%,-50%) rotate(360deg);
-  }
-}
-
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .hero-meta{
   position:absolute;
   top:18px;
@@ -233,49 +193,29 @@ body::after{
   letter-spacing:.18em;
   text-transform:uppercase;
 }
-
 .titlebox{
   position:absolute;
   left:18px;
   right:18px;
-  bottom:34px;
+  bottom:98px;
   z-index:2;
 }
-
-.eternal-loop-title{
+.titlebox h1{
   font-size:clamp(45px,15.5vw,68px);
   line-height:.82;
   letter-spacing:-.07em;
   font-weight:900;
   text-transform:uppercase;
 }
-
-.eternal-word{
+.titlebox h1 span{
   display:block;
-  font-family:var(--hand);
-  font-style:normal;
-  font-weight:400;
-  font-size:.42em;
-  line-height:1.15;
-  letter-spacing:-.055em;
-  text-transform:none;
-  color:var(--acid);
-  opacity:.92;
-  transform:translateX(4px) translateY(3px);
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:500;
+  letter-spacing:-.045em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(236,228,211,.82);
 }
-
-.loop-word{
-  display:block;
-  font-family:var(--sans);
-  font-style:normal;
-  font-weight:900;
-  font-size:1em;
-  line-height:.82;
-  letter-spacing:-.07em;
-  color:var(--bone);
-  text-transform:uppercase;
-}
-
 .titlebox p{
   margin-top:13px;
   display:flex;
@@ -287,18 +227,40 @@ body::after{
   letter-spacing:.16em;
   text-transform:uppercase;
 }
-
-/* hidden stat targets for JS */
-.stats-hidden{
+.stats{
   position:absolute;
-  width:1px;
-  height:1px;
-  overflow:hidden;
-  opacity:0;
-  pointer-events:none;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  z-index:3;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
 }
-
-/* nav */
+.stat{
+  min-height:64px;
+  padding:12px 10px;
+  border:1px solid var(--line);
+  border-radius:23px;
+  background:rgba(5,5,4,.48);
+  backdrop-filter:blur(18px);
+}
+.stat b{
+  display:block;
+  font-size:20px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-.05em;
+}
+.stat small{
+  display:block;
+  margin-top:8px;
+  color:var(--bone3);
+  font-family:var(--mono);
+  font-size:7px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
 .nav-wrap{
   position:sticky;
   top:calc(82px + var(--safe-top));
@@ -307,7 +269,6 @@ body::after{
   padding:0 12px 10px;
   background:linear-gradient(180deg,rgba(5,5,4,.96),rgba(5,5,4,.62),transparent);
 }
-
 #nav{
   display:flex;
   gap:7px;
@@ -316,11 +277,7 @@ body::after{
   scroll-snap-type:x proximity;
   padding:2px 0;
 }
-
-#nav::-webkit-scrollbar{
-  display:none;
-}
-
+#nav::-webkit-scrollbar{display:none}
 #nav button{
   flex:0 0 auto;
   min-width:44px;
@@ -334,15 +291,12 @@ body::after{
   letter-spacing:.05em;
   text-transform:uppercase;
 }
-
 #nav button.active{
   background:var(--bone);
   color:var(--ink);
   border-color:var(--bone);
   font-weight:700;
 }
-
-/* sections */
 .section{
   scroll-margin-top:138px;
   margin-bottom:10px;
@@ -355,7 +309,6 @@ body::after{
   content-visibility:auto;
   contain-intrinsic-size:410px;
 }
-
 .section::before{
   content:'';
   position:absolute;
@@ -365,7 +318,6 @@ body::after{
     radial-gradient(circle at 100% 0%,rgba(159,220,255,.045),transparent 35%),
     linear-gradient(135deg,rgba(165,239,255,.025),transparent 45%);
 }
-
 .section-head{
   position:relative;
   z-index:1;
@@ -376,10 +328,8 @@ body::after{
   padding:14px;
   border-bottom:1px solid var(--line);
 }
-
 .code{
-  width:50px;
-  height:50px;
+  width:50px;height:50px;
   display:grid;
   place-items:center;
   border:1px solid var(--line2);
@@ -389,39 +339,31 @@ body::after{
   font-family:var(--mono);
   font-size:10px;
 }
-
 .section-head h2{
   font-size:17px;
-  line-height:1.05;
-  font-weight:480;
-  letter-spacing:-.04em;
+  line-height:1.02;
+  font-weight:800;
+  letter-spacing:-.046em;
 }
-
 .section-head p{
   margin-top:5px;
-  color:var(--acid);
+  color:var(--bone3);
   font-family:var(--mono);
-  font-size:10px;
-  font-weight:400;
-  letter-spacing:.08em;
+  font-size:8px;
+  letter-spacing:.14em;
   text-transform:uppercase;
-  opacity:.86;
 }
-
 .count{
   min-width:42px;
   text-align:center;
   border:1px solid var(--line);
   border-radius:999px;
   background:rgba(5,5,4,.22);
-  color:rgba(236,228,211,.46);
+  color:var(--bone2);
   padding:6px 8px;
   font-family:var(--mono);
-  font-size:10px;
-  font-weight:400;
+  font-size:9px;
 }
-
-/* tasks */
 .task{
   min-height:82px;
   display:grid;
@@ -435,25 +377,16 @@ body::after{
   touch-action:manipulation;
   position:relative;
 }
-
-.task:last-child{
-  border-bottom:0;
-}
-
+.task:last-child{border-bottom:0}
 .task::before{
   content:'';
   position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:0;
+  left:0;top:0;bottom:0;width:0;
   background:linear-gradient(180deg,var(--acid),rgba(159,220,255,0));
   transition:width .18s;
 }
-
 .check{
-  width:28px;
-  height:28px;
+  width:28px;height:28px;
   display:grid;
   place-items:center;
   border:1px solid var(--line2);
@@ -465,47 +398,33 @@ body::after{
   position:relative;
   z-index:1;
 }
-
 .task h3{
   position:relative;
   z-index:1;
-  font-size:15px;
+  font-size:14.5px;
   line-height:1.22;
-  letter-spacing:-.03em;
-  font-weight:300;
+  letter-spacing:-.025em;
+  font-weight:650;
 }
-
 .task p{
   position:relative;
   z-index:1;
   margin-top:6px;
-  color:rgba(236,228,211,.48);
+  color:var(--bone3);
   font-size:12px;
-  line-height:1.5;
-  font-weight:300;
-  letter-spacing:-.006em;
+  line-height:1.42;
 }
-
 .task.done{
   background:rgba(159,220,255,.065);
 }
-
-.task.done::before{
-  width:3px;
-}
-
+.task.done::before{width:3px}
 .task.done .check{
   background:var(--acid);
   border-color:var(--acid);
   color:var(--ink);
   box-shadow:0 0 24px rgba(159,220,255,.22);
 }
-
-.task.done p{
-  color:#858d69;
-}
-
-/* bottom dock */
+.task.done p{color:#858d69}
 .dock{
   position:fixed;
   left:50%;
@@ -523,7 +442,6 @@ body::after{
   backdrop-filter:blur(26px) saturate(135%);
   box-shadow:0 22px 82px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.05);
 }
-
 .dock button{
   min-height:46px;
   border:1px solid var(--line);
@@ -535,15 +453,12 @@ body::after{
   letter-spacing:.16em;
   text-transform:uppercase;
 }
-
 .dock button.primary{
   background:var(--bone);
   color:var(--ink);
   border-color:var(--bone);
   font-weight:700;
 }
-
-/* sheet */
 .sheet{
   position:fixed;
   left:50%;
@@ -561,33 +476,25 @@ body::after{
   box-shadow:0 -24px 92px rgba(0,0,0,.6);
   transition:transform .24s cubic-bezier(.2,.8,.2,1);
 }
-
-.sheet.open{
-  transform:translateX(-50%) translateY(0);
-}
-
+.sheet.open{transform:translateX(-50%) translateY(0)}
 .sheet-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:5px 2px 14px;
 }
-
 .sheet-head h2{
   font-size:20px;
   font-weight:800;
   letter-spacing:-.05em;
 }
-
 .sheet-head button{
-  width:36px;
-  height:36px;
+  width:36px;height:36px;
   border-radius:50%;
   border:1px solid var(--line);
   background:rgba(236,228,211,.07);
   color:var(--bone);
 }
-
 .buybar{
   display:flex;
   border:1px solid var(--line);
@@ -596,19 +503,14 @@ body::after{
   background:rgba(236,228,211,.052);
   margin-bottom:12px;
 }
-
 #buyInput{
-  flex:1;
-  min-width:0;
-  border:0;
-  background:transparent;
-  color:var(--bone);
+  flex:1;min-width:0;
+  border:0;background:transparent;color:var(--bone);
   padding:15px;
   outline:0;
   font-family:var(--mono);
   font-size:11px;
 }
-
 #buyAdd{
   border:0;
   border-left:1px solid var(--line);
@@ -619,12 +521,7 @@ body::after{
   font-size:10px;
   font-weight:700;
 }
-
-#buyItems{
-  max-height:46svh;
-  overflow:auto;
-}
-
+#buyItems{max-height:46svh;overflow:auto}
 .buy{
   display:flex;
   justify-content:space-between;
@@ -636,32 +533,10 @@ body::after{
   font-family:var(--mono);
   font-size:12px;
 }
-
-.buy span{
-  flex:1;
-}
-
-.buy.bought span{
-  text-decoration:line-through;
-  color:var(--bone3);
-}
-
-.buy button{
-  border:0;
-  background:transparent;
-  color:var(--ember);
-  width:30px;
-  height:30px;
-  font-size:18px;
-}
-
-.empty{
-  padding:16px 2px;
-  color:var(--bone3);
-  font-family:var(--mono);
-  font-size:10px;
-}
-
+.buy span{flex:1}
+.buy.bought span{text-decoration:line-through;color:var(--bone3)}
+.buy button{border:0;background:transparent;color:var(--ember);width:30px;height:30px;font-size:18px}
+.empty{padding:16px 2px;color:var(--bone3);font-family:var(--mono);font-size:10px}
 .toast{
   position:fixed;
   left:50%;
@@ -682,47 +557,215 @@ body::after{
   transition:.18s;
   pointer-events:none;
 }
-
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-
-/* small screens */
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:380px){
-  .hero{
-    min-height:304px;
-  }
-
-  .eternal-loop-title{
-    font-size:43px;
-  }
-
-  .ritual-orb{
-    width:226px;
-    height:226px;
-  }
-
-  .section-head{
-    grid-template-columns:46px 1fr auto;
-  }
-
-  .code{
-    width:46px;
-    height:46px;
-  }
+  .hero{min-height:312px}
+  .titlebox h1{font-size:43px}
+  .ritual-orb{width:226px;height:226px}
+  .section-head{grid-template-columns:46px 1fr auto}
+  .code{width:46px;height:46px}
 }
-
 @media(prefers-reduced-motion:reduce){
-  *{
-    animation:none!important;
-    transition:none!important;
-    scroll-behavior:auto!important;
-  }
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
-</style>
-</head>
 
+/* exact typography repair: Eternal keeps the old span font, Loop keeps old main font */
+.titlebox .eternal-loop-title,
+.hero-title .eternal-loop-title,
+.title .eternal-loop-title{
+  font-size:clamp(45px,15.5vw,68px)!important;
+  line-height:.82!important;
+  letter-spacing:-.07em!important;
+  font-weight:900!important;
+  text-transform:uppercase!important;
+}
+.titlebox .eternal-loop-title .eternal-word,
+.hero-title .eternal-loop-title .eternal-word,
+.title .eternal-loop-title .eternal-word{
+  display:block!important;
+  font-family:var(--serif)!important;
+  font-style:italic!important;
+  font-weight:500!important;
+  font-size:.70em!important;
+  line-height:.9!important;
+  letter-spacing:-.045em!important;
+  color:transparent!important;
+  -webkit-text-stroke:1px rgba(236,228,211,.82)!important;
+  opacity:1!important;
+  transform:none!important;
+}
+.titlebox .eternal-loop-title .loop-word,
+.hero-title .eternal-loop-title .loop-word,
+.title .eternal-loop-title .loop-word{
+  display:block!important;
+  font-family:var(--sans)!important;
+  font-style:normal!important;
+  font-weight:900!important;
+  font-size:1em!important;
+  line-height:.82!important;
+  letter-spacing:-.07em!important;
+  color:var(--bone)!important;
+  -webkit-text-stroke:0!important;
+  opacity:1!important;
+  transform:none!important;
+}
+
+
+/* Eternal only: Homemade Apple */
+.titlebox .eternal-loop-title .eternal-word,
+.hero-title .eternal-loop-title .eternal-word,
+.title .eternal-loop-title .eternal-word,
+.eternal-loop-title .eternal-word{
+  font-family:var(--eternal-hand)!important;
+  font-style:normal!important;
+  font-weight:400!important;
+  font-size:.42em!important;
+  line-height:1.15!important;
+  letter-spacing:-.055em!important;
+  text-transform:none!important;
+  color:var(--bone)!important;
+  -webkit-text-stroke:0!important;
+  opacity:.76!important;
+  transform:translateX(4px) translateY(3px)!important;
+}
+
+
+/* requested patch: Eternal blue + routine text thinner */
+.titlebox .eternal-loop-title .eternal-word,
+.hero-title .eternal-loop-title .eternal-word,
+.title .eternal-loop-title .eternal-word,
+.eternal-loop-title .eternal-word{
+  color:#9fdcff!important;
+  opacity:.92!important;
+  -webkit-text-stroke:0!important;
+}
+
+.section-head h2,
+.ll-section-title{
+  font-weight:420!important;
+  letter-spacing:-.018em!important;
+}
+
+.task h3,
+.ll-task-title{
+  font-weight:380!important;
+  letter-spacing:-.012em!important;
+}
+
+.task p,
+.ll-task-note{
+  font-weight:300!important;
+  opacity:.88!important;
+}
+
+
+/* final mixed text treatment
+   metrics = option 4 technical mono
+   section header = option 5 bigger hierarchy
+   task text = option 3 editorial contrast
+*/
+
+/* top stat cells: done / left / rate */
+.metric b,
+.stat b,
+.kpi b,
+.summary b{
+  font-family:'IBM Plex Mono', monospace!important;
+  font-size:18px!important;
+  font-weight:400!important;
+  letter-spacing:-.02em!important;
+}
+.metric small,
+.stat small,
+.kpi small,
+.summary small{
+  font-family:'IBM Plex Mono', monospace!important;
+  font-size:9px!important;
+  font-weight:400!important;
+  letter-spacing:.02em!important;
+  text-transform:uppercase!important;
+  color:rgba(236,228,211,.48)!important;
+}
+
+/* section header: Wake / Start */
+.section-head h2,
+.ll-section-title{
+  font-size:17px!important;
+  font-weight:480!important;
+  line-height:1.05!important;
+  letter-spacing:-.04em!important;
+}
+.section-head p,
+.ll-section-subtitle{
+  font-family:'IBM Plex Mono', monospace!important;
+  font-size:10px!important;
+  font-weight:400!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  color:#9fdcff!important;
+  opacity:.86!important;
+}
+.count,
+.section-count,
+.ll-count{
+  font-family:'IBM Plex Mono', monospace!important;
+  font-size:10px!important;
+  font-weight:400!important;
+  color:rgba(236,228,211,.46)!important;
+}
+
+/* task text: Get up immediately */
+.task h3,
+.ll-task-title{
+  font-size:15px!important;
+  line-height:1.22!important;
+  font-weight:300!important;
+  letter-spacing:-.03em!important;
+}
+.task p,
+.ll-task-note{
+  font-size:12px!important;
+  line-height:1.5!important;
+  font-weight:300!important;
+  letter-spacing:-.006em!important;
+  color:rgba(236,228,211,.48)!important;
+}
+
+
+/* remove ugly hero stats; keep hidden data targets for JS */
+.hero .stats-hidden,
+.stats-hidden{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  overflow:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+
+/* corrected layout after stats removal:
+   the real empty space was from .titlebox bottom:98px */
+.hero{
+  min-height:318px!important;
+}
+.titlebox{
+  bottom:46px!important;
+}
+
+
+/* slight downward shift: title + orb only */
+.ritual-orb{
+  top:48%!important;
+}
+.titlebox{
+  bottom:34px!important;
+}
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
 <body>
 <div class="app">
   <header class="top">
@@ -735,33 +778,17 @@ body::after{
 
   <section class="hero">
     <div class="ritual-orb"></div>
-    <div class="hero-meta">
-      <span>S#01</span>
-      <span>PRIVATE RITE</span>
-    </div>
-
+    <div class="hero-meta"><span>S#01</span><span>PRIVATE RITE</span></div>
     <div class="titlebox">
-      <h1 class="eternal-loop-title">
-        <span class="eternal-word">Eternal</span>
-        <strong class="loop-word">Loop</strong>
-      </h1>
-      <p>
-        <span>Daily ritual system</span>
-        <span></span>
-      </p>
+      <h1 class="eternal-loop-title"><span class="eternal-word">Eternal</span><strong class="loop-word">Loop</strong></h1>
+      <p><span>Daily ritual system</span><span></span></p>
     </div>
-
     <div class="stats-hidden" aria-hidden="true">
-      <b data-done>0</b>
-      <b data-left>0</b>
-      <b data-pct>0%</b>
+      <b data-done>0</b><b data-left>0</b><b data-pct>0%</b>
     </div>
   </section>
 
-  <div class="nav-wrap">
-    <nav id="nav"></nav>
-  </div>
-
+  <div class="nav-wrap"><nav id="nav"></nav></div>
   <main id="root"></main>
 </div>
 
@@ -772,215 +799,69 @@ body::after{
 </div>
 
 <section class="sheet" id="sheet">
-  <div class="sheet-head">
-    <h2>Wish List & Notes</h2>
-    <button id="closeSheet">×</button>
-  </div>
-
-  <div class="buybar">
-    <input id="buyInput" placeholder="// add item" />
-    <button id="buyAdd">ADD</button>
-  </div>
-
+  <div class="sheet-head"><h2>Wish List & Notes</h2><button id="closeSheet">×</button></div>
+  <div class="buybar"><input id="buyInput" placeholder="// add item"><button id="buyAdd">ADD</button></div>
   <div id="buyItems"></div>
 </section>
-
 <div class="toast" id="toast">Saved</div>
 
 <script>
-const ROUTINE = [
-  ["01","Wake","initiation",[
-    ["Get up immediately","Move within 5 seconds. No snooze."]
-  ]],
-
-  ["02","Morning","first circle",[
-    ["Oil pulling","5 min. Empty stomach. Spit into tissue."],
-    ["Brush teeth","2+ min. Include tongue scraping."],
-    ["Check weather","Fine dust, outfit, SPF strength."],
-    ["Hydration","200–300ml water."]
-  ]],
-
-  ["03","Shower","purification",[
-    ["Lukewarm shower","38–40°C. End with cold water."],
-    ["Shampoo routine","Shampoo → conditioner → cold rinse."],
-    ["Hair oil","70% damp. Ends only."],
-    ["Hair mask","2–3×/wk. Skip conditioner that day."],
-    ["Body lotion","Apply while skin is damp."],
-    ["Exfoliate","1–2×/wk. Never daily."]
-  ]],
-
-  ["04","Lens","sight layer",[
-    ["Insert lenses","Rewetting drops. Max 8 hours."],
-    ["Accessories","Watch, rings, necklace."]
-  ]],
-
-  ["05","Skin AM","day shield",[
-    ["Cleanser","Mild acidic pH 5.5."],
-    ["Toner","HA + niacinamide."],
-    ["Vitamin C","10–20%. AM only."],
-    ["Eye cream","Peptides + caffeine."],
-    ["Moisturizer","Ceramide + peptides."],
-    ["Sunscreen","SPF50+ PA++++. Non-negotiable."],
-    ["Deodorant","Only on completely dry skin."]
-  ]],
-
-  ["06","Commute","transit",[
-    ["Review plan","Todoist + Mindkit + Notion Calendar."],
-    ["Mindset","One intention or 30 sec visualization."],
-    ["Audio","Music/podcast under 60%."]
-  ]],
-
-  ["07","Konkuk","main rite",[
-    ["Study A","08:00–13:00. Deep work."],
-    ["Lunch","12:00. Eat light. 80% full."],
-    ["AM supplements","C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen."],
-    ["Study B","13:00–18:00. Deep work."],
-    ["Study C","18:00–23:00. Deep work."],
-    ["Dinner","18:00. Eat light."],
-    ["PM supplements","NAC, magnesium, zinc, B complex, probiotics."]
-  ]],
-
-  ["08","Return","release",[
-    ["Decompress","Drama, film, music, or reading."]
-  ]],
-
-  ["09","Workout","kinetic rite",[
-    ["Strength training","3×/week. Big compound lifts."],
-    ["Cardio","3–4×/week. 20–30 min."],
-    ["Stretching","Daily 10 min. Foam rolling."]
-  ]],
-
-  ["10","Shower PM","second cleanse",[
-    ["PM shower","Within 30 min after workout."],
-    ["Back acne care","Acnon or BHA body wash."],
-    ["Driclor","2–3×/week. Dry underarms."]
-  ]],
-
-  ["11","Skin PM","repair rite",[
-    ["Double cleanse","Oil/balm → mild acidic foam."],
-    ["Toner","HA + niacinamide."],
-    ["AHA / BHA","1–2×/wk. Not with retinol."],
-    ["Essence","Niacinamide 5–10% + peptides."],
-    ["Retinol","3–4×/wk. PM only."],
-    ["Eye cream","Peptides + low-dose retinol."],
-    ["Moisturizer","Thicker than morning."],
-    ["Lip care","Lip balm or sleeping mask."],
-    ["Sheet mask","1–2×/wk. Non-retinol days."]
-  ]],
-
-  ["12","Face","alignment",[
-    ["Jaw + eye massager","4×/wk. Lymph flow route."],
-    ["Retainer","Clean and insert."]
-  ]],
-
-  ["13","Sleep","closed loop",[
-    ["Pillowcase","2×/wk. Satin or cotton."],
-    ["Phone off","30 min before bed."],
-    ["Set alarm","90-min cycles. One alarm."],
-    ["Remove lenses","Never sleep in contacts."],
-    ["Magnesium","200–400mg before bed."]
-  ]]
-];
-
-const KEY = "s01_eternal_loop_checks_v1";
-const BUYKEY = "s01_eternal_loop_buys_v1";
-
-const qs = selector => document.querySelector(selector);
-const qsa = selector => [...document.querySelectorAll(selector)];
-
+const ROUTINE = [["01", "Wake", "initiation", [["Get up immediately", "Move within 5 seconds. No snooze."]]], ["02", "Morning", "first circle", [["Oil pulling", "5 min. Empty stomach. Spit into tissue."], ["Brush teeth", "2+ min. Include tongue scraping."], ["Check weather", "Fine dust, outfit, SPF strength."], ["Hydration", "200–300ml water."]]], ["03", "Shower", "purification", [["Lukewarm shower", "38–40°C. End with cold water."], ["Shampoo routine", "Shampoo → conditioner → cold rinse."], ["Hair oil", "70% damp. Ends only."], ["Hair mask", "2–3×/wk. Skip conditioner that day."], ["Body lotion", "Apply while skin is damp."], ["Exfoliate", "1–2×/wk. Never daily."]]], ["04", "Lens", "sight layer", [["Insert lenses", "Rewetting drops. Max 8 hours."], ["Accessories", "Watch, rings, necklace."]]], ["05", "Skin AM", "day shield", [["Cleanser", "Mild acidic pH 5.5."], ["Toner", "HA + niacinamide."], ["Vitamin C", "10–20%. AM only."], ["Eye cream", "Peptides + caffeine."], ["Moisturizer", "Ceramide + peptides."], ["Sunscreen", "SPF50+ PA++++. Non-negotiable."], ["Deodorant", "Only on completely dry skin."]]], ["06", "Commute", "transit", [["Review plan", "Todoist + Mindkit + Notion Calendar."], ["Mindset", "One intention or 30 sec visualization."], ["Audio", "Music/podcast under 60%."]]], ["07", "Konkuk", "main rite", [["Study A", "08:00–13:00. Deep work."], ["Lunch", "12:00. Eat light. 80% full."], ["AM supplements", "C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen."], ["Study B", "13:00–18:00. Deep work."], ["Study C", "18:00–23:00. Deep work."], ["Dinner", "18:00. Eat light."], ["PM supplements", "NAC, magnesium, zinc, B complex, probiotics."]]], ["08", "Return", "release", [["Decompress", "Drama, film, music, or reading."]]], ["09", "Workout", "kinetic rite", [["Strength training", "3×/week. Big compound lifts."], ["Cardio", "3–4×/week. 20–30 min."], ["Stretching", "Daily 10 min. Foam rolling."]]], ["10", "Shower PM", "second cleanse", [["PM shower", "Within 30 min after workout."], ["Back acne care", "Acnon or BHA body wash."], ["Driclor", "2–3×/week. Dry underarms."]]], ["11", "Skin PM", "repair rite", [["Double cleanse", "Oil/balm → mild acidic foam."], ["Toner", "HA + niacinamide."], ["AHA / BHA", "1–2×/wk. Not with retinol."], ["Essence", "Niacinamide 5–10% + peptides."], ["Retinol", "3–4×/wk. PM only."], ["Eye cream", "Peptides + low-dose retinol."], ["Moisturizer", "Thicker than morning."], ["Lip care", "Lip balm or sleeping mask."], ["Sheet mask", "1–2×/wk. Non-retinol days."]]], ["12", "Face", "alignment", [["Jaw + eye massager", "4×/wk. Lymph flow route."], ["Retainer", "Clean and insert."]]], ["13", "Sleep", "closed loop", [["Pillowcase", "2×/wk. Satin or cotton."], ["Phone off", "30 min before bed."], ["Set alarm", "90-min cycles. One alarm."], ["Remove lenses", "Never sleep in contacts."], ["Magnesium", "200–400mg before bed."]]]];
+const KEY = 's01_loop_eternal_sanctum_checks_v1';
+const BUYKEY = 's01_loop_eternal_sanctum_buys_v1';
+const qs = s => document.querySelector(s);
+const qsa = s => [...document.querySelectorAll(s)];
 let observer;
 
 function today(){
   const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2,"0");
-  const day = String(d.getDate()).padStart(2,"0");
-  return `${y}.${m}.${day}`;
+  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
 }
-
-function loadState(){
-  try{
-    return JSON.parse(localStorage.getItem(KEY) || "{}");
-  }catch(e){
-    return {};
-  }
-}
-
-function saveState(state){
-  localStorage.setItem(KEY,JSON.stringify(state));
-}
-
-function haptic(ms = 8){
-  if(navigator.vibrate){
-    navigator.vibrate(ms);
-  }
-}
+function loadState(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function saveState(s){localStorage.setItem(KEY,JSON.stringify(s))}
+function haptic(ms=8){if(navigator.vibrate) navigator.vibrate(ms)}
 
 function render(){
   const state = loadState();
-  const nav = qs("#nav");
-  const root = qs("#root");
+  const nav = qs('#nav');
+  const root = qs('#root');
+  nav.innerHTML = '';
+  root.innerHTML = '';
 
-  nav.innerHTML = "";
-  root.innerHTML = "";
-
-  ROUTINE.forEach(([code,title,mode,items], sectionIndex) => {
-    const navButton = document.createElement("button");
-    navButton.textContent = code;
-
-    navButton.onclick = () => {
-      qs(`#sec-${sectionIndex}`).scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-      setActive(sectionIndex);
+  ROUTINE.forEach(([code,title,mode,items], si)=>{
+    const nb = document.createElement('button');
+    nb.textContent = code;
+    nb.onclick = () => {
+      qs(`#sec-${si}`).scrollIntoView({behavior:'smooth', block:'start'});
+      setActive(si);
     };
+    nav.appendChild(nb);
 
-    nav.appendChild(navButton);
-
-    const section = document.createElement("section");
-    section.className = "section";
-    section.id = `sec-${sectionIndex}`;
-
-    section.innerHTML = `
+    const sec = document.createElement('section');
+    sec.className = 'section';
+    sec.id = `sec-${si}`;
+    sec.innerHTML = `
       <div class="section-head">
         <div class="code">${code}</div>
-        <div>
-          <h2>${title}</h2>
-          <p>${mode}</p>
-        </div>
+        <div><h2>${title}</h2><p>${mode}</p></div>
         <div class="count">0/${items.length}</div>
       </div>
       <div class="list"></div>
     `;
-
-    const list = section.querySelector(".list");
-
-    items.forEach(([name,note], itemIndex) => {
-      const id = `${sectionIndex}-${itemIndex}`;
-
-      const row = document.createElement("article");
-      row.className = "task" + (state[id] ? " done" : "");
+    const list = sec.querySelector('.list');
+    items.forEach(([name,note],ii)=>{
+      const id = `${si}-${ii}`;
+      const row = document.createElement('article');
+      row.className = 'task' + (state[id] ? ' done' : '');
       row.dataset.id = id;
-
-      row.innerHTML = `
-        <div class="check">✓</div>
-        <div>
-          <h3>${name}</h3>
-          <p>${note}</p>
-        </div>
-      `;
-
+      row.innerHTML = `<div class="check">✓</div><div><h3>${name}</h3><p>${note}</p></div>`;
       row.onclick = () => toggle(row);
-
       list.appendChild(row);
     });
-
-    root.appendChild(section);
+    root.appendChild(sec);
   });
 
-  qs("#date").textContent = today();
-
+  qs('#date').textContent = today();
   observe();
   update();
   setActive(0);
@@ -988,207 +869,144 @@ function render(){
 
 function toggle(row){
   const id = row.dataset.id;
-  const state = loadState();
-
-  state[id] = !state[id];
-
-  saveState(state);
-
-  row.classList.toggle("done",state[id]);
-
+  const s = loadState();
+  s[id] = !s[id];
+  saveState(s);
+  row.classList.toggle('done', s[id]);
   haptic();
   update();
 }
 
 function update(){
-  const total = ROUTINE.reduce((sum,section) => sum + section[3].length,0);
-  const done = qsa(".task.done").length;
-  const pct = total ? Math.round(done / total * 100) : 0;
+  const total = ROUTINE.reduce((a,s)=>a+s[3].length,0);
+  const done = qsa('.task.done').length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  qsa('[data-done]').forEach(e=>e.textContent=done);
+  qsa('[data-left]').forEach(e=>e.textContent=total-done);
+  qsa('[data-pct]').forEach(e=>e.textContent=pct+'%');
+  qs('#moon').style.setProperty('--p', pct*3.6 + 'deg');
 
-  qsa("[data-done]").forEach(el => {
-    el.textContent = done;
-  });
-
-  qsa("[data-left]").forEach(el => {
-    el.textContent = total - done;
-  });
-
-  qsa("[data-pct]").forEach(el => {
-    el.textContent = pct + "%";
-  });
-
-  qs("#moon").style.setProperty("--p",pct * 3.6 + "deg");
-
-  ROUTINE.forEach((section,sectionIndex) => {
-    const sec = qs(`#sec-${sectionIndex}`);
-
-    if(!sec){
-      return;
-    }
-
-    const doneInSection = sec.querySelectorAll(".task.done").length;
-    const count = sec.querySelector(".count");
-
-    if(count){
-      count.textContent = `${doneInSection}/${section[3].length}`;
-    }
+  ROUTINE.forEach((section, si)=>{
+    const sec = qs(`#sec-${si}`);
+    if(!sec) return;
+    const d = sec.querySelectorAll('.task.done').length;
+    sec.querySelector('.count').textContent = `${d}/${section[3].length}`;
   });
 }
 
-function setActive(sectionIndex){
-  qsa("#nav button").forEach((button,index) => {
-    button.classList.toggle("active",index === sectionIndex);
-  });
-
-  const activeButton = qsa("#nav button")[sectionIndex];
-
-  if(activeButton){
-    activeButton.scrollIntoView({
-      behavior:"smooth",
-      inline:"center",
-      block:"nearest"
-    });
-  }
+function setActive(si){
+  qsa('#nav button').forEach((b,i)=>b.classList.toggle('active',i===si));
+  const b = qsa('#nav button')[si];
+  if(b) b.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
 }
 
 function observe(){
-  if(observer){
-    observer.disconnect();
-  }
-
-  observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        setActive(Number(entry.target.id.replace("sec-","")));
-      }
+  if(observer) observer.disconnect();
+  observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) setActive(Number(e.target.id.replace('sec-','')));
     });
-  },{
-    threshold:.25,
-    rootMargin:"-132px 0px -48% 0px"
-  });
-
-  qsa(".section").forEach(section => {
-    observer.observe(section);
-  });
+  },{threshold:.25,rootMargin:'-132px 0px -48% 0px'});
+  qsa('.section').forEach(s=>observer.observe(s));
 }
 
 function resetAll(){
-  if(!confirm("Reset all checks?")){
-    return;
-  }
-
+  if(!confirm('Reset all checks?')) return;
   localStorage.removeItem(KEY);
   render();
 }
 
-let buys = [];
-
-function loadBuys(){
-  try{
-    buys = JSON.parse(localStorage.getItem(BUYKEY) || "[]");
-  }catch(e){
-    buys = [];
-  }
-}
-
-function saveBuys(){
-  localStorage.setItem(BUYKEY,JSON.stringify(buys));
-}
-
+let buys=[];
+function loadBuys(){try{buys=JSON.parse(localStorage.getItem(BUYKEY)||'[]')}catch(e){buys=[]}}
+function saveBuys(){localStorage.setItem(BUYKEY,JSON.stringify(buys))}
 function renderBuys(){
-  const wrap = qs("#buyItems");
-
-  wrap.innerHTML = buys.length ? "" : '<p class="empty">// empty</p>';
-
-  buys.forEach((item,index) => {
-    const element = document.createElement("div");
-    element.className = "buy" + (item.done ? " bought" : "");
-
-    element.innerHTML = `
-      <span>${item.text}</span>
-      <button>×</button>
-    `;
-
-    element.querySelector("span").onclick = () => {
-      buys[index].done = !buys[index].done;
-      saveBuys();
-      renderBuys();
-    };
-
-    element.querySelector("button").onclick = () => {
-      buys.splice(index,1);
-      saveBuys();
-      renderBuys();
-    };
-
-    wrap.appendChild(element);
+  const wrap=qs('#buyItems');
+  wrap.innerHTML = buys.length ? '' : '<p class="empty">// empty</p>';
+  buys.forEach((it,i)=>{
+    const el=document.createElement('div');
+    el.className='buy'+(it.done?' bought':'');
+    el.innerHTML=`<span>${it.text}</span><button>×</button>`;
+    el.querySelector('span').onclick=()=>{buys[i].done=!buys[i].done;saveBuys();renderBuys();};
+    el.querySelector('button').onclick=()=>{buys.splice(i,1);saveBuys();renderBuys();};
+    wrap.appendChild(el);
   });
 }
-
 function addBuy(){
-  const input = qs("#buyInput");
-  const text = input.value.trim();
-
-  if(!text){
-    return;
-  }
-
-  buys.push({
-    text,
-    done:false
-  });
-
-  input.value = "";
+  const input=qs('#buyInput');
+  const text=input.value.trim();
+  if(!text)return;
+  buys.push({text,done:false});
+  input.value='';
   saveBuys();
   renderBuys();
 }
+const NOTION_ENDPOINT = ""; 
+// 여기에 원래 쓰던 Notion / Make / Zapier / Apps Script Webhook URL 넣어야 함.
+// 예: const NOTION_ENDPOINT = "https://script.google.com/macros/s/XXXX/exec";
 
-function exportSnapshot(){
-  const done = qsa(".task.done h3").map(el => el.textContent);
+async function exportSnapshot(){
+  const total = ROUTINE.reduce((sum,section) => sum + section[3].length,0);
+  const doneCount = qsa(".task.done").length;
+  const pct = total ? Math.round(doneCount / total * 100) : 0;
 
-  const blob = new Blob([
-    JSON.stringify({
-      date:today(),
-      done,
-      buys
-    },null,2)
-  ],{
-    type:"application/json"
-  });
+  const doneTasks = qsa(".task.done h3").map(el => el.textContent);
 
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `S01_ETERNAL_LOOP_${today()}.json`;
-  a.click();
+  const payload = {
+    date: today(),
+    title: "ETERNAL LOOP",
+    done_count: doneCount,
+    left_count: total - doneCount,
+    rate: pct,
+    done_tasks: doneTasks,
+    buys,
+    created_at: new Date().toISOString()
+  };
 
-  showToast();
+  if(!NOTION_ENDPOINT){
+    console.error("NOTION_ENDPOINT is empty.", payload);
+    showToast("Endpoint Missing");
+    return;
+  }
+
+  try{
+    const response = await fetch(NOTION_ENDPOINT,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(payload)
+    });
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    showToast("Saved to Notion");
+  }catch(error){
+    console.error(error);
+    showToast("Save Failed");
+  }
 }
-
-function showToast(){
-  qs("#toast").classList.add("show");
+function showToast(message = "Saved"){
+  const toast = qs("#toast");
+  toast.textContent = message;
+  toast.classList.add("show");
 
   setTimeout(() => {
-    qs("#toast").classList.remove("show");
+    toast.classList.remove("show");
   },1200);
 }
 
-document.addEventListener("DOMContentLoaded",() => {
+document.addEventListener('DOMContentLoaded',()=>{
   render();
-
   loadBuys();
   renderBuys();
-
-  qs("#reset").onclick = resetAll;
-  qs("#export").onclick = exportSnapshot;
-  qs("#openSheet").onclick = () => qs("#sheet").classList.add("open");
-  qs("#closeSheet").onclick = () => qs("#sheet").classList.remove("open");
-  qs("#buyAdd").onclick = addBuy;
-
-  qs("#buyInput").addEventListener("keydown",event => {
-    if(event.key === "Enter"){
-      addBuy();
-    }
-  });
+  qs('#reset').onclick=resetAll;
+  qs('#export').onclick=exportSnapshot;
+  qs('#openSheet').onclick=()=>qs('#sheet').classList.add('open');
+  qs('#closeSheet').onclick=()=>qs('#sheet').classList.remove('open');
+  qs('#buyAdd').onclick=addBuy;
+  qs('#buyInput').addEventListener('keydown',e=>{if(e.key==='Enter')addBuy()});
 });
 </script>
 </body>
