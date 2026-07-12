@@ -1,267 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080806">
-<title>LOOP LITUAL</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#050504" />
+<title>ETERNAL LOOP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Homemade+Apple&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
 :root{
-  --bg:#080806;
-  --bg2:#11100d;
-  --bone:#e9dfcc;
-  --bone2:#b7ae9f;
-  --bone3:#6f695f;
-  --line:rgba(233,223,204,.12);
-  --line2:rgba(233,223,204,.22);
-  --glass:rgba(233,223,204,.055);
-  --glass2:rgba(233,223,204,.085);
-  --acid:#d9ff3f;
-  --cold:#d8eef0;
-  --ink:#080806;
-  --danger:#ff624d;
+  --bg:#050504;
+  --bg2:#0a0a08;
+  --bone:#ece4d3;
+  --bone2:#bfb6a4;
+  --bone3:#7e776c;
+  --line:rgba(236,228,211,.13);
+  --line2:rgba(236,228,211,.23);
+  --veil:rgba(236,228,211,.052);
+  --veil2:rgba(236,228,211,.086);
+  --acid:#9fdcff;
+  --cyan:#a5efff;
+  --ember:#ff684d;
+  --green:#9cffc5;
+  --ink:#050504;
   --safe-top:env(safe-area-inset-top);
   --safe-bottom:env(safe-area-inset-bottom);
   --sans:'Inter',system-ui,sans-serif;
   --mono:'JetBrains Mono',monospace;
-  --serif:'Instrument Serif',serif;
+  --hand:'Homemade Apple',cursive;
 }
-html{background:var(--bg);scroll-behavior:smooth}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--bg);
+}
+
 body{
   min-height:100svh;
+  background:
+    radial-gradient(ellipse 80% 44% at 50% -8%,rgba(159,220,255,.105),transparent 58%),
+    radial-gradient(ellipse 65% 36% at 100% 16%,rgba(165,239,255,.055),transparent 60%),
+    linear-gradient(180deg,#050504 0%,#0a0a08 52%,#050504 100%);
   color:var(--bone);
   font-family:var(--sans);
   overflow-x:hidden;
-  background:
-    radial-gradient(ellipse 90% 42% at 50% -8%, rgba(217,255,63,.09), transparent 55%),
-    radial-gradient(ellipse 75% 45% at 110% 30%, rgba(216,238,240,.045), transparent 58%),
-    linear-gradient(180deg,#080806 0%,#11100d 44%,#080806 100%);
 }
+
 body::before{
   content:'';
   position:fixed;
   inset:0;
   pointer-events:none;
-  background:linear-gradient(rgba(233,223,204,.018) 1px,transparent 1px);
-  background-size:100% 7px;
-  opacity:.42;
-  mask-image:linear-gradient(180deg,black,transparent 82%);
+  background:
+    linear-gradient(rgba(236,228,211,.012) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(236,228,211,.012) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(180deg,black,transparent 86%);
 }
+
 body::after{
   content:'';
   position:fixed;
   inset:0;
   pointer-events:none;
-  background:
-    radial-gradient(circle at 50% 42%,transparent 0 42%,rgba(0,0,0,.18) 65%,rgba(0,0,0,.56) 100%);
+  background:radial-gradient(circle at 50% 45%,transparent 0 55%,rgba(0,0,0,.58) 100%);
 }
+
 .app{
   width:min(100%,430px);
   margin:0 auto;
   min-height:100svh;
-  padding:calc(13px + var(--safe-top)) 12px calc(104px + var(--safe-bottom));
   position:relative;
   z-index:1;
+  padding:calc(12px + var(--safe-top)) 12px calc(106px + var(--safe-bottom));
 }
+
+/* top bar */
 .top{
   position:sticky;
   top:calc(8px + var(--safe-top));
   z-index:80;
-  height:60px;
+  height:62px;
   display:grid;
   grid-template-columns:1fr auto;
-  align-items:center;
   gap:12px;
-  padding:9px 10px 9px 15px;
+  align-items:center;
+  padding:10px 12px 10px 16px;
   border:1px solid var(--line2);
-  border-radius:22px;
-  background:rgba(8,8,6,.66);
-  backdrop-filter:blur(24px) saturate(125%);
-  -webkit-backdrop-filter:blur(24px) saturate(125%);
-  box-shadow:0 20px 72px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.045);
+  border-radius:999px;
+  background:rgba(5,5,4,.62);
+  backdrop-filter:blur(26px) saturate(128%);
+  -webkit-backdrop-filter:blur(26px) saturate(128%);
+  box-shadow:0 18px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.045);
 }
-.brand b{
+
+.mark{
+  min-width:0;
+}
+
+.mark b{
   display:block;
-  font-size:13px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
+  font-size:12px;
   line-height:1;
-  font-weight:800;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:700;
 }
-.brand span{
+
+.mark span{
   display:block;
   margin-top:7px;
   color:var(--bone3);
   font-family:var(--mono);
   font-size:8px;
-  letter-spacing:.16em;
+  letter-spacing:.18em;
   text-transform:uppercase;
 }
-.progress{
+
+/* progress moon */
+.moon{
   --p:0deg;
-  width:42px;height:42px;
+  width:42px;
+  height:42px;
   border-radius:50%;
+  position:relative;
   display:grid;
   place-items:center;
-  position:relative;
-  background:conic-gradient(var(--acid) var(--p),rgba(233,223,204,.085) 0);
+  background:conic-gradient(var(--acid) var(--p),rgba(236,228,211,.09) 0);
+  box-shadow:0 0 38px rgba(159,220,255,.10);
 }
-.progress::after{
+
+.moon::before{
+  content:'';
+  position:absolute;
+  inset:-5px;
+  border:1px solid rgba(236,228,211,.12);
+  border-radius:50%;
+}
+
+.moon::after{
   content:'';
   position:absolute;
   inset:6px;
-  background:#0a0a08;
-  border:1px solid var(--line);
   border-radius:50%;
+  background:var(--bg);
+  border:1px solid var(--line);
 }
-.progress span{
+
+.moon span{
   position:relative;
   z-index:1;
   font-family:var(--mono);
   font-size:8px;
   color:var(--bone);
 }
+
+/* hero */
 .hero{
   margin:18px 0 16px;
-  min-height:314px;
+  min-height:318px;
   position:relative;
   overflow:hidden;
   border:1px solid var(--line2);
-  border-radius:30px;
+  border-radius:36px;
   background:
-    linear-gradient(180deg,rgba(233,223,204,.075),rgba(233,223,204,.026)),
-    radial-gradient(circle at 50% 45%,rgba(217,255,63,.065),transparent 46%);
-  box-shadow:0 36px 100px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.04);
+    linear-gradient(180deg,rgba(236,228,211,.082),rgba(236,228,211,.026)),
+    radial-gradient(circle at 50% 42%,rgba(159,220,255,.08),transparent 43%);
+  box-shadow:0 34px 100px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.04);
 }
-.hero .sphere{
+
+.ritual-orb{
   position:absolute;
   left:50%;
-  top:38%;
-  width:232px;height:232px;
+  top:48%;
+  width:254px;
+  height:254px;
   transform:translate(-50%,-50%);
   border-radius:50%;
+  border:1px solid rgba(236,228,211,.13);
   background:
-    radial-gradient(circle at 50% 50%, rgba(233,223,204,.055), transparent 0 28%, rgba(233,223,204,.03) 29% 30%, transparent 31%),
-    conic-gradient(from 140deg, transparent, rgba(217,255,63,.13), transparent 36%, rgba(216,238,240,.10), transparent 74%);
-  border:1px solid rgba(233,223,204,.13);
-  filter:drop-shadow(0 0 54px rgba(217,255,63,.09));
-  animation:floatspin 24s linear infinite;
+    radial-gradient(circle at center,transparent 0 34%,rgba(236,228,211,.034) 35% 36%,transparent 37% 50%,rgba(159,220,255,.07) 51% 52%,transparent 53%),
+    conic-gradient(from 20deg,transparent,rgba(165,239,255,.13),transparent 38%,rgba(159,220,255,.12),transparent 72%);
+  animation:spin 26s linear infinite;
 }
-.hero .sphere::before{
+
+.ritual-orb::before{
   content:'';
   position:absolute;
-  inset:49px;
+  inset:43px;
   border-radius:50%;
-  border:1px solid rgba(233,223,204,.17);
+  border:1px solid rgba(236,228,211,.16);
+  background:radial-gradient(circle,rgba(236,228,211,.05),transparent 62%);
 }
-.hero .sphere::after{
+
+.ritual-orb::after{
   content:'';
   position:absolute;
-  left:50%;top:50%;
-  width:5px;height:5px;
+  left:50%;
+  top:50%;
+  width:7px;
+  height:7px;
   transform:translate(-50%,-50%);
   border-radius:50%;
   background:var(--acid);
-  box-shadow:0 0 28px rgba(217,255,63,.5);
+  box-shadow:0 0 32px rgba(159,220,255,.55);
 }
-@keyframes floatspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.meta{
+
+@keyframes spin{
+  to{
+    transform:translate(-50%,-50%) rotate(360deg);
+  }
+}
+
+.hero-meta{
   position:absolute;
-  top:17px;left:17px;right:17px;
+  top:18px;
+  left:18px;
+  right:18px;
   display:flex;
   justify-content:space-between;
+  color:var(--bone3);
   font-family:var(--mono);
   font-size:8px;
   letter-spacing:.18em;
-  color:var(--bone3);
   text-transform:uppercase;
 }
-.title{
+
+.titlebox{
   position:absolute;
-  left:17px;right:17px;
-  bottom:94px;
+  left:18px;
+  right:18px;
+  bottom:34px;
   z-index:2;
 }
-.title h1{
-  font-size:clamp(47px,15.7vw,69px);
-  line-height:.79;
-  letter-spacing:-.075em;
+
+.eternal-loop-title{
+  font-size:clamp(45px,15.5vw,68px);
+  line-height:.82;
+  letter-spacing:-.07em;
   font-weight:900;
   text-transform:uppercase;
 }
-.title h1 span{
+
+.eternal-word{
   display:block;
-  font-family:var(--serif);
-  font-style:italic;
+  font-family:var(--hand);
+  font-style:normal;
   font-weight:400;
-  color:transparent;
-  letter-spacing:-.035em;
-  -webkit-text-stroke:1px rgba(233,223,204,.82);
+  font-size:.42em;
+  line-height:1.15;
+  letter-spacing:-.055em;
+  text-transform:none;
+  color:var(--acid);
+  opacity:.92;
+  transform:translateX(4px) translateY(3px);
 }
-.title p{
-  margin-top:12px;
+
+.loop-word{
+  display:block;
+  font-family:var(--sans);
+  font-style:normal;
+  font-weight:900;
+  font-size:1em;
+  line-height:.82;
+  letter-spacing:-.07em;
+  color:var(--bone);
+  text-transform:uppercase;
+}
+
+.titlebox p{
+  margin-top:13px;
   display:flex;
   justify-content:space-between;
+  gap:10px;
+  color:var(--acid);
   font-family:var(--mono);
   font-size:8px;
-  letter-spacing:.15em;
-  color:var(--acid);
+  letter-spacing:.16em;
   text-transform:uppercase;
 }
-.stats{
+
+/* hidden stat targets for JS */
+.stats-hidden{
   position:absolute;
-  left:12px;right:12px;bottom:12px;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:7px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  opacity:0;
+  pointer-events:none;
 }
-.stat{
-  min-height:60px;
-  padding:11px 10px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:rgba(8,8,6,.44);
-  backdrop-filter:blur(16px);
-}
-.stat b{
-  display:block;
-  font-size:19px;
-  line-height:1;
-  font-weight:800;
-  letter-spacing:-.055em;
-}
-.stat small{
-  display:block;
-  margin-top:8px;
-  color:var(--bone3);
-  font-family:var(--mono);
-  font-size:7px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
+
+/* nav */
 .nav-wrap{
   position:sticky;
-  top:calc(80px + var(--safe-top));
+  top:calc(82px + var(--safe-top));
   z-index:70;
   margin:0 -12px 14px;
   padding:0 12px 10px;
-  background:linear-gradient(180deg,rgba(8,8,6,.98),rgba(8,8,6,.62),transparent);
+  background:linear-gradient(180deg,rgba(5,5,4,.96),rgba(5,5,4,.62),transparent);
 }
+
 #nav{
   display:flex;
   gap:7px;
   overflow:auto;
   scrollbar-width:none;
   scroll-snap-type:x proximity;
+  padding:2px 0;
 }
-#nav::-webkit-scrollbar{display:none}
+
+#nav::-webkit-scrollbar{
+  display:none;
+}
+
 #nav button{
   flex:0 0 auto;
+  min-width:44px;
   border:1px solid var(--line);
   border-radius:999px;
-  background:rgba(233,223,204,.045);
+  background:rgba(236,228,211,.045);
   color:var(--bone3);
   padding:10px 12px;
   font-family:var(--mono);
@@ -269,120 +334,178 @@ body::after{
   letter-spacing:.05em;
   text-transform:uppercase;
 }
+
 #nav button.active{
-  color:var(--ink);
   background:var(--bone);
+  color:var(--ink);
   border-color:var(--bone);
+  font-weight:700;
 }
+
+/* sections */
 .section{
   scroll-margin-top:138px;
   margin-bottom:10px;
   border:1px solid var(--line);
-  border-radius:24px;
-  background:rgba(233,223,204,.04);
+  border-radius:30px;
+  background:rgba(236,228,211,.042);
   overflow:hidden;
+  position:relative;
   backdrop-filter:blur(16px);
   content-visibility:auto;
-  contain-intrinsic-size:395px;
+  contain-intrinsic-size:410px;
 }
+
+.section::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(159,220,255,.045),transparent 35%),
+    linear-gradient(135deg,rgba(165,239,255,.025),transparent 45%);
+}
+
 .section-head{
+  position:relative;
+  z-index:1;
   display:grid;
-  grid-template-columns:44px 1fr auto;
+  grid-template-columns:50px 1fr auto;
   align-items:center;
   gap:12px;
-  padding:13px;
+  padding:14px;
   border-bottom:1px solid var(--line);
 }
+
 .code{
-  width:44px;height:44px;
-  border:1px solid var(--line2);
-  border-radius:16px;
+  width:50px;
+  height:50px;
   display:grid;
   place-items:center;
+  border:1px solid var(--line2);
+  border-radius:50%;
   color:var(--acid);
-  background:rgba(8,8,6,.24);
+  background:rgba(5,5,4,.32);
   font-family:var(--mono);
   font-size:10px;
 }
+
 .section-head h2{
-  font-size:16px;
+  font-size:17px;
   line-height:1.05;
-  font-weight:760;
+  font-weight:480;
   letter-spacing:-.04em;
 }
+
 .section-head p{
   margin-top:5px;
+  color:var(--acid);
   font-family:var(--mono);
-  color:var(--bone3);
-  font-size:8px;
-  letter-spacing:.13em;
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:.08em;
   text-transform:uppercase;
+  opacity:.86;
 }
+
 .count{
+  min-width:42px;
+  text-align:center;
   border:1px solid var(--line);
   border-radius:999px;
+  background:rgba(5,5,4,.22);
+  color:rgba(236,228,211,.46);
   padding:6px 8px;
-  color:var(--bone2);
   font-family:var(--mono);
-  font-size:9px;
-  background:rgba(8,8,6,.22);
+  font-size:10px;
+  font-weight:400;
 }
+
+/* tasks */
 .task{
-  min-height:78px;
+  min-height:82px;
   display:grid;
-  grid-template-columns:27px 1fr;
+  grid-template-columns:30px 1fr;
   gap:12px;
-  padding:14px 13px;
+  align-items:flex-start;
+  padding:15px 14px;
   border-bottom:1px solid var(--line);
-  background:rgba(8,8,6,.13);
+  background:rgba(5,5,4,.15);
   cursor:pointer;
   touch-action:manipulation;
   position:relative;
 }
-.task:last-child{border-bottom:0}
+
+.task:last-child{
+  border-bottom:0;
+}
+
 .task::before{
   content:'';
   position:absolute;
-  left:0;top:0;bottom:0;width:0;
-  background:linear-gradient(180deg,var(--acid),rgba(217,255,63,0));
-  transition:width .16s;
+  left:0;
+  top:0;
+  bottom:0;
+  width:0;
+  background:linear-gradient(180deg,var(--acid),rgba(159,220,255,0));
+  transition:width .18s;
 }
+
 .check{
-  width:26px;height:26px;
-  border-radius:10px;
-  border:1px solid var(--line2);
-  background:rgba(233,223,204,.05);
-  color:transparent;
+  width:28px;
+  height:28px;
   display:grid;
   place-items:center;
+  border:1px solid var(--line2);
+  border-radius:50%;
+  color:transparent;
+  background:rgba(236,228,211,.05);
   font-family:var(--mono);
-  font-size:10px;
+  font-size:11px;
   position:relative;
   z-index:1;
 }
+
 .task h3{
   position:relative;
   z-index:1;
-  font-size:14px;
-  line-height:1.2;
-  letter-spacing:-.018em;
-  font-weight:630;
+  font-size:15px;
+  line-height:1.22;
+  letter-spacing:-.03em;
+  font-weight:300;
 }
+
 .task p{
   position:relative;
   z-index:1;
   margin-top:6px;
-  color:var(--bone3);
-  font-size:11.5px;
-  line-height:1.42;
+  color:rgba(236,228,211,.48);
+  font-size:12px;
+  line-height:1.5;
+  font-weight:300;
+  letter-spacing:-.006em;
 }
-.task.done{background:rgba(217,255,63,.06)}
-.task.done::before{width:2px}
+
+.task.done{
+  background:rgba(159,220,255,.065);
+}
+
+.task.done::before{
+  width:3px;
+}
+
 .task.done .check{
   background:var(--acid);
   border-color:var(--acid);
   color:var(--ink);
+  box-shadow:0 0 24px rgba(159,220,255,.22);
 }
+
+.task.done p{
+  color:#858d69;
+}
+
+/* bottom dock */
 .dock{
   position:fixed;
   left:50%;
@@ -395,28 +518,32 @@ body::after{
   gap:8px;
   padding:8px;
   border:1px solid var(--line2);
-  border-radius:22px;
-  background:rgba(8,8,6,.74);
-  backdrop-filter:blur(26px) saturate(130%);
-  box-shadow:0 22px 82px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.04);
+  border-radius:999px;
+  background:rgba(5,5,4,.72);
+  backdrop-filter:blur(26px) saturate(135%);
+  box-shadow:0 22px 82px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.05);
 }
+
 .dock button{
-  min-height:45px;
+  min-height:46px;
   border:1px solid var(--line);
-  border-radius:16px;
-  background:rgba(233,223,204,.06);
+  border-radius:999px;
+  background:rgba(236,228,211,.06);
   color:var(--bone3);
   font-family:var(--mono);
   font-size:9px;
-  letter-spacing:.15em;
+  letter-spacing:.16em;
   text-transform:uppercase;
 }
+
 .dock button.primary{
   background:var(--bone);
   color:var(--ink);
   border-color:var(--bone);
   font-weight:700;
 }
+
+/* sheet */
 .sheet{
   position:fixed;
   left:50%;
@@ -428,53 +555,213 @@ body::after{
   padding:14px 14px calc(18px + var(--safe-bottom));
   border:1px solid var(--line2);
   border-bottom:0;
-  border-radius:30px 30px 0 0;
-  background:rgba(17,16,13,.96);
+  border-radius:34px 34px 0 0;
+  background:rgba(10,10,8,.96);
   backdrop-filter:blur(30px);
-  box-shadow:0 -24px 92px rgba(0,0,0,.62);
+  box-shadow:0 -24px 92px rgba(0,0,0,.6);
   transition:transform .24s cubic-bezier(.2,.8,.2,1);
 }
-.sheet.open{transform:translateX(-50%) translateY(0)}
-.sheet-head{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 14px}
-.sheet-head h2{font-size:20px;font-weight:800;letter-spacing:-.05em}
-.sheet-head button{width:35px;height:35px;border-radius:50%;border:1px solid var(--line);background:rgba(233,223,204,.06);color:var(--bone)}
-.buybar{display:flex;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(233,223,204,.05);margin-bottom:12px}
-#buyInput{flex:1;min-width:0;border:0;background:transparent;color:var(--bone);padding:14px;outline:0;font-family:var(--mono);font-size:11px}
-#buyAdd{border:0;border-left:1px solid var(--line);background:var(--bone);color:var(--ink);padding:0 16px;font-family:var(--mono);font-size:10px;font-weight:700}
-#buyItems{max-height:46svh;overflow:auto}
-.buy{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 2px;border-bottom:1px solid var(--line);color:var(--bone2);font-family:var(--mono);font-size:12px}
-.buy span{flex:1}.buy.bought span{text-decoration:line-through;color:var(--bone3)}.buy button{border:0;background:transparent;color:var(--danger);width:30px;height:30px;font-size:18px}.empty{padding:16px 2px;color:var(--bone3);font-family:var(--mono);font-size:10px}
-.toast{position:fixed;left:50%;bottom:calc(84px + var(--safe-bottom));transform:translateX(-50%) translateY(18px);opacity:0;z-index:130;border:1px solid var(--line2);border-radius:999px;background:var(--bone);color:var(--ink);padding:10px 14px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:.18s;pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:380px){.hero{min-height:300px}.title h1{font-size:45px}.hero .sphere{width:212px;height:212px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.sheet.open{
+  transform:translateX(-50%) translateY(0);
+}
+
+.sheet-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:5px 2px 14px;
+}
+
+.sheet-head h2{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.05em;
+}
+
+.sheet-head button{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:rgba(236,228,211,.07);
+  color:var(--bone);
+}
+
+.buybar{
+  display:flex;
+  border:1px solid var(--line);
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(236,228,211,.052);
+  margin-bottom:12px;
+}
+
+#buyInput{
+  flex:1;
+  min-width:0;
+  border:0;
+  background:transparent;
+  color:var(--bone);
+  padding:15px;
+  outline:0;
+  font-family:var(--mono);
+  font-size:11px;
+}
+
+#buyAdd{
+  border:0;
+  border-left:1px solid var(--line);
+  background:var(--bone);
+  color:var(--ink);
+  padding:0 16px;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:700;
+}
+
+#buyItems{
+  max-height:46svh;
+  overflow:auto;
+}
+
+.buy{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:13px 2px;
+  border-bottom:1px solid var(--line);
+  color:var(--bone2);
+  font-family:var(--mono);
+  font-size:12px;
+}
+
+.buy span{
+  flex:1;
+}
+
+.buy.bought span{
+  text-decoration:line-through;
+  color:var(--bone3);
+}
+
+.buy button{
+  border:0;
+  background:transparent;
+  color:var(--ember);
+  width:30px;
+  height:30px;
+  font-size:18px;
+}
+
+.empty{
+  padding:16px 2px;
+  color:var(--bone3);
+  font-family:var(--mono);
+  font-size:10px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(84px + var(--safe-bottom));
+  transform:translateX(-50%) translateY(18px);
+  opacity:0;
+  z-index:130;
+  border:1px solid var(--line2);
+  border-radius:999px;
+  background:var(--bone);
+  color:var(--ink);
+  padding:10px 14px;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:.18s;
+  pointer-events:none;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* small screens */
+@media(max-width:380px){
+  .hero{
+    min-height:304px;
+  }
+
+  .eternal-loop-title{
+    font-size:43px;
+  }
+
+  .ritual-orb{
+    width:226px;
+    height:226px;
+  }
+
+  .section-head{
+    grid-template-columns:46px 1fr auto;
+  }
+
+  .code{
+    width:46px;
+    height:46px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
 </style>
 </head>
+
 <body>
 <div class="app">
   <header class="top">
-    <div class="brand">
-      <b>LOOP LITUAL</b>
+    <div class="mark">
+      <b>S#01 / ETERNAL LOOP</b>
       <span id="date">0000.00.00</span>
     </div>
-    <div class="progress" id="progress"><span data-pct>0%</span></div>
+    <div class="moon" id="moon"><span data-pct>0%</span></div>
   </header>
 
   <section class="hero">
-    <div class="sphere"></div>
-    <div class="meta"><span>S#01</span><span>PRIVATE SYSTEM</span></div>
-    <div class="title">
-      <h1>Loop<span>Litual</span></h1>
-      <p><span>Daily ritual system</span><span>Seoul</span></p>
+    <div class="ritual-orb"></div>
+    <div class="hero-meta">
+      <span>S#01</span>
+      <span>PRIVATE RITE</span>
     </div>
-    <div class="stats">
-      <div class="stat"><b data-done>0</b><small>Done</small></div>
-      <div class="stat"><b data-left>0</b><small>Left</small></div>
-      <div class="stat"><b data-pct>0%</b><small>Rate</small></div>
+
+    <div class="titlebox">
+      <h1 class="eternal-loop-title">
+        <span class="eternal-word">Eternal</span>
+        <strong class="loop-word">Loop</strong>
+      </h1>
+      <p>
+        <span>Daily ritual system</span>
+        <span></span>
+      </p>
+    </div>
+
+    <div class="stats-hidden" aria-hidden="true">
+      <b data-done>0</b>
+      <b data-left>0</b>
+      <b data-pct>0%</b>
     </div>
   </section>
 
-  <div class="nav-wrap"><nav id="nav"></nav></div>
+  <div class="nav-wrap">
+    <nav id="nav"></nav>
+  </div>
+
   <main id="root"></main>
 </div>
 
@@ -485,121 +772,423 @@ body::after{
 </div>
 
 <section class="sheet" id="sheet">
-  <div class="sheet-head"><h2>Wish List & Notes</h2><button id="closeSheet">×</button></div>
-  <div class="buybar"><input id="buyInput" placeholder="// add item"><button id="buyAdd">ADD</button></div>
+  <div class="sheet-head">
+    <h2>Wish List & Notes</h2>
+    <button id="closeSheet">×</button>
+  </div>
+
+  <div class="buybar">
+    <input id="buyInput" placeholder="// add item" />
+    <button id="buyAdd">ADD</button>
+  </div>
+
   <div id="buyItems"></div>
 </section>
+
 <div class="toast" id="toast">Saved</div>
 
 <script>
-const ROUTINE = [["01", "Wake", "initiation", [["Get up immediately", "Move within 5 seconds. No snooze."]]], ["02", "Morning", "first loop", [["Oil pulling", "5 min. Empty stomach. Spit into tissue."], ["Brush teeth", "2+ min. Include tongue scraping."], ["Check weather", "Fine dust, outfit, SPF strength."], ["Hydration", "200–300ml water."]]], ["03", "Shower", "clean phase", [["Lukewarm shower", "38–40°C. End with cold water."], ["Shampoo routine", "Shampoo → conditioner → cold rinse."], ["Hair oil", "70% damp. Ends only."], ["Hair mask", "2–3×/wk. Skip conditioner that day."], ["Body lotion", "Apply while skin is damp."], ["Exfoliate", "1–2×/wk. Never daily."]]], ["04", "Lens", "visual layer", [["Insert lenses", "Rewetting drops. Max 8 hours."], ["Accessories", "Watch, rings, necklace."]]], ["05", "Skin AM", "day shield", [["Cleanser", "Mild acidic pH 5.5."], ["Toner", "HA + niacinamide."], ["Vitamin C", "10–20%. AM only."], ["Eye cream", "Peptides + caffeine."], ["Moisturizer", "Ceramide + peptides."], ["Sunscreen", "SPF50+ PA++++. Non-negotiable."], ["Deodorant", "Only on completely dry skin."]]], ["06", "Commute", "transit", [["Review plan", "Todoist + Mindkit + Notion Calendar."], ["Mindset", "One intention or 30 sec visualization."], ["Audio", "Music/podcast under 60%."]]], ["07", "Konkuk", "main block", [["Study A", "08:00–13:00. Deep work."], ["Lunch", "12:00. Eat light. 80% full."], ["AM supplements", "C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen."], ["Study B", "13:00–18:00. Deep work."], ["Study C", "18:00–23:00. Deep work."], ["Dinner", "18:00. Eat light."], ["PM supplements", "NAC, magnesium, zinc, B complex, probiotics."]]], ["08", "Return", "release", [["Decompress", "Drama, film, music, or reading."]]], ["09", "Workout", "movement", [["Strength training", "3×/week. Big compound lifts."], ["Cardio", "3–4×/week. 20–30 min."], ["Stretching", "Daily 10 min. Foam rolling."]]], ["10", "Shower PM", "reset", [["PM shower", "Within 30 min after workout."], ["Back acne care", "Acnon or BHA body wash."], ["Driclor", "2–3×/week. Dry underarms."]]], ["11", "Skin PM", "repair", [["Double cleanse", "Oil/balm → mild acidic foam."], ["Toner", "HA + niacinamide."], ["AHA / BHA", "1–2×/wk. Not with retinol."], ["Essence", "Niacinamide 5–10% + peptides."], ["Retinol", "3–4×/wk. PM only."], ["Eye cream", "Peptides + low-dose retinol."], ["Moisturizer", "Thicker than morning."], ["Lip care", "Lip balm or sleeping mask."], ["Sheet mask", "1–2×/wk. Non-retinol days."]]], ["12", "Face", "alignment", [["Jaw + eye massager", "4×/wk. Lymph flow route."], ["Retainer", "Clean and insert."]]], ["13", "Sleep", "closed loop", [["Pillowcase", "2×/wk. Satin or cotton."], ["Phone off", "30 min before bed."], ["Set alarm", "90-min cycles. One alarm."], ["Remove lenses", "Never sleep in contacts."], ["Magnesium", "200–400mg before bed."]]]];
-const KEY = 'loop_litual_clean_checks_v1';
-const BUYKEY = 'loop_litual_clean_buys_v1';
-const qs = s => document.querySelector(s);
-const qsa = s => [...document.querySelectorAll(s)];
+const ROUTINE = [
+  ["01","Wake","initiation",[
+    ["Get up immediately","Move within 5 seconds. No snooze."]
+  ]],
+
+  ["02","Morning","first circle",[
+    ["Oil pulling","5 min. Empty stomach. Spit into tissue."],
+    ["Brush teeth","2+ min. Include tongue scraping."],
+    ["Check weather","Fine dust, outfit, SPF strength."],
+    ["Hydration","200–300ml water."]
+  ]],
+
+  ["03","Shower","purification",[
+    ["Lukewarm shower","38–40°C. End with cold water."],
+    ["Shampoo routine","Shampoo → conditioner → cold rinse."],
+    ["Hair oil","70% damp. Ends only."],
+    ["Hair mask","2–3×/wk. Skip conditioner that day."],
+    ["Body lotion","Apply while skin is damp."],
+    ["Exfoliate","1–2×/wk. Never daily."]
+  ]],
+
+  ["04","Lens","sight layer",[
+    ["Insert lenses","Rewetting drops. Max 8 hours."],
+    ["Accessories","Watch, rings, necklace."]
+  ]],
+
+  ["05","Skin AM","day shield",[
+    ["Cleanser","Mild acidic pH 5.5."],
+    ["Toner","HA + niacinamide."],
+    ["Vitamin C","10–20%. AM only."],
+    ["Eye cream","Peptides + caffeine."],
+    ["Moisturizer","Ceramide + peptides."],
+    ["Sunscreen","SPF50+ PA++++. Non-negotiable."],
+    ["Deodorant","Only on completely dry skin."]
+  ]],
+
+  ["06","Commute","transit",[
+    ["Review plan","Todoist + Mindkit + Notion Calendar."],
+    ["Mindset","One intention or 30 sec visualization."],
+    ["Audio","Music/podcast under 60%."]
+  ]],
+
+  ["07","Konkuk","main rite",[
+    ["Study A","08:00–13:00. Deep work."],
+    ["Lunch","12:00. Eat light. 80% full."],
+    ["AM supplements","C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen."],
+    ["Study B","13:00–18:00. Deep work."],
+    ["Study C","18:00–23:00. Deep work."],
+    ["Dinner","18:00. Eat light."],
+    ["PM supplements","NAC, magnesium, zinc, B complex, probiotics."]
+  ]],
+
+  ["08","Return","release",[
+    ["Decompress","Drama, film, music, or reading."]
+  ]],
+
+  ["09","Workout","kinetic rite",[
+    ["Strength training","3×/week. Big compound lifts."],
+    ["Cardio","3–4×/week. 20–30 min."],
+    ["Stretching","Daily 10 min. Foam rolling."]
+  ]],
+
+  ["10","Shower PM","second cleanse",[
+    ["PM shower","Within 30 min after workout."],
+    ["Back acne care","Acnon or BHA body wash."],
+    ["Driclor","2–3×/week. Dry underarms."]
+  ]],
+
+  ["11","Skin PM","repair rite",[
+    ["Double cleanse","Oil/balm → mild acidic foam."],
+    ["Toner","HA + niacinamide."],
+    ["AHA / BHA","1–2×/wk. Not with retinol."],
+    ["Essence","Niacinamide 5–10% + peptides."],
+    ["Retinol","3–4×/wk. PM only."],
+    ["Eye cream","Peptides + low-dose retinol."],
+    ["Moisturizer","Thicker than morning."],
+    ["Lip care","Lip balm or sleeping mask."],
+    ["Sheet mask","1–2×/wk. Non-retinol days."]
+  ]],
+
+  ["12","Face","alignment",[
+    ["Jaw + eye massager","4×/wk. Lymph flow route."],
+    ["Retainer","Clean and insert."]
+  ]],
+
+  ["13","Sleep","closed loop",[
+    ["Pillowcase","2×/wk. Satin or cotton."],
+    ["Phone off","30 min before bed."],
+    ["Set alarm","90-min cycles. One alarm."],
+    ["Remove lenses","Never sleep in contacts."],
+    ["Magnesium","200–400mg before bed."]
+  ]]
+];
+
+const KEY = "s01_eternal_loop_checks_v1";
+const BUYKEY = "s01_eternal_loop_buys_v1";
+
+const qs = selector => document.querySelector(selector);
+const qsa = selector => [...document.querySelectorAll(selector)];
+
 let observer;
 
 function today(){
   const d = new Date();
-  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+  return `${y}.${m}.${day}`;
 }
-function loadState(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
-function saveState(s){localStorage.setItem(KEY,JSON.stringify(s))}
-function haptic(ms=8){if(navigator.vibrate) navigator.vibrate(ms)}
+
+function loadState(){
+  try{
+    return JSON.parse(localStorage.getItem(KEY) || "{}");
+  }catch(e){
+    return {};
+  }
+}
+
+function saveState(state){
+  localStorage.setItem(KEY,JSON.stringify(state));
+}
+
+function haptic(ms = 8){
+  if(navigator.vibrate){
+    navigator.vibrate(ms);
+  }
+}
 
 function render(){
-  const state = loadState(), nav = qs('#nav'), root = qs('#root');
-  nav.innerHTML = ''; root.innerHTML = '';
-  ROUTINE.forEach(([code,title,mode,items], si)=>{
-    const nb = document.createElement('button');
-    nb.textContent = code;
-    nb.onclick = () => { qs(`#sec-${si}`).scrollIntoView({behavior:'smooth', block:'start'}); setActive(si); };
-    nav.appendChild(nb);
+  const state = loadState();
+  const nav = qs("#nav");
+  const root = qs("#root");
 
-    const sec = document.createElement('section');
-    sec.className = 'section'; sec.id = `sec-${si}`;
-    sec.innerHTML = `<div class="section-head"><div class="code">${code}</div><div><h2>${title}</h2><p>${mode}</p></div><div class="count">0/${items.length}</div></div><div class="list"></div>`;
-    const list = sec.querySelector('.list');
-    items.forEach(([name,note],ii)=>{
-      const id = `${si}-${ii}`;
-      const row = document.createElement('article');
-      row.className = 'task' + (state[id] ? ' done' : '');
+  nav.innerHTML = "";
+  root.innerHTML = "";
+
+  ROUTINE.forEach(([code,title,mode,items], sectionIndex) => {
+    const navButton = document.createElement("button");
+    navButton.textContent = code;
+
+    navButton.onclick = () => {
+      qs(`#sec-${sectionIndex}`).scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+      setActive(sectionIndex);
+    };
+
+    nav.appendChild(navButton);
+
+    const section = document.createElement("section");
+    section.className = "section";
+    section.id = `sec-${sectionIndex}`;
+
+    section.innerHTML = `
+      <div class="section-head">
+        <div class="code">${code}</div>
+        <div>
+          <h2>${title}</h2>
+          <p>${mode}</p>
+        </div>
+        <div class="count">0/${items.length}</div>
+      </div>
+      <div class="list"></div>
+    `;
+
+    const list = section.querySelector(".list");
+
+    items.forEach(([name,note], itemIndex) => {
+      const id = `${sectionIndex}-${itemIndex}`;
+
+      const row = document.createElement("article");
+      row.className = "task" + (state[id] ? " done" : "");
       row.dataset.id = id;
-      row.innerHTML = `<div class="check">✓</div><div><h3>${name}</h3><p>${note}</p></div>`;
+
+      row.innerHTML = `
+        <div class="check">✓</div>
+        <div>
+          <h3>${name}</h3>
+          <p>${note}</p>
+        </div>
+      `;
+
       row.onclick = () => toggle(row);
+
       list.appendChild(row);
     });
-    root.appendChild(sec);
-  });
-  qs('#date').textContent = today();
-  observe(); update(); setActive(0);
-}
-function toggle(row){
-  const id = row.dataset.id, s = loadState();
-  s[id] = !s[id]; saveState(s);
-  row.classList.toggle('done', s[id]);
-  haptic(); update();
-}
-function update(){
-  const total = ROUTINE.reduce((a,s)=>a+s[3].length,0);
-  const done = qsa('.task.done').length;
-  const pct = total ? Math.round(done/total*100) : 0;
-  qsa('[data-done]').forEach(e=>e.textContent=done);
-  qsa('[data-left]').forEach(e=>e.textContent=total-done);
-  qsa('[data-pct]').forEach(e=>e.textContent=pct+'%');
-  qs('#progress').style.setProperty('--p', pct*3.6 + 'deg');
-  ROUTINE.forEach((section, si)=>{
-    const sec = qs(`#sec-${si}`);
-    if(sec) sec.querySelector('.count').textContent = `${sec.querySelectorAll('.task.done').length}/${section[3].length}`;
-  });
-}
-function setActive(si){
-  qsa('#nav button').forEach((b,i)=>b.classList.toggle('active',i===si));
-  const b = qsa('#nav button')[si];
-  if(b) b.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-}
-function observe(){
-  if(observer) observer.disconnect();
-  observer = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)setActive(Number(e.target.id.replace('sec-','')))}),{threshold:.25,rootMargin:'-132px 0px -48% 0px'});
-  qsa('.section').forEach(s=>observer.observe(s));
-}
-function resetAll(){if(!confirm('Reset all checks?'))return;localStorage.removeItem(KEY);render();}
 
-let buys=[];
-function loadBuys(){try{buys=JSON.parse(localStorage.getItem(BUYKEY)||'[]')}catch(e){buys=[]}}
-function saveBuys(){localStorage.setItem(BUYKEY,JSON.stringify(buys))}
-function renderBuys(){
-  const wrap=qs('#buyItems');
-  wrap.innerHTML = buys.length ? '' : '<p class="empty">// empty</p>';
-  buys.forEach((it,i)=>{
-    const el=document.createElement('div');
-    el.className='buy'+(it.done?' bought':'');
-    el.innerHTML=`<span>${it.text}</span><button>×</button>`;
-    el.querySelector('span').onclick=()=>{buys[i].done=!buys[i].done;saveBuys();renderBuys();};
-    el.querySelector('button').onclick=()=>{buys.splice(i,1);saveBuys();renderBuys();};
-    wrap.appendChild(el);
+    root.appendChild(section);
+  });
+
+  qs("#date").textContent = today();
+
+  observe();
+  update();
+  setActive(0);
+}
+
+function toggle(row){
+  const id = row.dataset.id;
+  const state = loadState();
+
+  state[id] = !state[id];
+
+  saveState(state);
+
+  row.classList.toggle("done",state[id]);
+
+  haptic();
+  update();
+}
+
+function update(){
+  const total = ROUTINE.reduce((sum,section) => sum + section[3].length,0);
+  const done = qsa(".task.done").length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  qsa("[data-done]").forEach(el => {
+    el.textContent = done;
+  });
+
+  qsa("[data-left]").forEach(el => {
+    el.textContent = total - done;
+  });
+
+  qsa("[data-pct]").forEach(el => {
+    el.textContent = pct + "%";
+  });
+
+  qs("#moon").style.setProperty("--p",pct * 3.6 + "deg");
+
+  ROUTINE.forEach((section,sectionIndex) => {
+    const sec = qs(`#sec-${sectionIndex}`);
+
+    if(!sec){
+      return;
+    }
+
+    const doneInSection = sec.querySelectorAll(".task.done").length;
+    const count = sec.querySelector(".count");
+
+    if(count){
+      count.textContent = `${doneInSection}/${section[3].length}`;
+    }
   });
 }
+
+function setActive(sectionIndex){
+  qsa("#nav button").forEach((button,index) => {
+    button.classList.toggle("active",index === sectionIndex);
+  });
+
+  const activeButton = qsa("#nav button")[sectionIndex];
+
+  if(activeButton){
+    activeButton.scrollIntoView({
+      behavior:"smooth",
+      inline:"center",
+      block:"nearest"
+    });
+  }
+}
+
+function observe(){
+  if(observer){
+    observer.disconnect();
+  }
+
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        setActive(Number(entry.target.id.replace("sec-","")));
+      }
+    });
+  },{
+    threshold:.25,
+    rootMargin:"-132px 0px -48% 0px"
+  });
+
+  qsa(".section").forEach(section => {
+    observer.observe(section);
+  });
+}
+
+function resetAll(){
+  if(!confirm("Reset all checks?")){
+    return;
+  }
+
+  localStorage.removeItem(KEY);
+  render();
+}
+
+let buys = [];
+
+function loadBuys(){
+  try{
+    buys = JSON.parse(localStorage.getItem(BUYKEY) || "[]");
+  }catch(e){
+    buys = [];
+  }
+}
+
+function saveBuys(){
+  localStorage.setItem(BUYKEY,JSON.stringify(buys));
+}
+
+function renderBuys(){
+  const wrap = qs("#buyItems");
+
+  wrap.innerHTML = buys.length ? "" : '<p class="empty">// empty</p>';
+
+  buys.forEach((item,index) => {
+    const element = document.createElement("div");
+    element.className = "buy" + (item.done ? " bought" : "");
+
+    element.innerHTML = `
+      <span>${item.text}</span>
+      <button>×</button>
+    `;
+
+    element.querySelector("span").onclick = () => {
+      buys[index].done = !buys[index].done;
+      saveBuys();
+      renderBuys();
+    };
+
+    element.querySelector("button").onclick = () => {
+      buys.splice(index,1);
+      saveBuys();
+      renderBuys();
+    };
+
+    wrap.appendChild(element);
+  });
+}
+
 function addBuy(){
-  const input=qs('#buyInput'), text=input.value.trim();
-  if(!text)return;
-  buys.push({text,done:false}); input.value=''; saveBuys(); renderBuys();
+  const input = qs("#buyInput");
+  const text = input.value.trim();
+
+  if(!text){
+    return;
+  }
+
+  buys.push({
+    text,
+    done:false
+  });
+
+  input.value = "";
+  saveBuys();
+  renderBuys();
 }
+
 function exportSnapshot(){
-  const done=qsa('.task.done h3').map(e=>e.textContent);
-  const blob=new Blob([JSON.stringify({date:today(),done,buys},null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob); a.download=`LOOP_LITUAL_${today()}.json`; a.click(); showToast();
+  const done = qsa(".task.done h3").map(el => el.textContent);
+
+  const blob = new Blob([
+    JSON.stringify({
+      date:today(),
+      done,
+      buys
+    },null,2)
+  ],{
+    type:"application/json"
+  });
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `S01_ETERNAL_LOOP_${today()}.json`;
+  a.click();
+
+  showToast();
 }
-function showToast(){qs('#toast').classList.add('show');setTimeout(()=>qs('#toast').classList.remove('show'),1200)}
-document.addEventListener('DOMContentLoaded',()=>{
-  render(); loadBuys(); renderBuys();
-  qs('#reset').onclick=resetAll;
-  qs('#export').onclick=exportSnapshot;
-  qs('#openSheet').onclick=()=>qs('#sheet').classList.add('open');
-  qs('#closeSheet').onclick=()=>qs('#sheet').classList.remove('open');
-  qs('#buyAdd').onclick=addBuy;
-  qs('#buyInput').addEventListener('keydown',e=>{if(e.key==='Enter')addBuy()});
+
+function showToast(){
+  qs("#toast").classList.add("show");
+
+  setTimeout(() => {
+    qs("#toast").classList.remove("show");
+  },1200);
+}
+
+document.addEventListener("DOMContentLoaded",() => {
+  render();
+
+  loadBuys();
+  renderBuys();
+
+  qs("#reset").onclick = resetAll;
+  qs("#export").onclick = exportSnapshot;
+  qs("#openSheet").onclick = () => qs("#sheet").classList.add("open");
+  qs("#closeSheet").onclick = () => qs("#sheet").classList.remove("open");
+  qs("#buyAdd").onclick = addBuy;
+
+  qs("#buyInput").addEventListener("keydown",event => {
+    if(event.key === "Enter"){
+      addBuy();
+    }
+  });
 });
 </script>
 </body>
