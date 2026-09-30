@@ -9,48 +9,50 @@ export default async function handler(req, res) {
   const dbId = process.env.NOTION_DB_ID;
   const { date, checks } = req.body;
 
-  // 오늘 날짜 기존 행 찾기
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'Notion-Version': '2022-06-28'
+  };
+
+  // 오늘 날짜 행 찾기 (Date 프로퍼티 기준)
   const query = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Notion-Version': '2022-06-28'
-    },
+    headers,
     body: JSON.stringify({
-      filter: { property: 'Name', title: { equals: date } }
+      filter: { property: 'Date', date: { equals: date } }
     })
   });
   const queryResult = await query.json();
+  const existing = (queryResult.results || [])[0];
 
-  // 기존 행 있으면 삭제
-  for (const page of queryResult.results || []) {
-    await fetch(`https://api.notion.com/v1/pages/${page.id}`, {
+  const checkProps = {};
+  for (const [key, value] of Object.entries(checks)) {
+    checkProps[key] = { checkbox: value };
+  }
+
+  let response;
+  if (existing) {
+    // 오늘 행이 이미 있으면 체크박스만 갱신 — 타이틀 메모는 그대로 둠
+    response = await fetch(`https://api.notion.com/v1/pages/${existing.id}`, {
       method: 'PATCH',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Notion-Version': '2022-06-28'
-      },
-      body: JSON.stringify({ archived: true })
+      headers,
+      body: JSON.stringify({ properties: checkProps })
+    });
+  } else {
+    // 없으면 새로 생성, 타이틀은 비워둠 (직접 메모 쓸 수 있게)
+    response = await fetch('https://api.notion.com/v1/pages', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        parent: { database_id: dbId },
+        properties: {
+          Date: { date: { start: date } },
+          ...checkProps
+        }
+      })
     });
   }
-
-  // 새로 만들기
-  const properties = { Date: { title: [{ text: { content: date } }] } };
-  for (const [key, value] of Object.entries(checks)) {
-    properties[key] = { checkbox: value };
-  }
-
-  const response = await fetch('https://api.notion.com/v1/pages', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Notion-Version': '2022-06-28'
-    },
-    body: JSON.stringify({ parent: { database_id: dbId }, properties })
-  });
 
   const result = await response.json();
   res.status(response.ok ? 200 : 500).json(result);
