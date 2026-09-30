@@ -86,7 +86,7 @@ body{min-height:100svh;background:#D6D6D3;color:var(--ink);font-family:var(--san
 .buy-item.bought .tick{color:var(--grad);font-weight:900}
 .buy-del{border:0;background:transparent;color:var(--ink3);font-size:16px}
 .buy-empty{padding:14px 0;color:var(--ink3);font-family:var(--mono);font-size:10px}
-.dock{position:fixed;left:50%;bottom:calc(14px + var(--safe-bottom));transform:translateX(-50%);z-index:100;width:min(420px,calc(100vw - 32px));display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--grad);border:1px solid rgba(255,255,255,.6);border-radius:16px;overflow:hidden;box-shadow:0 10px 28px rgba(40,46,50,.24)}
+.dock{position:fixed;left:50%;bottom:calc(14px + var(--safe-bottom));transform:translate3d(-50%,0,0);-webkit-transform:translate3d(-50%,0,0);will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;z-index:100;width:min(420px,calc(100vw - 32px));display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--grad);border:1px solid rgba(255,255,255,.6);border-radius:16px;overflow:hidden;box-shadow:0 10px 28px rgba(40,46,50,.24)}
 .dock button{min-height:48px;border:0;background:transparent;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
 @media(max-width:380px){.titlebox h1{font-size:24px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
