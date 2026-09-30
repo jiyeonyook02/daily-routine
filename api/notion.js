@@ -24,6 +24,11 @@ export default async function handler(req, res) {
     })
   });
   const queryResult = await query.json();
+
+  if (!query.ok) {
+    return res.status(500).json({ step: 'query', message: queryResult.message || JSON.stringify(queryResult) });
+  }
+
   const existing = (queryResult.results || [])[0];
 
   const checkProps = {};
@@ -55,5 +60,8 @@ export default async function handler(req, res) {
   }
 
   const result = await response.json();
-  res.status(response.ok ? 200 : 500).json(result);
+  if (!response.ok) {
+    return res.status(500).json({ step: existing ? 'update' : 'create', message: result.message || JSON.stringify(result) });
+  }
+  res.status(200).json(result);
 }
