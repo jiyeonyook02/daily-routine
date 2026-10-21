@@ -68,6 +68,9 @@ svg g.lbg.on .lead{opacity:1}
 .chip i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ember);margin-right:6px;vertical-align:1px}
 .legend{padding:10px 4px 0;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--ink3)}
 .legend i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ember);margin-right:6px}
+.legend.src{padding-top:4px;min-height:17px}
+.legend.src i{background:var(--ink3)}
+.legend.src.live i{background:#3f8f5f}
 </style>
 </head>
 <body>
@@ -143,10 +146,12 @@ svg g.lbg.on .lead{opacity:1}
 
   <div class="chips glass" id="chips"></div>
   <div class="legend"><i></i>Fix now</div>
+  <div class="legend src" id="src" aria-live="polite"></div>
 </div>
 
 <script>
-// Static snapshot of the Notion "Body Parts" database (Body Map.). Edit URLs/text here if pages change.
+// Snapshot of the Notion "Body Parts" database (Body Map.). It is shown first and whenever Notion can't be reached;
+// /api/bodymap then overwrites name/zone/status/goal/now with the live Notion values (see loadLive below).
 const N='https://app.notion.com/p/';
 const P={
  eyes:{name:'Eyes',zone:'Head',view:'face',status:'Fix now',goal:'눈 수분 개선 (건조 완화)',now:'렌즈 착용 (최대 8시간) · 보존제 없는 1회용 습윤 점안액 사용 중',url:N+'400d6b58c4ff81c7a9c4dd4130d0d0ff'},
@@ -163,8 +168,10 @@ const P={
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function showView(v){$$('.stage svg').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));$$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+let cur=null;
 function select(k){
   const p=P[k];if(!p)return;
+  cur=k;
   showView(p.view);
   $$('[data-k]').forEach(e=>e.classList.toggle('on',e.dataset.k===k));
   $$('.chip').forEach(c=>c.classList.toggle('on',c.dataset.k===k));
@@ -176,7 +183,63 @@ function select(k){
    '<a class="open" target="_blank" rel="noopener" href="'+p.url+'">Open in Notion ↗</a>';
 }
 $('#info').innerHTML='<div class="i-top"><span>Body Map</span><span></span></div><h2 class="i-name">Tap a zone</h2><div class="i-row"><b>Tip</b><span class="empty">눈, 두피, 입술… 부위를 누르면 목표와 지금 하는 것이 나오고, 버튼으로 Notion 페이지가 열려요.</span></div><a class="open off">Open in Notion ↗</a>';
-$('#chips').innerHTML=Object.keys(P).map(k=>'<button type="button" class="chip" data-k="'+k+'">'+(P[k].status==='Fix now'?'<i></i>':'')+esc(P[k].name)+'</button>').join('');
+function renderChips(){
+  $('#chips').innerHTML=Object.keys(P).map(k=>'<button type="button" class="chip'+(k===cur?' on':'')+'" data-k="'+k+'">'+(P[k].status==='Fix now'?'<i></i>':'')+esc(P[k].name)+'</button>').join('');
+}
+renderChips();
+
+// ---- live data from Notion (via /api/bodymap) -------------------------------------------------
+// Any failure (offline, no permission, bad JSON, slow) just keeps whatever is already on screen.
+const LIVE_KEY='bodymap_live_v1';
+const idOf=u=>{const m=/[0-9a-f]{32}$/i.exec(String(u||''));return m?m[0].toLowerCase():''};
+const str=v=>typeof v==='string'?v:'';
+function setSrc(state,msg){const el=$('#src');if(!el)return;el.className='legend src'+(state==='live'?' live':'');el.innerHTML='<i></i>'+esc(msg)}
+function applyLive(parts){
+  if(!Array.isArray(parts))return 0;
+  let n=0;
+  parts.forEach(row=>{
+    if(!row||typeof row!=='object')return;
+    const id=str(row.id).replace(/-/g,'').toLowerCase();
+    const k=Object.keys(P).find(key=>idOf(P[key].url)===id);
+    if(!k)return;
+    const name=str(row.name).trim(),now=str(row.now).trim();
+    P[k]=Object.assign({},P[k],{
+      name:name||P[k].name,
+      zone:str(row.zone)||P[k].zone,
+      status:str(row.status),
+      goal:str(row.goal).trim(),
+      now:now||P[k].now
+    });
+    n++;
+  });
+  if(n){
+    renderChips();
+    if(cur){const on=$('.stage svg.on');select(cur);if(on)showView(on.id.slice(2))}
+  }
+  return n;
+}
+const REASON={object_not_found:'Notion 연동 권한 확인 필요',unauthorized:'Notion 토큰 확인 필요',restricted_resource:'Notion 연동 권한 확인 필요',no_token:'서버에 Notion 토큰 없음',timeout:'Notion 응답 지연',network:'네트워크 오류'};
+function timeLabel(iso){const d=new Date(iso);return isNaN(d)?'':d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}
+async function loadLive(){
+  try{const c=JSON.parse(localStorage.getItem(LIVE_KEY)||'null');if(c&&c.parts&&applyLive(c.parts))setSrc('copy','마지막으로 불러온 Notion 내용 · 확인 중…')}catch(e){}
+  const ctrl=typeof AbortController==='function'?new AbortController():null;
+  const timer=setTimeout(()=>ctrl&&ctrl.abort(),8000);
+  try{
+    const r=await fetch('/api/bodymap',{cache:'no-store',signal:ctrl?ctrl.signal:undefined});
+    const j=await r.json().catch(()=>null);
+    if(!r.ok||!j||j.ok!==true){
+      setSrc('copy','저장된 사본 표시 중 · '+(REASON[j&&j.reason]||'Notion을 불러오지 못했어요'));
+      return;
+    }
+    const n=applyLive(j.parts);
+    if(!n){setSrc('copy','저장된 사본 표시 중 · Notion에서 부위를 찾지 못했어요');return}
+    try{localStorage.setItem(LIVE_KEY,JSON.stringify({at:j.at,parts:j.parts}))}catch(e){}
+    setSrc('live','Notion과 연결됨 · '+timeLabel(j.at)+' 기준');
+  }catch(e){
+    setSrc('copy','저장된 사본 표시 중 · '+(e&&e.name==='AbortError'?REASON.timeout:'Notion을 불러오지 못했어요'));
+  }finally{clearTimeout(timer)}
+}
+loadLive();
 $$('#seg button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.v)));
 document.addEventListener('click',e=>{const el=e.target.closest('[data-k]');if(el)select(el.dataset.k)});
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&e.target.dataset.k){e.preventDefault();select(e.target.dataset.k)}});
