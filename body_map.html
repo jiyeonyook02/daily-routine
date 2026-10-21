@@ -12,6 +12,7 @@
 html{background:#D6D6D3}
 body{min-height:100svh;background:#D6D6D3;color:var(--ink);font-family:var(--sans)}
 .app{width:min(100%,460px);margin:0 auto;padding:calc(24px + env(safe-area-inset-top)) 20px calc(40px + env(safe-area-inset-bottom))}
+.back{display:inline-block;margin:0 4px 10px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);text-decoration:none;padding:6px 0}
 .head{display:flex;justify-content:space-between;align-items:flex-end;padding:0 4px 18px}
 .head h1{font-size:30px;font-weight:600;line-height:1.05}
 .head span{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
@@ -71,6 +72,7 @@ svg g.lbg.on .lead{opacity:1}
 </head>
 <body>
 <div class="app">
+  <a class="back" href="index.html">← Baseline</a>
   <div class="head"><h1>Body Map.</h1><span>Tap a zone</span></div>
 
   <div class="seg glass" id="seg">
