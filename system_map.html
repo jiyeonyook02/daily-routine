@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow">
+<title>Baseline System Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one narrow column like the Baseline app itself. Map first, then loop check, then ideas. */
+:root{
+  --bg:#D6D6D3;
+  --card:rgba(255,255,255,.55);
+  --card-edge:rgba(255,255,255,.7);
+  --ink:#181818;
+  --ink2:#55554f;
+  --ink3:#7d7d78;
+  --line:rgba(0,0,0,.14);
+  --hl-bg:#3d3d3a;
+  --hl-fg:#f4f4f2;
+  --hl-sub:#c9c9c5;
+  --gap:#c23a3a;
+  --gap-soft:rgba(194,58,58,.10);
+  --ok:#2f6b4f;
+  --ok-soft:rgba(47,107,79,.12);
+  --warn:#8a6414;
+  --warn-soft:rgba(138,100,20,.13);
+  --serif:'EB Garamond','Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',-apple-system,'Apple SD Gothic Neo',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#151514;
+    --card:rgba(255,255,255,.07);
+    --card-edge:rgba(255,255,255,.12);
+    --ink:#ecebe8;
+    --ink2:#aeaea9;
+    --ink3:#85857f;
+    --line:rgba(255,255,255,.2);
+    --hl-bg:#e8e7e3;
+    --hl-fg:#171716;
+    --hl-sub:#4a4a46;
+    --gap:#ff7a72;
+    --gap-soft:rgba(255,122,114,.12);
+    --ok:#7fd1a6;
+    --ok-soft:rgba(127,209,166,.14);
+    --warn:#e6bd63;
+    --warn-soft:rgba(230,189,99,.14);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151514;
+  --card:rgba(255,255,255,.07);
+  --card-edge:rgba(255,255,255,.12);
+  --ink:#ecebe8;
+  --ink2:#aeaea9;
+  --ink3:#85857f;
+  --line:rgba(255,255,255,.2);
+  --hl-bg:#e8e7e3;
+  --hl-fg:#171716;
+  --hl-sub:#4a4a46;
+  --gap:#ff7a72;
+  --gap-soft:rgba(255,122,114,.12);
+  --ok:#7fd1a6;
+  --ok-soft:rgba(127,209,166,.14);
+  --warn:#e6bd63;
+  --warn-soft:rgba(230,189,99,.14);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+h1,h2,h3,p{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px;-webkit-text-size-adjust:100%}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,8vw,40px);line-height:1.1;margin-top:10px;text-wrap:balance}
+.lede{margin-top:14px;color:var(--ink2);max-width:46ch;text-wrap:pretty}
+.lede b{color:var(--ink);font-weight:700}
+.stamp{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink3)}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.2;text-wrap:balance}
+.sec-sub{margin-top:6px;color:var(--ink2);font-size:14px;max-width:50ch;text-wrap:pretty}
+.glass{background:var(--card);border:1px solid var(--card-edge);border-radius:22px;backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%)}
+
+/* ---- map ---- */
+.map{padding:14px 4px 14px;margin-top:16px}
+.map .dia{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}
+.n{fill:var(--card);stroke:var(--line);stroke-width:1}
+.n.hl{fill:var(--hl-bg);stroke:none}
+.n.iso{fill:var(--gap-soft);stroke:var(--gap);stroke-width:1.2;stroke-dasharray:2 3.5}
+.grp{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:1 0}
+.t1{font:600 14px var(--serif);fill:var(--ink)}
+.t1k{font:700 13px var(--sans);fill:var(--ink)}
+.t2{font:400 11px var(--sans);fill:var(--ink2)}
+.t2g{font:500 11px var(--sans);fill:var(--gap)}
+.t3{font:500 8.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;fill:var(--ink3)}
+.th{font:700 13.5px var(--sans);fill:var(--hl-fg)}
+.th2{font:400 10.5px var(--sans);fill:var(--hl-sub)}
+.lab{font:500 10.5px var(--sans);fill:var(--ink2)}
+.labg{font:500 10.5px var(--sans);fill:var(--gap)}
+.l-live{stroke:var(--ink);stroke-width:1.6;fill:none;stroke-linejoin:round}
+.l-soft{stroke:var(--ink2);stroke-width:1.4;stroke-dasharray:5 4;fill:none;stroke-linejoin:round}
+.l-gap{stroke:var(--gap);stroke-width:1.5;stroke-dasharray:1.5 4.5;stroke-linecap:round;fill:none;stroke-linejoin:round}
+.mk-live{fill:var(--ink)}.mk-soft{fill:var(--ink2)}.mk-gap{fill:var(--gap)}
+.pill{fill:var(--ink)}
+.pill-t{font:700 8px var(--mono);letter-spacing:.08em;fill:var(--bg)}
+.q{fill:var(--bg);stroke:var(--gap);stroke-width:1.2}
+.qt{font:700 10px var(--sans);fill:var(--gap)}
+
+.legend{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px;padding:0 16px}
+.lg{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink2)}
+.lg svg{flex:0 0 44px;width:44px;height:10px}
+.lg b{color:var(--ink);font-weight:500}
+.newtag{font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.08em;background:var(--ink);color:var(--bg);padding:2px 6px;border-radius:999px}
+
+/* ---- loop check ---- */
+.loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px}
+.step{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.step-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.step h3{font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.2;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.state{font-family:var(--sans);font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;letter-spacing:.01em}
+.s-ok{background:var(--ok-soft);color:var(--ok)}
+.s-part{background:var(--warn-soft);color:var(--warn)}
+.s-miss{background:var(--gap-soft);color:var(--gap)}
+.step p{font-size:14px;color:var(--ink2);text-wrap:pretty}
+.step.wide{grid-column:1/-1;border-color:var(--gap)}
+.step.wide p{max-width:60ch}
+
+/* ---- ideas ---- */
+.group{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.group-h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);display:flex;gap:10px;align-items:center}
+.group-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.idea{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.idea h3{font-family:var(--serif);font-weight:600;font-size:19px;line-height:1.25;text-wrap:balance}
+.idea .row{font-size:14px;color:var(--ink2);text-wrap:pretty}
+.idea .row b{font-family:var(--mono);font-weight:500;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-right:8px}
+.idea .row.src{font-size:12.5px;color:var(--ink3)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--ink2);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.chip.sz{color:var(--ink);border-color:var(--ink)}
+.facts{margin-top:4px;padding:16px 18px;font-size:12.5px;color:var(--ink2);line-height:1.7}
+.facts b{font-family:var(--mono);font-weight:500;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px}
+@media (min-width:720px){
+  .wrap{max-width:700px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .idea,.step{transition:transform .2s ease}
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Baseline · 구조도</div>
+  <h1>나를 포함한 시스템 지도</h1>
+  <p class="lede">기록하는 쪽은 이미 촘촘해요. 비어 있는 곳은 <b>기록이 나에게 돌아오는 구간</b>이에요. 그 구멍을 중심으로 지도와 아이디어를 정리했어요.</p>
+  <div class="stamp">2026.10.21 기준 · Notion과 배포된 앱을 직접 열어본 내용</div>
+</header>
+
+<section aria-labelledby="h-map">
+  <h2 id="h-map">지금 구조</h2>
+  <p class="sec-sub">위가 손, 아래가 눈이에요. 같은 사람이 두 번 나와요. 위에서 탭하고, 아래에서 보고 결정해요. 아래에서 위로 돌아오는 화살표가 지금 거의 끊겨 있어요.</p>
+
+  <div class="glass map">
+  <svg class="dia" viewBox="0 0 400 740" role="img" aria-label="Baseline 앱, 저장 함수, Notion 데이터베이스, 바디맵과 사용자가 어떻게 연결되어 있는지 보여주는 구조도">
+    <defs>
+      <marker id="aL" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1.2 L9 5 L1 8.8 Z" class="mk-live"/></marker>
+      <marker id="aS" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1.2 L9 5 L1 8.8 Z" class="mk-soft"/></marker>
+      <marker id="aG" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1.2 L9 5 L1 8.8 Z" class="mk-gap"/></marker>
+    </defs>
+
+    <!-- Notion container -->
+    <rect class="grp" x="12" y="316" width="376" height="310" rx="20"/>
+    <text class="t3" x="26" y="334">Notion</text>
+
+    <!-- ===== links (drawn first so nodes sit on top) ===== -->
+    <path class="l-live" d="M150 68 V104" marker-end="url(#aL)"/>
+    <path class="l-live" d="M250 68 V84 H323 V104" marker-end="url(#aL)"/>
+    <path class="l-live" d="M140 172 V212" marker-end="url(#aL)"/>
+    <path class="l-live" d="M140 272 V364" marker-end="url(#aL)"/>
+    <path class="l-live" d="M61 424 V452" marker-end="url(#aL)"/>
+    <path class="l-live" d="M143 424 V452" marker-end="url(#aL)"/>
+    <path class="l-live" d="M298 416 V444" marker-start="url(#aL)" marker-end="url(#aL)"/>
+    <path class="l-live" d="M298 504 V532" marker-start="url(#aL)" marker-end="url(#aL)"/>
+    <path class="l-soft" d="M220 567 H200 V412 H180" marker-end="url(#aS)"/>
+    <path class="l-live" d="M376 567 H382 V300 H323 V172" marker-end="url(#aL)"/>
+    <path class="l-gap" d="M220 376 H180" marker-start="url(#aG)" marker-end="url(#aG)"/>
+    <path class="l-gap" d="M200 626 V668" marker-end="url(#aG)"/>
+    <path class="l-gap" d="M100 695 H7 V41 H100" marker-end="url(#aG)"/>
+
+    <!-- ===== top: the person who checks ===== -->
+    <rect class="n hl" x="100" y="14" width="200" height="54" rx="27"/>
+    <text class="th" x="200" y="37" text-anchor="middle">체크하는 나</text>
+    <text class="th2" x="200" y="54" text-anchor="middle">하루 61번 탭 · 폰 홈화면 앱</text>
+    <text class="lab" x="158" y="91">탭</text>
+    <text class="lab" x="270" y="79">보기</text>
+
+    <!-- app + body map web -->
+    <rect class="n" x="24" y="104" width="232" height="68" rx="14"/>
+    <text class="t1k" x="40" y="128">Baseline 앱</text>
+    <text class="t3" x="244" y="124" text-anchor="end">Vercel</text>
+    <text class="t2" x="40" y="146">61개 항목 · 시간대별 구간</text>
+    <text class="t2" x="40" y="161">Key Habits 5 · 오늘 진행률 %</text>
+
+    <rect class="n" x="270" y="104" width="106" height="68" rx="14"/>
+    <text class="t1k" x="283" y="128">Body Map</text>
+    <text class="t2" x="283" y="146">부위를 눌러 보는</text>
+    <text class="t2" x="283" y="161">지도 (웹)</text>
+
+    <text class="labg" x="148" y="196">Save 버튼 (수동)</text>
+
+    <!-- api -->
+    <rect class="n" x="24" y="212" width="232" height="60" rx="14"/>
+    <text class="t1" x="40" y="236">/api/notion</text>
+    <text class="t2" x="40" y="255">날짜별 한 줄 저장 + 월·연도 자동 연결</text>
+    <rect class="pill" x="218" y="206" width="32" height="13" rx="6.5"/>
+    <text class="pill-t" x="234" y="215.5" text-anchor="middle">NEW</text>
+    <text class="lab" x="148" y="296">날짜 기준으로 덮어쓰기</text>
+
+    <text class="lab" x="330" y="236">Body Parts</text>
+    <text class="lab" x="330" y="249">실시간 읽기</text>
+
+    <!-- notion left column -->
+    <text class="t3" x="24" y="356">Session #01</text>
+    <rect class="n" x="24" y="364" width="156" height="60" rx="14"/>
+    <text class="t1" x="38" y="386">Daily Log</text>
+    <text class="t2" x="38" y="402">체크 61칸 · 달성률 식</text>
+    <text class="t2g" x="38" y="416">마지막 저장 10/16</text>
+
+    <rect class="n" x="24" y="452" width="74" height="44" rx="12"/>
+    <text class="t1" x="61" y="472" text-anchor="middle">Monthly</text>
+    <text class="t2" x="61" y="487" text-anchor="middle">월 평균</text>
+    <rect class="n" x="106" y="452" width="74" height="44" rx="12"/>
+    <text class="t1" x="143" y="472" text-anchor="middle">Year</text>
+    <text class="t2" x="143" y="487" text-anchor="middle">연 평균</text>
+    <rect class="pill" x="150" y="446" width="30" height="13" rx="6.5"/>
+    <text class="pill-t" x="165" y="455.5" text-anchor="middle">NEW</text>
+
+    <rect class="n iso" x="24" y="528" width="156" height="46" rx="14"/>
+    <text class="t1k" x="38" y="549">장기 목표</text>
+    <text class="t2g" x="38" y="564">아무와도 연결 없음</text>
+
+    <!-- notion right column -->
+    <text class="t3" x="220" y="356">Project · Wellness · Body</text>
+    <rect class="n" x="220" y="364" width="156" height="52" rx="14"/>
+    <text class="t1" x="234" y="386">Project Management</text>
+    <text class="t2" x="234" y="403">프로젝트 13 → Tasks</text>
+
+    <rect class="n" x="220" y="444" width="156" height="60" rx="14"/>
+    <text class="t1" x="234" y="465">Soft Wellness Club</text>
+    <text class="t2" x="234" y="481">체크리스트 22개</text>
+    <text class="t2g" x="234" y="495">완료 0개</text>
+
+    <rect class="n" x="220" y="532" width="156" height="70" rx="14"/>
+    <text class="t1" x="234" y="554">Body Map</text>
+    <text class="t2" x="234" y="571">부위 10 ⇄ 액션 15</text>
+    <text class="t2" x="234" y="586">웰네스 할 일 16개 연결</text>
+
+    <text class="lab" x="306" y="434">Career</text>
+    <text class="lab" x="306" y="522">부위 태깅 16</text>
+    <rect class="pill" x="342" y="510" width="30" height="13" rx="6.5" style="display:none"/>
+
+    <!-- gutter labels -->
+    <circle class="q" cx="200" cy="376" r="8"/>
+    <text class="qt" x="200" y="379.5" text-anchor="middle">?</text>
+
+    <!-- bottom: the person who reads -->
+    <text class="labg" x="208" y="652">수동 · 요약 없음</text>
+    <rect class="n hl" x="100" y="668" width="200" height="54" rx="27"/>
+    <text class="th" x="200" y="691" text-anchor="middle">판단하는 나</text>
+    <text class="th2" x="200" y="708" text-anchor="middle">Notion을 열어 직접 훑어봄</text>
+
+    <!-- return loop labels -->
+    <text class="labg" x="14" y="33">다음 날</text>
+    <text class="labg" x="14" y="58">행동 조정</text>
+  </svg>
+
+  <div class="legend">
+    <div class="lg"><svg viewBox="0 0 44 10"><path class="l-live" d="M2 5 H36" marker-end="url(#aL)"/></svg><span><b>실제 연결</b> · relation이나 코드가 자동으로 이어줌</span></div>
+    <div class="lg"><svg viewBox="0 0 44 10"><path class="l-soft" d="M2 5 H36" marker-end="url(#aS)"/></svg><span><b>이름이나 손으로만 맞춘 연결</b> · 예: 바디맵 Baseline item 칸과 Daily Log 칸 이름. 한쪽을 바꾸면 다른 쪽도 직접 고쳐야 해요</span></div>
+    <div class="lg"><svg viewBox="0 0 44 10"><path class="l-gap" d="M2 5 H36" marker-end="url(#aG)"/></svg><span><b>빠진 연결, 끊긴 고리</b></span></div>
+    <div class="lg"><span class="newtag" style="flex:0 0 auto">NEW</span><span>오늘 새로 이은 것</span></div>
+  </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-loop">
+  <h2 id="h-loop">고리 점검</h2>
+  <p class="sec-sub">습관 시스템은 기록 → 저장 → 보기 → 바꾸기가 한 바퀴 돌아야 살아 있어요. 어디까지 돌고 있는지 봤어요.</p>
+  <div class="loop">
+    <div class="glass step">
+      <div class="step-k">1 · record</div>
+      <h3>기록 <span class="state s-part">되는데 마찰 있음</span></h3>
+      <p>탭으로 61칸을 채워요. 저장은 Save 버튼을 직접 눌러야 하고, Notion에 마지막으로 저장된 날은 10/16이에요.</p>
+    </div>
+    <div class="glass step">
+      <div class="step-k">2 · store</div>
+      <h3>저장 <span class="state s-ok">잘 됨</span></h3>
+      <p>Daily Log가 월과 연도에 자동으로 이어져요. 달성률 식도 이미 있어서 합계는 Notion이 계산해요.</p>
+    </div>
+    <div class="glass step">
+      <div class="step-k">3 · see</div>
+      <h3>보기 <span class="state s-miss">비어 있음</span></h3>
+      <p>앱에는 오늘 퍼센트만 보여요. 이번 주, 이번 달, 부위별로 되돌려주는 화면이 없어서 Notion을 열어야 해요.</p>
+    </div>
+    <div class="glass step">
+      <div class="step-k">4 · adjust</div>
+      <h3>바꾸기 <span class="state s-miss">비어 있음</span></h3>
+      <p>웰네스 할 일 22개 중 0개가 완료예요. 할 일을 실험으로 바꾸고 결과로 판정하는 절차가 없어요.</p>
+    </div>
+    <div class="glass step wide">
+      <div class="step-k">missing input · outcome</div>
+      <h3>결과 <span class="state s-miss">기록 자체가 없음</span></h3>
+      <p>지금은 "한 것"만 남아요. 눈이 덜 건조해졌는지, 두피가 나아졌는지는 어디에도 없어요. 앱 이름이 Baseline인데 정작 시작 상태(Day 0)가 기록돼 있지 않아요. 아래 아이디어 대부분이 이 구멍을 메우는 쪽이에요.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-ideas">
+  <h2 id="h-ideas">추가하면 좋은 것</h2>
+  <p class="sec-sub">이미 있는 조각을 최대한 재활용하는 순서로 골랐어요. 먼저 할 3개는 서로 맞물려서, 같이 하면 한 바퀴가 처음 닫혀요.</p>
+
+  <div class="group">
+    <div class="group-h">먼저 · 이번 주</div>
+
+    <article class="glass idea">
+      <h3>자동 저장과 "저장 안 된 날" 알림</h3>
+      <div class="chips"><span class="chip sz">작게</span><span class="chip">앱 코드</span></div>
+      <p class="row"><b>무엇</b>탭할 때마다 조용히 저장하고, 앱을 열었을 때 빠진 날이 있으면 한 줄로 알려줘요.</p>
+      <p class="row"><b>왜</b>사슬에서 가장 약한 고리가 Save 버튼이에요. 나머지가 아무리 좋아도 저장이 끊기면 아래 모든 것이 비어요.</p>
+      <p class="row src"><b>재료</b>지금 앱의 저장 함수, Daily Log의 마지막 날짜</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>Day 0 기준선과 일요일 3분 체크인</h3>
+      <div class="chips"><span class="chip sz">중간</span><span class="chip">Notion DB 1개</span><span class="chip">바디맵 카드</span></div>
+      <p class="row"><b>무엇</b>오늘 사진과 점수를 시작점으로 남기고, 매주 일요일에 바디맵에서 부위를 눌러 1~5점과 사진 한 장을 기록해요. 눈 건조감, 두피 기름기, 피부 수분 정도면 충분해요.</p>
+      <p class="row"><b>왜</b>점안젤이나 미녹시딜이 효과가 있는지 판정하려면 "한 것"과 짝이 되는 "결과"가 필요해요.</p>
+      <p class="row src"><b>재료</b>Body Parts와 연결되는 Outcomes DB 하나</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>바디맵 히트맵</h3>
+      <div class="chips"><span class="chip sz">중간</span><span class="chip">읽기 API</span></div>
+      <p class="row"><b>무엇</b>부위 색이 최근 7일 체크율에 따라 진해지고 옅어져요. 부위를 누르면 이행률 옆에 최근 점수가 같이 나와요.</p>
+      <p class="row"><b>왜</b>"한 것"과 "결과"를 부위 위에서 겹쳐 보는 첫 화면이에요. 방치된 부위가 색으로 바로 드러나요.</p>
+      <p class="row src"><b>재료</b>Body Parts의 Baseline item 칸이 이미 부위와 체크 항목을 잇는 표 역할을 해요</p>
+    </article>
+  </div>
+
+  <div class="group">
+    <div class="group-h">다음</div>
+
+    <article class="glass idea">
+      <h3>실험 루프: 아이디어에서 판정까지</h3>
+      <div class="chips"><span class="chip sz">중간</span><span class="chip">Notion 칸 추가</span></div>
+      <p class="row"><b>무엇</b>웰네스 할 일 22개 중 한 번에 하나만 "2주 실험"으로 올리고, 끝나면 체크인 점수로 계속 / 중단을 정해요. Actions에 시작일과 판정일을 넣어요.</p>
+      <p class="row"><b>왜</b>할 일이 쌓이기만 하고 한 개도 끝나지 않았어요. 개수를 줄이고 끝맺는 규칙이 필요해요.</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>주간 리뷰 자동 작성</h3>
+      <div class="chips"><span class="chip sz">중간</span><span class="chip">예약 작업</span></div>
+      <p class="row"><b>무엇</b>매주 일요일에 제가 Daily Log를 읽고 Notion에 한 페이지를 써요. 가장 많이 놓친 항목 3개, 방치된 부위, 다음 실험 후보까지요.</p>
+      <p class="row"><b>왜</b>"보기" 구간을 앱을 새로 만들지 않고도 메울 수 있어요. 사람이 아니라 일정이 돌려줘요.</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>렌즈 타이머</h3>
+      <div class="chips"><span class="chip sz">작게</span><span class="chip">앱 코드</span></div>
+      <p class="row"><b>무엇</b>Insert Lenses와 Remove Lenses를 누른 시각을 기록해서 착용 시간을 계산하고, 8시간이 가까워지면 알려줘요.</p>
+      <p class="row"><b>왜</b>바디맵 Eyes에 "최대 8시간"이라고 적어둔 규칙을 지금은 기억에 맡기고 있어요. 앱이 대신 지키게 할 수 있어요.</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>소모품 재구매 알림</h3>
+      <div class="chips"><span class="chip sz">작게</span><span class="chip">Todoist 연동</span></div>
+      <p class="row"><b>무엇</b>Actions에 "다 쓰는 날"과 주기를 넣고, 미녹시딜, 점안젤, 앰플, 서플리먼트가 떨어질 때쯤 Todoist에 재구매 할 일이 생기게 해요.</p>
+      <p class="row"><b>왜</b>미녹시딜이나 점안젤 같은 Buy 항목에는 날짜가 없어요. 날짜가 붙으면 "언젠가"가 "그날"이 돼요.</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>최소 합격선</h3>
+      <div class="chips"><span class="chip sz">작게</span><span class="chip">앱 코드</span></div>
+      <p class="row"><b>무엇</b>Key Habits 5개를 다 하면 그날은 퍼센트와 상관없이 "합격"으로 표시하고, 합격이 이어진 날수를 보여줘요.</p>
+      <p class="row"><b>왜</b>61칸 중 몇 퍼센트라는 숫자는 바쁜 날 기분만 나쁘게 해요. 이틀 연속으로 놓치지 않는 것이 더 오래 가는 목표예요.</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>공부와 프로젝트 잇기</h3>
+      <div class="chips"><span class="chip sz">중간</span><span class="chip">relation 추가</span></div>
+      <p class="row"><b>무엇</b>Research A/B, Semiconductor Study, Konkuk Lecture, English Vocab을 Projects와 장기 목표에 연결해서 주간 공부 횟수를 프로젝트별로 모아요.</p>
+      <p class="row"><b>왜</b>지금 장기 목표는 아무 데도 연결되지 않은 채 혼자 있고, 프로젝트 13개는 매일의 체크와 만나지 않아요.</p>
+    </article>
+
+    <article class="glass idea">
+      <h3>연말 리셋 재료 자동 수집</h3>
+      <div class="chips"><span class="chip sz">중간</span><span class="chip">Notion 수식</span></div>
+      <p class="row"><b>무엇</b>12월에 year view의 연간 달성률과 부위별 점수 변화를 웰네스 연말 리셋 페이지로 끌어와요. 리셋 질문에 쓸 숫자가 미리 채워져요.</p>
+      <p class="row"><b>왜</b>year view와 Soft Wellness Club이 한 해의 시작과 끝에 있는데 서로 모르는 사이예요.</p>
+    </article>
+  </div>
+
+  <div class="group">
+    <div class="group-h">정리할 것</div>
+    <article class="glass idea">
+      <h3>작은 구멍 세 개 · 오늘 두 개 정리</h3>
+      <p class="row"><b>1 · 했음</b>바디맵 문구가 Notion의 복사본이라 한쪽을 고치면 다른 쪽도 직접 고쳐야 했어요. 이제 앱이 Notion을 실시간으로 읽어요. 단, Body Map 페이지에 연동(Connections)을 한 번 추가해야 켜져요.</p>
+      <p class="row"><b>2 · 했음</b>미녹시딜과 리포직 점안젤이 웰네스 할 일과 바디맵 Actions에 따로 있었어요. Actions 쪽을 지우고 웰네스 쪽만 남겼어요.</p>
+      <p class="row"><b>3 · 남음</b>Body Map 페이지를 홈으로 옮겼어요. Session #01 옆 칸으로 끌어다 놓는 일과, Daily Log에 안 쓰는 "날짜" 칸 정리가 남았어요.</p>
+    </article>
+  </div>
+
+  <div class="glass facts">
+    <b>이 지도의 근거</b>
+    Daily Log 7행 (마지막 저장 10/16) · 웰네스 체크리스트 22개 중 완료 0, 부위에 연결된 것 16 · 프로젝트 13 · Body Parts 10 · Actions 15 · 앱 체크 항목 61.
+  </div>
+</section>
+
+</div>
+
+</html>
