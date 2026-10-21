@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#D6D6D3">
+<title>Body Map</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--ink:#181818;--ink2:#6b6b6b;--ink3:#9b9b9b;--line:rgba(0,0,0,.08);--line2:rgba(0,0,0,.14);--grad:#3d3d3a;--ember:#e14b4b;--sans:'EB Garamond',Georgia,serif;--mono:'JetBrains Mono',monospace}
+html{background:#D6D6D3}
+body{min-height:100svh;background:#D6D6D3;color:var(--ink);font-family:var(--sans)}
+.app{width:min(100%,460px);margin:0 auto;padding:calc(24px + env(safe-area-inset-top)) 20px calc(40px + env(safe-area-inset-bottom))}
+.head{display:flex;justify-content:space-between;align-items:flex-end;padding:0 4px 18px}
+.head h1{font-size:30px;font-weight:600;line-height:1.05}
+.head span{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(200%);-webkit-backdrop-filter:blur(22px) saturate(200%);border-radius:22px;border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 8px 24px rgba(40,46,50,.08)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin-bottom:14px;border-radius:999px}
+.seg button{border:0;background:none;padding:9px 0;border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);cursor:pointer}
+.seg button.on{background:var(--grad);color:#fff;font-weight:700}
+.stage{padding:10px 6px 6px;margin-bottom:14px}
+.stage svg{display:none;width:100%;height:auto;max-height:64svh}
+.stage svg.on{display:block}
+svg .shape{fill:rgba(255,255,255,.35);stroke:#3d3d3a;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round;cursor:pointer;transition:fill .15s,stroke-width .15s}
+svg .deco{fill:none;stroke:#3d3d3a;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;opacity:.55;pointer-events:none}
+svg .dash{stroke-dasharray:3 3}
+svg .hit{fill:transparent;stroke:none;pointer-events:all;cursor:pointer}
+svg [data-k]{cursor:pointer;outline:none}
+svg [data-k]:hover .shape,svg [data-k].on .shape{fill:rgba(61,61,58,.18)}
+svg [data-k].on .shape{stroke-width:2.2}
+svg .lead{stroke:#3d3d3a;stroke-width:.8;opacity:.45;fill:none}
+svg .skin{fill:#F5F5F3;stroke:#3d3d3a;stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round;transition:fill .15s}
+svg .hairfill{fill:#E2E1DD;stroke:#3d3d3a;stroke-width:1.3;stroke-linejoin:round;transition:fill .15s}
+svg .strand{fill:none;stroke:#3d3d3a;stroke-width:.9;stroke-linecap:round;opacity:.32;pointer-events:none}
+svg .fine{fill:none;stroke:#3d3d3a;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;opacity:.6;pointer-events:none}
+svg .lid{fill:none;stroke:#181818;stroke-width:2.1;stroke-linecap:round;pointer-events:none}
+svg .brow{fill:#3d3d3a;stroke:none;pointer-events:none;opacity:.85}
+svg .eyew{fill:#fff;stroke:#3d3d3a;stroke-width:1;transition:fill .15s}
+svg .lip{fill:#ECEBE8;stroke:#3d3d3a;stroke-width:1.3;stroke-linejoin:round;transition:fill .15s}
+svg .tooth{fill:#fff;stroke:#3d3d3a;stroke-width:.9;transition:fill .15s}
+svg .zline{fill:none;stroke:#3d3d3a;stroke-width:1.4;stroke-dasharray:3 3;stroke-linecap:round;pointer-events:none}
+svg .zhit{fill:none;stroke:transparent;stroke-linecap:round;pointer-events:stroke;cursor:pointer}
+svg .ldot{fill:#3d3d3a;opacity:.55}
+svg [data-k]:hover .skin,svg [data-k].on .skin{fill:#DCDBD7}
+svg [data-k]:hover .hairfill,svg [data-k].on .hairfill{fill:#C9C8C3}
+svg [data-k]:hover .eyew,svg [data-k].on .eyew{fill:#DCDBD7}
+svg [data-k]:hover .lip,svg [data-k].on .lip{fill:#C6C5C1}
+svg [data-k]:hover .tooth,svg [data-k].on .tooth{fill:#BDBCB8}
+svg [data-k].on .skin,svg [data-k].on .hairfill,svg [data-k].on .lip{stroke-width:2}
+svg [data-k]:hover .zline,svg [data-k].on .zline{stroke-width:3.2;stroke-dasharray:none}
+svg .lb{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;fill:#6b6b6b;text-transform:uppercase}
+svg g.lbg.on .lb,svg g.lbg:hover .lb{fill:#181818;font-weight:700}
+svg g.lbg.on .lead{opacity:1}
+.info{padding:18px 18px 16px;margin-bottom:14px}
+.i-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.i-st.fix{color:var(--ember);font-weight:700}
+.i-name{font-size:26px;font-weight:600;margin:6px 0 10px}
+.i-row{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}
+.i-row b{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding-top:3px}
+.i-row .empty{color:var(--ink2)}
+.open{display:flex;justify-content:center;align-items:center;margin-top:12px;min-height:46px;border-radius:14px;background:var(--grad);color:#fff;text-decoration:none;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.open.off{opacity:.35;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:14px}
+.chip{border:1px solid var(--line2);background:rgba(255,255,255,.5);border-radius:999px;padding:7px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);cursor:pointer}
+.chip.on{background:var(--grad);border-color:var(--grad);color:#fff;font-weight:700}
+.chip i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ember);margin-right:6px;vertical-align:1px}
+.legend{padding:10px 4px 0;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--ink3)}
+.legend i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ember);margin-right:6px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="head"><h1>Body Map.</h1><span>Tap a zone</span></div>
+
+  <div class="seg glass" id="seg">
+    <button data-v="face" class="on">Face</button><button data-v="front">Front</button><button data-v="back">Back</button>
+  </div>
+
+  <div class="stage glass">
+    <!-- FACE -->
+    <svg id="v-face" class="on" viewBox="-20 0 360 392" role="img" aria-label="Face map">
+      <g data-k="hair" tabindex="0"><path class="hairfill" d="M160 38 C216 38 264 84 264 160 C264 218 266 276 280 334 C266 352 222 346 160 338 C98 346 54 352 40 334 C54 276 56 218 56 160 C56 84 104 38 160 38 Z"/>
+      <path class="strand" d="M236 78 C256 130 252 232 266 318"/><path class="strand" d="M248 112 C260 182 256 252 272 324"/>
+      <path class="strand" d="M84 78C64 130 68 232 54 318"/><path class="strand" d="M72 112C60 182 64 252 48 324"/></g>
+      <path class="skin nofx" d="M160 262 C176 262 184 270 184 286 C184 312 192 330 214 340 C244 350 276 360 302 384 C306 388 306 390 306 390 C240 390 200 390 160 390 C120 390 80 390 14 390 C14 390 14 388 18 384 C44 360 76 350 106 340 C128 330 136 312 136 286 C136 270 144 262 160 262 Z"/>
+      <path class="fine" d="M134 350 Q148 357 158 353"/><path class="fine" d="M186 350Q172 357 162 353"/>
+      <path class="fine" d="M164 296 C164 304 166 312 170 318" style="opacity:.25"/>
+      <g data-k="face" tabindex="0"><path class="skin" d="M160 90 C200 90 236 112 238 160 C239 198 224 238 205 262 C193 283 178 295 160 295 C142 295 127 283 115 262 C96 238 81 198 82 160 C84 112 120 90 160 90 Z"/></g>
+      <g data-k="hair" tabindex="0"><path class="hairfill" d="M163.5 44 C214 44 254 88 255 160 C256 212 258 256 270 304 C254 288 246 256 242 214 C240 170 224 124 184 104 C176 100 169 98 163.5 97 Z"/><path class="hairfill" d="M156.5 44C106 44 66 88 65 160C64 212 62 256 50 304C66 288 74 256 78 214C80 170 96 124 136 104C144 100 151 98 156.5 97Z"/>
+      <path class="strand" d="M168 52 C204 58 240 96 246 164"/><path class="strand" d="M172 70 C198 78 222 108 230 150"/>
+      <path class="strand" d="M152 52C116 58 80 96 74 164"/><path class="strand" d="M148 70C122 78 98 108 90 150"/></g>
+      <g data-k="scalp" tabindex="0"><path class="zhit" style="stroke-width:24" d="M160 50 L160 94"/><path class="zline" d="M160 50 L160 94"/></g>
+      <path class="brow" d="M166 148 C182 134 204 131 220 142 C204 137 184 139 166 148 Z"/><path class="brow" d="M154 148C138 134 116 131 100 142C116 137 136 139 154 148Z"/>
+      <g data-k="eyes" tabindex="0"><ellipse class="hit" cx="193" cy="164" rx="30" ry="20"/><ellipse class="hit" cx="127" cy="164" rx="30" ry="20"/><clipPath id="clipR"><path d="M176 168 C184 158 200 156 211 163 C201 173 186 174 176 168 Z"/></clipPath><path class="eyew" d="M176 168 C184 158 200 156 211 163 C201 173 186 174 176 168 Z"/><g clip-path="url(#clipR)"><circle cx="194" cy="165.5" r="6.6" fill="#4a4a46"/><circle cx="194" cy="165.5" r="3" fill="#181818"/><circle cx="196.2" cy="163.5" r="1.4" fill="#fff"/></g><path class="lid" d="M176 168 C184 158 200 156 211 163"/><path class="lid" style="stroke-width:1.3" d="M211 163 Q215 160 217.5 156"/><path class="fine" d="M179 162 C188 151 203 150 213 158"/><path class="fine" style="opacity:.4" d="M180 171 C189 175 200 174 207 169"/><clipPath id="clipL"><path d="M144 168C136 158 120 156 109 163C119 173 134 174 144 168Z"/></clipPath><path class="eyew" d="M144 168C136 158 120 156 109 163C119 173 134 174 144 168Z"/><g clip-path="url(#clipL)"><circle cx="126" cy="165.5" r="6.6" fill="#4a4a46"/><circle cx="126" cy="165.5" r="3" fill="#181818"/><circle cx="123.8" cy="163.5" r="1.4" fill="#fff"/></g><path class="lid" d="M144 168C136 158 120 156 109 163"/><path class="lid" style="stroke-width:1.3" d="M109 163Q105 160 102.5 156"/><path class="fine" d="M141 162C132 151 117 150 107 158"/><path class="fine" style="opacity:.4" d="M140 171C131 175 120 174 113 169"/></g>
+      <path class="fine" d="M167 172 C169 190 171 203 171 212"/><path class="fine" style="opacity:.8" d="M149 218 C154 224 166 224 171 218"/><path class="fine" style="opacity:.8" d="M150 217 C147 218 148 222 152 222"/><path class="fine" style="opacity:.8" d="M170 217 C173 218 172 222 168 222"/>
+      <g data-k="jaw" tabindex="0"><path class="zhit" style="stroke-width:26" d="M225 196 C222 218 213 242 194 268"/><path class="zhit" style="stroke-width:26" d="M95 196C98 218 107 242 126 268"/><path class="zline" d="M225 196 C222 218 213 242 194 268"/><path class="zline" d="M95 196C98 218 107 242 126 268"/></g>
+      <g data-k="lips" tabindex="0"><path class="lip" d="M136 247 C146 251.5 174 251.5 184 247 C178 259 168 262 160 262 C152 262 142 259 136 247 Z"/><path class="lip" d="M136 247 C144 244 148 236 153 237 C157 237 158 240 160 240 C162 240 163 237 167 237 C172 236 176 244 184 247 C174 245 146 245 136 247 Z"/></g>
+      <path class="fine" style="opacity:.35" d="M150 270 Q160 273 170 270"/>
+      <g data-k="teeth" tabindex="0"><ellipse class="hit" cx="160" cy="247" rx="20" ry="5"/><path class="tooth" d="M143 246.4 C151 244.4 169 244.4 177 246.4 C175 250.4 145 250.4 143 246.4 Z"/></g>
+      <g class="lbg" data-k="scalp"><line class="lead" x1="160" y1="26" x2="160" y2="50"/><circle class="ldot" cx="160" cy="50" r="1.8"/><text class="lb" x="160" y="20" text-anchor="middle">Scalp</text></g>
+      <g class="lbg" data-k="hair"><line class="lead" x1="300" y1="122" x2="247" y2="122"/><circle class="ldot" cx="247" cy="122" r="1.8"/><text class="lb" x="332" y="125" text-anchor="end">Hair</text></g>
+      <g class="lbg" data-k="eyes"><line class="lead" x1="26" y1="166" x2="109" y2="166"/><circle class="ldot" cx="109" cy="166" r="1.8"/><text class="lb" x="-12" y="169" text-anchor="start">Eyes</text></g>
+      <g class="lbg" data-k="face"><line class="lead" x1="272" y1="212" x2="229" y2="212"/><circle class="ldot" cx="229" cy="212" r="1.8"/><text class="lb" x="332" y="215" text-anchor="end">Face skin</text></g>
+      <g class="lbg" data-k="lips"><line class="lead" x1="24" y1="248" x2="137" y2="248"/><circle class="ldot" cx="137" cy="248" r="1.8"/><text class="lb" x="-12" y="251" text-anchor="start">Lips</text></g>
+      <g class="lbg" data-k="teeth"><line class="lead" x1="298" y1="246" x2="172" y2="246"/><circle class="ldot" cx="172" cy="246" r="1.8"/><text class="lb" x="332" y="249" text-anchor="end">Teeth</text></g>
+      <g class="lbg" data-k="jaw"><line class="lead" x1="18" y1="270" x2="124.5" y2="268"/><circle class="ldot" cx="124.5" cy="268" r="1.8"/><text class="lb" x="-12" y="273" text-anchor="start">Jaw</text></g>
+      </svg>
+
+    <!-- FRONT -->
+    <svg id="v-front" viewBox="0 0 320 340" role="img" aria-label="Body front map">
+      <ellipse class="deco" cx="160" cy="40" rx="24" ry="30"/><path class="deco" d="M148 68 L148 90"/><path class="deco" d="M172 68 L172 90"/>
+      <g data-k="whole" tabindex="0">
+        <path class="shape" d="M102 100 Q160 84 218 100 L212 290 Q160 304 108 290 Z"/>
+        <rect class="shape" x="-13" y="0" width="26" height="176" rx="13" transform="translate(94 108) rotate(12)"/>
+        <rect class="shape" x="-13" y="0" width="26" height="176" rx="13" transform="translate(226 108) rotate(-12)"/>
+      </g>
+      <g data-k="underarms" tabindex="0">
+        <circle class="shape dash" cx="106" cy="152" r="13"/><circle class="shape dash" cx="214" cy="152" r="13"/>
+      </g>
+      <g class="lbg" data-k="underarms"><line class="lead" x1="74" y1="156" x2="92" y2="153"/><text class="lb" x="12" y="159">Underarms</text></g>
+      <g class="lbg" data-k="whole"><line class="lead" x1="250" y1="321" x2="192" y2="284"/><text class="lb" x="308" y="325" text-anchor="end">Whole body</text></g>
+    </svg>
+
+    <!-- BACK -->
+    <svg id="v-back" viewBox="0 0 320 340" role="img" aria-label="Body back map">
+      <ellipse class="deco" cx="160" cy="40" rx="24" ry="30"/><path class="deco" d="M148 68 L148 90"/><path class="deco" d="M172 68 L172 90"/>
+      <g data-k="whole" tabindex="0">
+        <path class="shape" d="M102 100 Q160 84 218 100 L212 290 Q160 304 108 290 Z"/>
+        <rect class="shape" x="-13" y="0" width="26" height="176" rx="13" transform="translate(94 108) rotate(12)"/>
+        <rect class="shape" x="-13" y="0" width="26" height="176" rx="13" transform="translate(226 108) rotate(-12)"/>
+      </g>
+      <path class="deco" d="M160 94 L160 290"/>
+      <g data-k="back" tabindex="0"><path class="shape dash" d="M118 112 Q160 100 202 112 L198 206 Q160 216 122 206 Z"/></g>
+      <g class="lbg" data-k="back"><line class="lead" x1="52" y1="152" x2="116" y2="152"/><text class="lb" x="12" y="155">Back</text></g>
+      <g class="lbg" data-k="whole"><line class="lead" x1="250" y1="321" x2="192" y2="284"/><text class="lb" x="308" y="325" text-anchor="end">Whole body</text></g>
+    </svg>
+  </div>
+
+  <section class="info glass" id="info"></section>
+
+  <div class="chips glass" id="chips"></div>
+  <div class="legend"><i></i>Fix now</div>
+</div>
+
+<script>
+// Static snapshot of the Notion "Body Parts" database (Body Map.). Edit URLs/text here if pages change.
+const N='https://app.notion.com/p/';
+const P={
+ eyes:{name:'Eyes',zone:'Head',view:'face',status:'Fix now',goal:'눈 수분 개선 (건조 완화)',now:'렌즈 착용 (최대 8시간) · 보존제 없는 1회용 습윤 점안액 사용 중',url:N+'400d6b58c4ff81c7a9c4dd4130d0d0ff'},
+ scalp:{name:'Scalp',zone:'Head',view:'face',status:'Fix now',goal:'수분 · 탄력 · 모발',now:'PDRN 앰플 (수건으로 말린 두피에)',url:N+'400d6b58c4ff8103a3d7ced55fda5e74'},
+ hair:{name:'Hair',zone:'Head',view:'face',status:'',goal:'',now:'샴푸 → 컨디셔너(중간~끝만) → 찬물 헹굼 · 헤어마스크 주 2–3회 · 모로칸 오일(끝)',url:N+'400d6b58c4ff812a9efec07936f84edb'},
+ face:{name:'Face skin',zone:'Face',view:'face',status:'',goal:'',now:'AM: 클렌저 → 토너 → 세럼 → 보습 → 선크림 · PM: 더블클렌징 → 토너 → 세럼 → 레티놀(주 3–4회) → 보습',url:N+'400d6b58c4ff8115977bd0500d864bfc'},
+ lips:{name:'Lips',zone:'Face',view:'face',status:'',goal:'',now:'립밤 또는 슬리핑 마스크',url:N+'400d6b58c4ff81bb9bf0ee95a2d8406e'},
+ jaw:{name:'Jaw',zone:'Face',view:'face',status:'',goal:'',now:'Jaw + eye + scalp massager 주 4회 (림프 흐름 루트)',url:N+'400d6b58c4ff81d485fbd0983a2adf53'},
+ teeth:{name:'Teeth',zone:'Face',view:'face',status:'',goal:'',now:'치실 → 양치 · 미백 · 리테이너',url:N+'400d6b58c4ff81a098b2f8389a34f271'},
+ back:{name:'Back',zone:'Body',view:'back',status:'',goal:'',now:'등 브러시 · 등 여드름 케어 (Acnon 또는 BHA 바디워시)',url:N+'400d6b58c4ff81d79baaf7eb4a7c627f'},
+ underarms:{name:'Underarms',zone:'Body',view:'front',status:'',goal:'',now:'나이아신아마이드 (착색 완화) · Driclor 주 2–3회',url:N+'400d6b58c4ff817d8ff2fd1bb0ce6077'},
+ whole:{name:'Whole body',zone:'Body',view:'front',status:'',goal:'',now:'AM / PM 서플리먼트',url:N+'400d6b58c4ff8147a4d9e310a2bebe54'}
+};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function showView(v){$$('.stage svg').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));$$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+function select(k){
+  const p=P[k];if(!p)return;
+  showView(p.view);
+  $$('[data-k]').forEach(e=>e.classList.toggle('on',e.dataset.k===k));
+  $$('.chip').forEach(c=>c.classList.toggle('on',c.dataset.k===k));
+  $('#info').innerHTML=
+   '<div class="i-top"><span>'+esc(p.zone)+'</span><span class="i-st '+(p.status==='Fix now'?'fix':'')+'">'+esc(p.status||'')+'</span></div>'+
+   '<h2 class="i-name">'+esc(p.name)+'</h2>'+
+   '<div class="i-row"><b>Goal</b><span class="'+(p.goal?'':'empty')+'">'+(p.goal?esc(p.goal):'아직 안 적음')+'</span></div>'+
+   '<div class="i-row"><b>Now</b><span>'+esc(p.now)+'</span></div>'+
+   '<a class="open" target="_blank" rel="noopener" href="'+p.url+'">Open in Notion ↗</a>';
+}
+$('#info').innerHTML='<div class="i-top"><span>Body Map</span><span></span></div><h2 class="i-name">Tap a zone</h2><div class="i-row"><b>Tip</b><span class="empty">눈, 두피, 입술… 부위를 누르면 목표와 지금 하는 것이 나오고, 버튼으로 Notion 페이지가 열려요.</span></div><a class="open off">Open in Notion ↗</a>';
+$('#chips').innerHTML=Object.keys(P).map(k=>'<button type="button" class="chip" data-k="'+k+'">'+(P[k].status==='Fix now'?'<i></i>':'')+esc(P[k].name)+'</button>').join('');
+$$('#seg button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.v)));
+document.addEventListener('click',e=>{const el=e.target.closest('[data-k]');if(el)select(el.dataset.k)});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&e.target.dataset.k){e.preventDefault();select(e.target.dataset.k)}});
+</script>
+</body>
+</html>
