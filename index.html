@@ -402,7 +402,7 @@ let saveDate=new Date();
 function paintSaveDate(){const t=new Date();t.setHours(12,0,0,0);const diff=Math.round((saveDate-t)/864e5);
  dLabel.textContent=`${WK[saveDate.getDay()]}, ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][saveDate.getMonth()]} ${saveDate.getDate()}`;
  dHint.textContent=diff===0?'Today':diff===-1?'Yesterday':diff===1?'Tomorrow':ymd(saveDate);
- let A=0,T=0;D.forEach((_,i)=>{const[x,y]=cnt(i);A+=x;T+=y});dSum.textContent=`${DAYTYPE[MODE]} · ${A} / ${T} checked`}
+ let A=0,T=0;D.forEach((_,i)=>{const[x,y]=cnt(i);A+=x;T+=y});dSum.textContent=`${A} / ${T} checked → ${{weekday:'Daily Log',sat:'Weekend Log',sun:'Baek Log'}[MODE]}`}
 function openSave(){saveDate=recordDay();paintSaveDate();doSave.textContent='Save';doSave.disabled=false;app.classList.add('open','open-save')}
 function closeSaveSheet(){app.classList.remove('open','open-save')}
 dPrev.onclick=()=>{saveDate.setDate(saveDate.getDate()-1);paintSaveDate()};

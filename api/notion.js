@@ -41,8 +41,14 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const token = process.env.NOTION_TOKEN;
-  const dbId = process.env.NOTION_DB_ID;
   const { date, checks, day } = req.body;
+  // 평일은 Daily Log, 토요일·공휴일은 Weekend Log, 일요일은 Baek Log 로 따로 저장
+  const type = day && day.type;
+  const dbId = type === 'Saturday'
+    ? (process.env.NOTION_WEEKEND_DB_ID || 'b0c0211e31a542eb8a3e1f528eeab84d')
+    : type === 'Sunday'
+      ? (process.env.NOTION_BAEK_DB_ID || 'a7be156feaf24a038c715b9fe739c4bc')
+      : process.env.NOTION_DB_ID;
 
   const headers = {
     'Authorization': `Bearer ${token}`,
@@ -61,7 +67,9 @@ export default async function handler(req, res) {
   const queryResult = await query.json();
 
   if (!query.ok) {
-    return res.status(500).json({ step: 'query', message: queryResult.message || JSON.stringify(queryResult) });
+    const hint = type === 'Saturday' || type === 'Sunday'
+      ? ` (Notion에서 ${type === 'Saturday' ? 'Weekend Log' : 'Baek Log'} → ••• → 연결에 이 앱 연동을 추가해줘)` : '';
+    return res.status(500).json({ step: 'query', message: (queryResult.message || JSON.stringify(queryResult)) + hint });
   }
 
   const existing = (queryResult.results || [])[0];
@@ -71,11 +79,10 @@ export default async function handler(req, res) {
     checkProps[key] = { checkbox: value };
   }
 
-  // 주말/평일 구분 + 주말 블록·한 줄 기록 (Day Type, Block A/B/C, Baek, Day Note)
+  // 주말 블록·Baek·한 줄 기록 (Weekend Log: Block A/B/C, Day Note / Baek Log: Baek, Day Note)
   const dayProps = {};
-  if (day && typeof day === 'object') {
+  if (type === 'Saturday' || type === 'Sunday') {
     const sel = v => ({ select: v ? { name: String(v) } : null });
-    if (day.type) dayProps['Day Type'] = sel(day.type);
     for (const k of ['A', 'B', 'C']) if (k in day) dayProps['Block ' + k] = sel(day[k]);
     if ('baek' in day) dayProps['Baek'] = { checkbox: !!day.baek };
     if ('note' in day) dayProps['Day Note'] = { rich_text: day.note ? [{ type: 'text', text: { content: String(day.note).slice(0, 2000) } }] : [] };
