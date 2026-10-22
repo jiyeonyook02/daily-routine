@@ -305,14 +305,16 @@ const MODES={
  sun:prep([...head,{s:"09:00",e:"23:00",name:"Baek",baek:true,g:[["",[...midA,...midC]]]},...tail])};
 const DAYTYPE={weekday:'Weekday',sat:'Saturday',sun:'Sunday'};
 
-const KEY='routine_v4';
+/* each day type keeps its own checks; weekday shares routine_v4 with the classic view */
+const STORE={weekday:'routine_v4',sat:'routine_sat_v1',sun:'routine_sun_v1'};
+const WSTORE={sat:'weekend_sat_v1',sun:'weekend_sun_v1'};
+let KEY='routine_v4';
 const load=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 let CK={},WE={};
-function pull(){const a=load(KEY,[]);CK={};LABELS.forEach((l,n)=>{if(a[n])CK[l]=true});WE=Object.assign({A:'',B:'',C:'',baek:false,note:''},load('weekend_v1',{}))}
+function pull(){KEY=STORE[MODE];const a=load(KEY,[]);CK={};LABELS.forEach((l,n)=>{if(a[n])CK[l]=true});WE=Object.assign({A:'',B:'',C:'',baek:false,note:''},WSTORE[MODE]?load(WSTORE[MODE],{}):{})}
 function persist(){save(KEY,LABELS.map(l=>!!CK[l]))}
-function persistWE(){save('weekend_v1',WE)}
-pull();
+function persistWE(){if(WSTORE[MODE])save(WSTORE[MODE],WE)}
 const nowM=()=>{const n=new Date();return n.getHours()*60+n.getMinutes()};
 const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 /* the "record day": before wake-up still counts as the previous day */
@@ -320,6 +322,7 @@ function recordDay(){const d=new Date();if(nowM()<toM(WD[0].s))d.setDate(d.getDa
 function autoMode(){const w=recordDay().getDay();return w===6?'sat':w===0?'sun':'weekday'}
 let MODE=(()=>{const m=load('dial_mode',null);return m&&m.day===ymd(recordDay())&&MODES[m.mode]?m.mode:autoMode()})();
 let D=MODES[MODE];
+pull();
 const extra=d=>d.block?1:d.baek?1:0;
 const extraOn=d=>d.block?!!WE[d.block]:d.baek?!!WE.baek:false;
 const cnt=i=>{const d=D[i];return [d.items.filter(x=>CK[x.L]).length+(extraOn(d)?1:0),d.items.length+extra(d)]};
@@ -376,7 +379,7 @@ function render(){
   allclear.style.display=A===T?'block':'none';
   drawDial();
 }
-function setMode(m){MODE=m;D=MODES[m];save('dial_mode',{mode:m,day:ymd(recordDay())});sel=nearIdx();render()}
+function setMode(m){MODE=m;D=MODES[m];save('dial_mode',{mode:m,day:ymd(recordDay())});pull();sel=nearIdx();render()}
 document.querySelectorAll('.modes button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
 prev.onclick=()=>{sel=(sel+D.length-1)%D.length;render()};
 next.onclick=()=>{sel=(sel+1)%D.length;render()};
@@ -419,8 +422,8 @@ async function saveToNotion(){
  catch(e){doSave.textContent='Save';doSave.disabled=false;alert('Error: '+e.message)}}
 doSave.onclick=saveToNotion;
 saveBtn.onclick=openSave;
-resetBtn.onclick=()=>{if(confirm('Reset all checks?')){CK={};WE={A:'',B:'',C:'',baek:false,note:''};persist();persistWE();render()}};
-window.addEventListener('storage',e=>{if(e.key===KEY||e.key==='weekend_v1'){pull();render()}if(e.key==='buys_v4'){buys=load('buys_v4',[]);renderBuys()}});
+resetBtn.onclick=()=>{if(confirm(`Reset ${DAYTYPE[MODE]} checks?`)){CK={};WE={A:'',B:'',C:'',baek:false,note:''};persist();persistWE();render()}};
+window.addEventListener('storage',e=>{if(e.key===KEY||e.key===WSTORE[MODE]){pull();render()}if(e.key==='buys_v4'){buys=load('buys_v4',[]);renderBuys()}});
 window.addEventListener('pageshow',()=>{pull();buys=load('buys_v4',[]);renderBuys();render()});
 sky();renderBuys();render();
 setInterval(()=>{sky();drawDial()},60000);
