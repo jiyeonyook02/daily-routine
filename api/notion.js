@@ -42,7 +42,7 @@ export default async function handler(req, res) {
 
   const token = process.env.NOTION_TOKEN;
   const dbId = process.env.NOTION_DB_ID;
-  const { date, checks } = req.body;
+  const { date, checks, day } = req.body;
 
   const headers = {
     'Authorization': `Bearer ${token}`,
@@ -69,6 +69,16 @@ export default async function handler(req, res) {
   const checkProps = {};
   for (const [key, value] of Object.entries(checks)) {
     checkProps[key] = { checkbox: value };
+  }
+
+  // 주말/평일 구분 + 주말 블록·한 줄 기록 (Day Type, Block A/B/C, Baek, Day Note)
+  const dayProps = {};
+  if (day && typeof day === 'object') {
+    const sel = v => ({ select: v ? { name: String(v) } : null });
+    if (day.type) dayProps['Day Type'] = sel(day.type);
+    for (const k of ['A', 'B', 'C']) if (k in day) dayProps['Block ' + k] = sel(day[k]);
+    if ('baek' in day) dayProps['Baek'] = { checkbox: !!day.baek };
+    if ('note' in day) dayProps['Day Note'] = { rich_text: day.note ? [{ type: 'text', text: { content: String(day.note).slice(0, 2000) } }] : [] };
   }
 
   // 월/연도 relation 을 같이 보낸다. 연동 권한 문제 등으로 실패하면
@@ -99,10 +109,16 @@ export default async function handler(req, res) {
     });
   };
 
+  // 실패하면 relation → 주말 칸 순서로 빼면서 다시 시도해서 체크 저장은 꼭 되게 한다.
   let relationsLinked = Object.keys(relProps).length > 0;
-  let response = await send(relProps);
+  let dayLinked = Object.keys(dayProps).length > 0;
+  let response = await send({ ...dayProps, ...relProps });
   if (!response.ok && relationsLinked) {
     relationsLinked = false;
+    response = await send({ ...dayProps });
+  }
+  if (!response.ok && dayLinked) {
+    dayLinked = false;
     response = await send({});
   }
 
@@ -110,5 +126,5 @@ export default async function handler(req, res) {
   if (!response.ok) {
     return res.status(500).json({ step: existing ? 'update' : 'create', message: result.message || JSON.stringify(result) });
   }
-  res.status(200).json({ ...result, relationsLinked });
+  res.status(200).json({ ...result, relationsLinked, dayLinked });
 }

@@ -210,15 +210,31 @@ body{background:transparent}
 .kt.on .kt-name{color:#fff}
 .kt.on i{background:#fff;border-color:#fff}
 .kt.on i::after{content:"";position:absolute;left:3.9px;top:1.6px;width:3px;height:6px;border:solid var(--grad);border-width:0 1.6px 1.6px 0;transform:rotate(45deg)}
+
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:14px 0 0;padding:4px;border-radius:14px;background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.7)}
+.modes button{padding:9px 0;border-radius:10px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.modes button[aria-selected=true]{background:var(--grad);color:#fff}
+.pick{padding:14px 0 6px;border-bottom:1px solid rgba(0,0,0,.055)}
+.pick-h{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.chip{padding:11px 0;border-radius:12px;text-align:center;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.85);font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink2)}
+.chip.on{background:var(--grad);border-color:var(--grad);color:#fff}
+.pick .it{border-bottom:0;padding-top:4px}
+.note1{display:block;margin-top:12px}
+.note1 span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.note1 input{width:100%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.6);border-radius:12px;padding:11px 12px;font-family:var(--serif);font-size:16px;color:var(--ink);outline:0}
+.note1 input:focus{border-color:var(--grad)}
+.bodylink{margin:18px 0 0}
 </style></head><body><div class="scene" aria-hidden="true"></div><div id="app">
 <div class="wrap">
 <header class="top"><div><b>S#01 / Baseline</b><span id="tDate"></span><a class="viewsw" href="classic.html">Classic view</a></div><div class="r"><b id="pct">0%</b><span id="sum"></span></div></header>
+<div class="modes" role="tablist" aria-label="Day type"><button data-m="weekday" role="tab">Weekday</button><button data-m="sat" role="tab">Sat · Holiday</button><button data-m="sun" role="tab">Sunday</button></div>
 <div class="dialcard"><div class="dial"><svg viewBox="-190 -190 380 380" id="svg" aria-label="하루 루틴 시계"></svg>
 <div class="center"><div class="time" id="cTime"></div><div class="name" id="cName"></div><div class="cnt" id="cCnt"></div><div id="cNow"></div></div></div></div>
 <section class="keys glass" aria-label="Key habits"><div class="keys-head"><span>Key Habits</span><b id="kCount">0/5</b></div><div class="keys-row" id="keys"></div></section>
-<a class="bodylink glass" href="body_map.html"><span><b>Body Map</b></span><span class="ar">→</span></a>
 <section class="listcard glass"><div class="shead2"><div class="sh-top"><h2 id="lTitle"></h2><span class="sh-cnt" id="lCnt"></span></div><small id="lTime"></small><div class="segbar" id="segbar"></div></div>
 <div id="list"></div><nav class="sibs"><button id="prev" aria-label="이전 시간대"><span class="dir">←</span><span><b id="pName"></b><small id="pTime"></small></span></button><button id="next" aria-label="다음 시간대"><span><b id="nName"></b><small id="nTime"></small></span><span class="dir">→</span></button></nav></section>
+<a class="bodylink glass" href="body_map.html"><span><b>Body Map</b></span><span class="ar">→</span></a>
 <div class="allclear" id="allclear"><b>All done.</b>Set tomorrow's alarm and sleep.</div>
 </div>
 <nav class="dock"><button class="a" id="saveBtn">Save</button><button id="openBuy">Notes</button><button id="resetBtn">Reset</button></nav>
@@ -233,7 +249,7 @@ body{background:transparent}
 </div>
 <script>
 /* 시간은 기존 앱에 없던 값이라 추정치예요. 여기만 고치면 시계가 따라 바뀝니다. */
-const D=[
+const WD=[
 {s:"06:45",e:"07:00",name:"Wake & morning",g:[
  ["Wake up",[["Get up at alarm","Move within 5 seconds. No snooze."]]],
  ["Morning routine",[["Oil pulling (5 min)","1 tsp coconut oil."],["Brush teeth","Including tongue scraping."],["Check weather","Bring umbrella if rain expected."],["Morning hydration",""]]]]},
@@ -269,19 +285,44 @@ const D=[
 
 const toM=t=>+t.slice(0,2)*60+ +t.slice(3);
 const fmt=t=>+t.slice(0,2)>=24?String(+t.slice(0,2)-24).padStart(2,"0")+t.slice(2):t;
-D.forEach(d=>d.items=d.g.flatMap(g=>g[1]));
-const today=(()=>{const n=new Date();return `${n.getFullYear()}-${n.getMonth()+1}-${n.getDate()}`})();
+const prep=arr=>{arr.forEach(d=>d.items=d.g.flatMap(g=>g[1]));return arr};
+prep(WD);
+const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Konkuk Lecture','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','PM Toner','Serum PM','Retinol','Moisturizer PM','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
+/* classic view / Notion order: Return comes after Lab · evening there */
+[0,1,2,3,4,5,7,6,8,9,10,11,12].flatMap(i=>WD[i].items).forEach((x,n)=>x.L=LABELS[n]);
+
+/* weekend: same routines, Lab and commute swapped for day blocks */
+const sec=n=>WD.find(d=>d.name===n), pick=(n,t)=>sec(n).items.find(x=>x[0].startsWith(t));
+const midA=[pick('Lab · morning','Lunch'),pick('Lab · morning','Floss'),pick('Lab · morning','AM supp')];
+const midC=[pick('Lab · evening','Dinner'),pick('Lab · evening','PM supp'),...sec('Return').items];
+const head=[WD[0],WD[1],WD[2],{s:"07:45",e:"09:00",name:"Slow morning",g:WD[3].g}], tail=WD.slice(8);
+const MODES={
+ weekday:WD,
+ sat:prep([...head,
+  {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",midA]]},
+  {s:"13:00",e:"18:00",name:"Day B",block:'B',g:[]},
+  {s:"18:00",e:"23:00",name:"Day C",block:'C',g:[["",midC]]},...tail]),
+ sun:prep([...head,{s:"09:00",e:"23:00",name:"Baek",baek:true,g:[["",[...midA,...midC]]]},...tail])};
+const DAYTYPE={weekday:'Weekday',sat:'Saturday',sun:'Sunday'};
+
 const KEY='routine_v4';
-/* classic view order: Return comes after Lab · evening there */
-const ORDER=[0,1,2,3,4,5,7,6,8,9,10,11,12];
-const FLAT=[];ORDER.forEach(i=>D[i].items.forEach((_,j)=>FLAT.push([i,j])));
 const load=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-let S=D.map(d=>d.items.map(()=>false));
-function pull(){const a=load(KEY,[]);S=D.map(d=>d.items.map(()=>false));FLAT.forEach(([i,j],n)=>{if(a[n])S[i][j]=true})}
-function persist(){save(KEY,FLAT.map(([i,j])=>S[i][j]))}
+let CK={},WE={};
+function pull(){const a=load(KEY,[]);CK={};LABELS.forEach((l,n)=>{if(a[n])CK[l]=true});WE=Object.assign({A:'',B:'',C:'',baek:false,note:''},load('weekend_v1',{}))}
+function persist(){save(KEY,LABELS.map(l=>!!CK[l]))}
+function persistWE(){save('weekend_v1',WE)}
 pull();
 const nowM=()=>{const n=new Date();return n.getHours()*60+n.getMinutes()};
+const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+/* the "record day": before wake-up still counts as the previous day */
+function recordDay(){const d=new Date();if(nowM()<toM(WD[0].s))d.setDate(d.getDate()-1);d.setHours(12,0,0,0);return d}
+function autoMode(){const w=recordDay().getDay();return w===6?'sat':w===0?'sun':'weekday'}
+let MODE=(()=>{const m=load('dial_mode',null);return m&&m.day===ymd(recordDay())&&MODES[m.mode]?m.mode:autoMode()})();
+let D=MODES[MODE];
+const extra=d=>d.block?1:d.baek?1:0;
+const extraOn=d=>d.block?!!WE[d.block]:d.baek?!!WE.baek:false;
+const cnt=i=>{const d=D[i];return [d.items.filter(x=>CK[x.L]).length+(extraOn(d)?1:0),d.items.length+extra(d)]};
 const inSeg=(d,m)=>(m>=toM(d.s)&&m<toM(d.e))||(m+1440>=toM(d.s)&&m+1440<toM(d.e));
 const curIdx=()=>D.findIndex(d=>inSeg(d,nowM()));
 const nearIdx=()=>{const c=curIdx();if(c>=0)return c;const n=D.findIndex(d=>toM(d.s)>nowM());return n<0?0:n};
@@ -291,13 +332,11 @@ const R1=176,R0=114,ang=m=>m/1440*2*Math.PI-Math.PI/2,pt=(r,a)=>[(r*Math.cos(a))
 function arc(a0,a1,r0,r1){const L=a1-a0>Math.PI?1:0,[x0,y0]=pt(r1,a0),[x1,y1]=pt(r1,a1),[x2,y2]=pt(r0,a1),[x3,y3]=pt(r0,a0);return `M${x0} ${y0}A${r1} ${r1} 0 ${L} 1 ${x1} ${y1}L${x2} ${y2}A${r0} ${r0} 0 ${L} 0 ${x3} ${y3}Z`}
 
 function drawDial(){
-  const cur=curIdx();let h=`<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,0,0,.09)" stroke-width="2"/></pattern></defs>`;
+  const cur=curIdx();let h='';
   for(let i=0;i<24;i++){const a=ang(i*60),[x0,y0]=pt(R1+5,a),[x1,y1]=pt(R1+(i%6?10:15),a);h+=`<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="rgba(0,0,0,${i%6?.18:.45})" stroke-width="${i%6?1:1.6}"/>`}
   [[0,'0'],[6,'6'],[12,'12'],[18,'18']].forEach(([hh,l])=>{const[x,y]=pt(R0-15,ang(hh*60));h+=`<text x="${x}" y="${y}" fill="#9b9b9b" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" dominant-baseline="middle">${l}</text>`});
-  // sleep
   h+=`<path d="${arc(ang(toM(D.at(-1).e))+.01,ang(toM(D[0].s)+1440)-.01,R0,R1)}" fill="rgba(255,255,255,.42)"/>`;
-  /* sleep arc has no label */
-  D.forEach((d,i)=>{const a0=ang(toM(d.s))+.01,a1=ang(toM(d.e))-.01,f=S[i].filter(Boolean).length/S[i].length;
+  D.forEach((d,i)=>{const a0=ang(toM(d.s))+.01,a1=ang(toM(d.e))-.01,[dn,tt]=cnt(i),f=tt?dn/tt:0;
     const base=i===sel?.2:i===cur?.13:.075;
     h+=`<g class="seg" data-i="${i}" tabindex="0" role="button" aria-label="${d.name}, ${fmt(d.s)}부터 ${fmt(d.e)}"><path class="base" d="${arc(a0,a1,R0,R1)}" fill="rgba(0,0,0,${base})"/>${f?`<path d="${arc(a0,a1,R0,R0+(R1-R0)*f)}" style="fill:var(--grad)" opacity="${f===1?1:.88}"/>`:''}</g>`});
   if(D[sel]){const d=D[sel];h+=`<path d="${arc(ang(toM(d.s))+.01,ang(toM(d.e))-.01,R1+2,R1+5)}" style="fill:var(--grad)"/>`}
@@ -306,22 +345,39 @@ function drawDial(){
   svg.innerHTML=h;
   svg.querySelectorAll('.seg').forEach(g=>{const go=()=>{sel=+g.dataset.i;render()};g.onclick=go;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}}});
 }
-const keyMap=[];D.forEach((d,i)=>d.items.forEach((x,j)=>{if(x[3])keyMap.push({k:x[3],i,j})}));
+let keyMap=[];
+const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+function extraHTML(d){
+  const note=`<label class="note1"><span>One line</span><input id="dayNote" maxlength="120" placeholder="${d.baek?'What did you do with Baek?':'What did you do?'}" value="${esc(WE.note)}"></label>`;
+  if(d.block)return `<div class="pick"><div class="pick-h">${d.name} was</div><div class="chips">${['Rest','Gathering','Study'].map(o=>`<button class="chip ${WE[d.block]===o?'on':''}" data-o="${o}" aria-pressed="${WE[d.block]===o}">${o}</button>`).join('')}</div>${note}</div>`;
+  if(d.baek)return `<div class="pick"><button class="it ${WE.baek?'done':''}" id="baekBtn" aria-pressed="${WE.baek}"><span class="knob"></span><span><div class="t">Met Baek</div></span></button>${note}</div>`;
+  return '';
+}
 function render(){
-  const d=D[sel],cur=curIdx(),dn=S[sel].filter(Boolean).length;
+  const d=D[sel],cur=curIdx(),[dn,tt]=cnt(sel);
+  document.querySelectorAll('.modes button').forEach(b=>b.setAttribute('aria-selected',b.dataset.m===MODE));
   cTime.textContent=`${fmt(d.s)}–${fmt(d.e)}`;cName.textContent=d.name;
-  cCnt.textContent=dn===d.items.length?'complete':`${dn} / ${d.items.length} done`;
+  cCnt.textContent=tt&&dn===tt?'complete':`${dn} / ${tt} done`;
   cNow.innerHTML=sel===cur?'<span class="now">Now</span>':(cur>=0?'<button class="tonow" id="toNow">Back to now</button>':'');const tn=document.getElementById('toNow');if(tn)tn.onclick=()=>{sel=nearIdx();render()};
-  lTitle.textContent=d.name;lTime.textContent=`${fmt(d.s)} — ${fmt(d.e)}`;lCnt.textContent=`${dn}/${d.items.length}`;segbar.innerHTML=S[sel].map(x=>`<i class="${x?'on':''}"></i>`).join('');const pv=D[(sel+D.length-1)%D.length],nx=D[(sel+1)%D.length];pName.textContent=pv.name;pTime.textContent=fmt(pv.s);nName.textContent=nx.name;nTime.textContent=fmt(nx.s);
+  lTitle.textContent=d.name;lTime.textContent=`${fmt(d.s)} — ${fmt(d.e)}`;lCnt.textContent=`${dn}/${tt}`;
+  segbar.innerHTML=[...(extra(d)?[extraOn(d)]:[]),...d.items.map(x=>!!CK[x.L])].map(x=>`<i class="${x?'on':''}"></i>`).join('');
+  const pv=D[(sel+D.length-1)%D.length],nx=D[(sel+1)%D.length];pName.textContent=pv.name;pTime.textContent=fmt(pv.s);nName.textContent=nx.name;nTime.textContent=fmt(nx.s);
   let j=0;
-  list.innerHTML=d.g.map(([label,its])=>`${label?`<div class="grp"><span>${label}</span></div>`:''}${its.map(x=>{const k=j++;const tag=x[2]==='must'?'<span class="tag must">Non-negotiable</span>':x[2]?`<span class="tag">${x[2]}</span>`:'';return `<button class="it ${S[sel][k]?'done':''}" data-j="${k}" aria-pressed="${S[sel][k]}"><span class="knob"></span><span><div class="t">${x[0]}${tag}</div>${x[1]?`<div class="n">${x[1]}</div>`:''}</span></button>`}).join('')}`).join('');
-  list.querySelectorAll('.it').forEach(b=>b.onclick=()=>{const k=+b.dataset.j;S[sel][k]=!S[sel][k];persist();render()});
-  keys.innerHTML=keyMap.map((m,n)=>`<button class="kt ${S[m.i][m.j]?'on':''}" data-n="${n}" aria-pressed="${S[m.i][m.j]}"><i></i><span class="kt-time">${fmt(D[m.i].s)}</span><span class="kt-name">${m.k}</span></button>`).join('');
-  keys.querySelectorAll('.kt').forEach(b=>b.onclick=()=>{const m=keyMap[+b.dataset.n];S[m.i][m.j]=!S[m.i][m.j];persist();render()});
-  const all=S.flat(),a=all.filter(Boolean).length;sum.textContent=`${a} / ${all.length} complete`;pct.textContent=Math.round(a/all.length*100)+'%';kCount.textContent=keyMap.filter(m=>S[m.i][m.j]).length+'/'+keyMap.length;
-  allclear.style.display=a===all.length?'block':'none';
+  list.innerHTML=extraHTML(d)+d.g.map(([label,its])=>`${label?`<div class="grp"><span>${label}</span></div>`:''}${its.map(x=>{const k=j++,on=!!CK[x.L];const tag=x[2]==='must'?'<span class="tag must">Non-negotiable</span>':x[2]?`<span class="tag">${x[2]}</span>`:'';return `<button class="it ${on?'done':''}" data-j="${k}" aria-pressed="${on}"><span class="knob"></span><span><div class="t">${x[0]}${tag}</div>${x[1]?`<div class="n">${x[1]}</div>`:''}</span></button>`}).join('')}`).join('');
+  list.querySelectorAll('.it[data-j]').forEach(b=>b.onclick=()=>{const x=d.items[+b.dataset.j];CK[x.L]=!CK[x.L];persist();render()});
+  list.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{WE[d.block]=WE[d.block]===b.dataset.o?'':b.dataset.o;persistWE();render()});
+  const bb=document.getElementById('baekBtn');if(bb)bb.onclick=()=>{WE.baek=!WE.baek;persistWE();render()};
+  const ni=document.getElementById('dayNote');if(ni)ni.oninput=()=>{WE.note=ni.value;persistWE()};
+  keyMap=[];D.forEach((dd,i)=>dd.items.forEach(x=>{if(x[3])keyMap.push({k:x[3],i,x})}));
+  keys.innerHTML=keyMap.map((m,n)=>`<button class="kt ${CK[m.x.L]?'on':''}" data-n="${n}" aria-pressed="${!!CK[m.x.L]}"><i></i><span class="kt-time">${fmt(D[m.i].s)}</span><span class="kt-name">${m.k}</span></button>`).join('');
+  keys.querySelectorAll('.kt').forEach(b=>b.onclick=()=>{const m=keyMap[+b.dataset.n];CK[m.x.L]=!CK[m.x.L];persist();render()});
+  let A=0,T=0;D.forEach((_,i)=>{const[x,y]=cnt(i);A+=x;T+=y});
+  sum.textContent=`${A} / ${T} complete`;pct.textContent=Math.round(A/T*100)+'%';kCount.textContent=keyMap.filter(m=>CK[m.x.L]).length+'/'+keyMap.length;
+  allclear.style.display=A===T?'block':'none';
   drawDial();
 }
+function setMode(m){MODE=m;D=MODES[m];save('dial_mode',{mode:m,day:ymd(recordDay())});sel=nearIdx();render()}
+document.querySelectorAll('.modes button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
 prev.onclick=()=>{sel=(sel+D.length-1)%D.length;render()};
 next.onclick=()=>{sel=(sel+1)%D.length;render()};
 
@@ -340,30 +396,31 @@ const close=()=>app.classList.remove('open','open-notes','open-save');closeBuy.o
 function sky(){const n=new Date();tDate.textContent=`${n.getFullYear()}.${String(n.getMonth()+1).padStart(2,'0')}.${String(n.getDate()).padStart(2,'0')}`}
 
 
-/* save to Notion: same labels & endpoint as classic view */
-const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Konkuk Lecture','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','PM Toner','Serum PM','Retinol','Moisturizer PM','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
-const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+/* save to Notion */
 const WK=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 let saveDate=new Date();
-function defaultSaveDate(){const d=new Date();if(nowM()<toM(D[0].s))d.setDate(d.getDate()-1);d.setHours(12,0,0,0);return d}
 function paintSaveDate(){const t=new Date();t.setHours(12,0,0,0);const diff=Math.round((saveDate-t)/864e5);
  dLabel.textContent=`${WK[saveDate.getDay()]}, ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][saveDate.getMonth()]} ${saveDate.getDate()}`;
  dHint.textContent=diff===0?'Today':diff===-1?'Yesterday':diff===1?'Tomorrow':ymd(saveDate);
- const all=S.flat();dSum.textContent=`${all.filter(Boolean).length} / ${all.length} checked`}
-function openSave(){saveDate=defaultSaveDate();paintSaveDate();doSave.textContent='Save';doSave.disabled=false;app.classList.add('open','open-save')}
+ let A=0,T=0;D.forEach((_,i)=>{const[x,y]=cnt(i);A+=x;T+=y});dSum.textContent=`${DAYTYPE[MODE]} · ${A} / ${T} checked`}
+function openSave(){saveDate=recordDay();paintSaveDate();doSave.textContent='Save';doSave.disabled=false;app.classList.add('open','open-save')}
 function closeSaveSheet(){app.classList.remove('open','open-save')}
 dPrev.onclick=()=>{saveDate.setDate(saveDate.getDate()-1);paintSaveDate()};
 dNext.onclick=()=>{saveDate.setDate(saveDate.getDate()+1);paintSaveDate()};
 closeSave.onclick=closeSaveSheet;
-async function saveToNotion(){const checks={};FLAT.forEach(([i,j],n)=>{if(LABELS[n])checks[LABELS[n]]=S[i][j]});
+async function saveToNotion(){
+ const checks={};D.forEach(d=>d.items.forEach(x=>{checks[x.L]=!!CK[x.L]}));
+ const day={type:DAYTYPE[MODE]};
+ if(MODE==='sat')Object.assign(day,{A:WE.A,B:WE.B,C:WE.C,note:WE.note});
+ if(MODE==='sun')Object.assign(day,{baek:WE.baek,note:WE.note});
  doSave.disabled=true;doSave.textContent='Saving';
- try{const res=await fetch('/api/notion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:ymd(saveDate),checks})});
+ try{const res=await fetch('/api/notion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:ymd(saveDate),checks,day})});
   if(res.ok){doSave.textContent='Saved';setTimeout(closeSaveSheet,700)}else{let msg='';try{const err=await res.json();msg=(err&&(err.message||JSON.stringify(err)))||('HTTP '+res.status)}catch(_){msg='HTTP '+res.status}doSave.textContent='Save';doSave.disabled=false;alert('Failed: '+msg)}}
  catch(e){doSave.textContent='Save';doSave.disabled=false;alert('Error: '+e.message)}}
 doSave.onclick=saveToNotion;
 saveBtn.onclick=openSave;
-resetBtn.onclick=()=>{if(confirm('Reset all checks?')){S=D.map(d=>d.items.map(()=>false));persist();render()}};
-window.addEventListener('storage',e=>{if(e.key===KEY){pull();render()}if(e.key==='buys_v4'){buys=load('buys_v4',[]);renderBuys()}});
+resetBtn.onclick=()=>{if(confirm('Reset all checks?')){CK={};WE={A:'',B:'',C:'',baek:false,note:''};persist();persistWE();render()}};
+window.addEventListener('storage',e=>{if(e.key===KEY||e.key==='weekend_v1'){pull();render()}if(e.key==='buys_v4'){buys=load('buys_v4',[]);renderBuys()}});
 window.addEventListener('pageshow',()=>{pull();buys=load('buys_v4',[]);renderBuys();render()});
 sky();renderBuys();render();
 setInterval(()=>{sky();drawDial()},60000);
