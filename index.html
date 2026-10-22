@@ -1,170 +1,331 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#D6D6D3">
 <link rel="manifest" href="/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FAFAFA">
 <title>Baseline</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#FAFAFA;--paper:#FFFFFF;
-  --ink:#181818;--ink2:#6b6b6b;--ink3:#9b9b9b;
-  --line:rgba(0,0,0,.08);--line2:rgba(0,0,0,.14);
-  --ember:#e14b4b;
-  --safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom);
-  --sans:'EB Garamond',Georgia,serif;--mono:'JetBrains Mono',monospace;
-  --grad:#3d3d3a;
-}
-html{scroll-behavior:smooth;background:var(--bg);overflow-anchor:none}
-body{min-height:100svh;background:#D6D6D3;color:var(--ink);font-family:var(--sans);overflow-x:hidden;overflow-anchor:none}
-.app{width:min(100%,460px);margin:0 auto;min-height:100svh;position:relative;padding:calc(20px + var(--safe-top)) 20px calc(96px + var(--safe-bottom))}
-.top{position:sticky;top:0;z-index:80;margin:0 -20px;padding:calc(10px + var(--safe-top)) 20px 14px;background:rgba(255,255,255,.55);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line)}
-.mark b{display:block;width:fit-content;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--grad)}
-.mark span{display:block;margin-top:4px;color:var(--ink3);font-family:var(--mono);font-size:9px;letter-spacing:.1em}
-.moon{font-family:var(--mono);color:var(--ink2);text-align:right}
-.moon b{display:block;width:fit-content;margin-left:auto;color:var(--grad);font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
-.moon-label{display:block;width:fit-content;margin-left:auto;margin-top:4px;color:var(--ink3);font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
-.hero{position:relative;margin:22px 0 34px;padding:32px 28px 33px;background:rgba(255,255,255,.4);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border-radius:26px;border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 10px 30px rgba(40,46,50,.1)}
-.hero-mark{position:absolute;top:26px;right:26px;color:var(--grad);opacity:.9}
-.hero-meta{display:flex;justify-content:space-between;color:var(--ink3);font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:46px}
-.titlebox h1{width:fit-content;font-family:'EB Garamond',serif;font-size:clamp(26px,7.8vw,34px);line-height:1.08;letter-spacing:0;font-weight:600;color:var(--ink)}
-.titlebox .zero{display:inline}.titlebox .friction{display:inline}
-.titlebox p{margin-top:14px;color:var(--ink2);font-size:14px;line-height:1.5;max-width:34ch}
-.stat-row{display:flex;gap:28px;margin-top:20px}
-.stat b{display:block;font-size:17px;font-weight:700;color:var(--ink)}
-.stat span{display:block;margin-top:2px;font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase}
-.keys{margin:-14px 0 20px;padding:14px;background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(200%);-webkit-backdrop-filter:blur(22px) saturate(200%);border-radius:20px;border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 8px 24px rgba(40,46,50,.08)}
+:root{--bg:#D6D6D3;--ink:#181818;--ink2:#6b6b6b;--ink3:#9b9b9b;--line:rgba(0,0,0,.08);--line2:rgba(0,0,0,.14);--grad:#3d3d3a;--ember:#e14b4b;
+--glass:rgba(255,255,255,.55);--edge:rgba(255,255,255,.6);--shadow:inset 0 1px 0 rgba(255,255,255,.8),0 8px 24px rgba(40,46,50,.08);
+--serif:'EB Garamond',Georgia,serif;--mono:'JetBrains Mono',monospace;--safe-b:env(safe-area-inset-bottom)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{min-height:100svh;color:var(--ink);font-family:var(--serif);background:var(--bg);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--grad);outline-offset:2px}
+.glass{background:var(--glass);backdrop-filter:blur(22px) saturate(200%);-webkit-backdrop-filter:blur(22px) saturate(200%);border:1px solid var(--edge);box-shadow:var(--shadow)}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px calc(96px + var(--safe-b))}
+.top{display:flex;justify-content:space-between;align-items:flex-end;padding:4px 2px 0}
+.top b{display:block;font-family:var(--serif);font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.top span{display:block;margin-top:4px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ink3)}
+.top .r{text-align:right}
+.top .r b{font-size:11px;color:var(--grad)}
+.dialcard{margin:16px 0 14px;padding:14px 10px 12px;border-radius:26px;background:rgba(255,255,255,.4);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid var(--edge);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 10px 30px rgba(40,46,50,.1)}
+.dial{position:relative;width:min(370px,100%);aspect-ratio:1;margin:0 auto}
+.dial svg{width:100%;height:100%;overflow:visible;display:block}
+.seg{cursor:pointer}
+.seg:focus{outline:none}
+.seg:focus-visible .base{stroke:var(--grad);stroke-width:2}
+.center{position:absolute;inset:28%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}
+.center .time{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink3)}
+.center .name{font-family:var(--serif);font-size:clamp(24px,7vw,31px);font-weight:600;line-height:1.05;margin:6px 0 4px}
+.center .cnt{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.center .now{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--ember);padding:3px 8px;border-radius:999px}
+.keys{margin:0 0 18px;padding:14px;border-radius:20px}
 .keys-head{display:flex;justify-content:space-between;padding:0 4px 10px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
-.keys-head b{color:var(--grad);font-weight:700}
 .keys-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.kc{border:0;background:rgba(255,255,255,.5);border-radius:14px;padding:11px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);cursor:pointer}
-.kc-box{width:22px;height:22px;border-radius:8px;border:1.5px solid rgba(0,0,0,.16);display:grid;place-items:center;color:transparent;font-size:11px;font-weight:900;background:rgba(255,255,255,.6)}
-.kc.on{background:var(--grad);color:#fff}
-.kc.on .kc-box{background:#fff;border-color:#fff;color:var(--grad)}
-.bodylink{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-8px 0 20px;padding:13px 16px;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(200%);-webkit-backdrop-filter:blur(22px) saturate(200%);border-radius:20px;border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 8px 24px rgba(40,46,50,.08)}
-.bodylink:active{background:rgba(255,255,255,.75)}
-.bl-l{display:flex;align-items:center;gap:12px;min-width:0}
-.bl-ic{flex:0 0 auto;width:34px;height:34px;border-radius:12px;background:var(--grad);color:#fff;display:grid;place-items:center}
-.bl-t b{display:block;font-size:16px;font-weight:600;line-height:1.1}
-.bl-t span{display:block;margin-top:3px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bl-ar{flex:0 0 auto;font-family:var(--mono);font-size:14px;color:var(--ink3)}
-.nav-wrap{position:sticky;top:56px;z-index:70;margin:0 -20px;padding:12px 20px 10px;background:rgba(255,255,255,.4);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--line)}
-.nav{display:flex;gap:6px;overflow:auto;scrollbar-width:none}
-.nav::-webkit-scrollbar{display:none}
-.nb{flex:0 0 auto;border:0;background:none;color:var(--ink3);padding:6px 12px;border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-.nb.active{background:var(--grad);color:#fff;font-weight:700}
-.section{scroll-margin-top:118px;margin-top:22px;background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(200%);-webkit-backdrop-filter:blur(22px) saturate(200%);border-radius:20px;padding:6px 18px 8px;border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 8px 24px rgba(40,46,50,.08);position:relative}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;padding:12px 0 10px;border-bottom:1px solid var(--line2);margin-bottom:2px}
-.sec-n{font-family:var(--mono);font-size:10px;color:var(--ink3)}
-.sec-t{font-size:16px;font-weight:600;letter-spacing:-.01em;flex:1;margin-left:10px;color:var(--ink)}
-.sec-head::after{content:attr(data-count);font-family:var(--mono);font-size:10px;color:var(--ink3)}
-.card{border:0}
-.card-lbl{padding:12px 0 6px;font-family:var(--mono);font-size:9px;color:#6b6b67;letter-spacing:.1em;text-transform:uppercase}
-.item{display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.item:last-child{border-bottom:0}
-.cb{width:18px;height:18px;margin-top:2px;border:1.5px solid rgba(0,0,0,.16);color:transparent;font-family:var(--mono);font-size:10px;display:grid;place-items:center;background:rgba(255,255,255,.5);border-radius:6px}
-.tick{display:block;color:inherit}
-.ib{min-width:0}
-.im{font-size:15px;line-height:1.3;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
-.in{margin-top:5px;color:var(--ink2);font-size:12.5px;line-height:1.5;font-weight:400}
-.sub{margin-top:8px;list-style:none}
-.sub li{position:relative;padding-left:13px;color:var(--ink3);font-family:var(--mono);font-size:9px;line-height:1.6}
-.sub li::before{content:'\2014';position:absolute;left:0;top:0}
-.item.done .cb{background:rgba(255,255,255,.75);border-color:rgba(255,255,255,.9);box-shadow:0 2px 8px rgba(40,46,50,.15)}
-.item.done .tick{color:var(--grad);font-weight:900;font-size:12px}
-.item.done .im{text-decoration:line-through;color:var(--ink3)}
-.item.done .in,.item.done .sub li{opacity:.55}
-.b{display:inline-block;font-family:var(--mono);font-size:8.5px;padding:2px 7px;border-radius:6px;margin-left:6px;border:1px solid var(--line2);color:var(--ink2);vertical-align:middle;text-transform:uppercase;letter-spacing:.04em}
-.b-r{color:#fff;background:#e14b4b;border-color:#e14b4b}
-.b-g{color:#1f9d6e}
-.b-a{color:#c07a1e}
-.b-n{color:var(--ink3)}
-.callout{border-top:1px solid var(--line);padding:12px 0;font-family:var(--mono);font-size:10px;color:var(--ink3);line-height:1.6}
-.callout.warn{color:#c07a1e}
-.day-hd{display:flex;align-items:baseline;gap:12px;padding:12px 0 6px}
-.day-letter{font-family:var(--mono);font-size:10px;color:#6b6b67;border:1px solid var(--line2);width:20px;height:20px;display:grid;place-items:center;border-radius:6px}
-.day-name{font-size:13px;font-weight:600;color:var(--ink)}
-.day-time{color:var(--ink3);font-family:var(--mono);font-size:9px}
-.buy-wrap{padding:0}
-.buy-row{display:flex;border-bottom:1px solid var(--line2)}
-.buy-input{flex:1;min-width:0;border:0;background:transparent;-webkit-appearance:none;appearance:none;-webkit-text-fill-color:var(--ink);color:var(--ink);padding:14px 0;outline:0;font-family:var(--sans);font-size:14px}
-.buy-add{border:0;background:none;color:#6b6b67;padding:0 0 0 14px;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase}
-.buy-item{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink2);font-family:var(--sans);font-size:14px}
-.buy-item .cb{width:16px;height:16px}
-.buy-item-txt{flex:1}
-.buy-item.bought .buy-item-txt{text-decoration:line-through;color:var(--ink3)}
-.buy-item.bought .cb{background:rgba(255,255,255,.75);border-color:rgba(255,255,255,.9)}
-.buy-item.bought .tick{color:var(--grad);font-weight:900}
-.buy-del{border:0;background:transparent;color:var(--ink3);font-size:16px}
-.buy-empty{padding:14px 0;color:var(--ink3);font-family:var(--mono);font-size:10px}
-.dock{position:fixed;left:50%;bottom:calc(14px + var(--safe-bottom));transform:translate3d(-50%,0,0);-webkit-transform:translate3d(-50%,0,0);will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;z-index:100;width:min(420px,calc(100vw - 32px));display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--grad);border:1px solid rgba(255,255,255,.6);border-radius:16px;overflow:hidden;box-shadow:0 10px 28px rgba(40,46,50,.24)}
-.dock button{min-height:48px;border:0;background:transparent;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
-@media(max-width:380px){.titlebox h1{font-size:24px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-#sheetBackdrop{position:fixed;inset:0;z-index:109;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s}
-#sheetBackdrop.open{opacity:1;pointer-events:auto}
-#s-buy{position:fixed;left:50%;bottom:0;transform:translateX(-50%) translateY(110%);z-index:120;width:min(460px,100vw);max-height:78svh;margin:0;padding:20px 20px calc(20px + var(--safe-bottom));background:rgba(255,255,255,.68);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border-top:1px solid rgba(255,255,255,.7);border-radius:20px 20px 0 0;transition:transform .24s cubic-bezier(.2,.8,.2,1);overflow:auto;box-shadow:0 -8px 30px rgba(40,46,50,.12)}
-#s-buy.open{transform:translateX(-50%) translateY(0)}
-#s-buy .sec-head{position:sticky;top:0;background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);margin:0 -20px;padding:6px 20px 12px;border-radius:20px 20px 0 0}
-#s-buy .sec-head::after{display:none}
-#s-buy .sec-t{font-size:20px;margin-left:0}
-.sheet-close{width:28px;height:28px;border:0;background:none;color:var(--ink);font-size:20px}
-#s-buy #buyItems{max-height:46svh;overflow:auto}
-</style>
-</head>
-<body>
-<div class="app">
-<header class="top"><div class="mark"><b>S#01 / Baseline</b><span id="tDate">0000.00.00</span></div><div class="moon"><b id="pPct">0%</b><span class="moon-label">complete</span></div></header>
-<section class="hero"><div class="hero-mark"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12 15 L13.4 11.4 L17 10 L13.4 8.6 L12 5 L10.6 8.6 L7 10 L10.6 11.4 Z" fill="currentColor"/></svg></div><div class="hero-meta"></div><div class="titlebox"><h1><span class="zero">Baseline</span><span class="friction">.</span></h1><div class="stat-row"><div class="stat"><b id="sDone">0</b><span>Done today</span></div><div class="stat"><b id="sLeft">0</b><span>Left</span></div><div class="stat"><b id="sPct">0%</b><span>Complete</span></div></div></div></section>
-<section class="keys" aria-label="Key habits"><div class="keys-head"><span>Key Habits</span><b id="kCount">0/5</b></div><div class="keys-row" id="keysRow"></div></section>
-<a class="bodylink" href="body_map.html" aria-label="Open Body Map"><span class="bl-l"><span class="bl-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.6"/><path d="M12 8.6v7M7 11.2l5-1.8 5 1.8M12 15.6l-3.4 5.4M12 15.6l3.4 5.4"/></svg></span><span class="bl-t"><b>Body Map</b><span>부위별 개선 · 눈 · 두피 · 입술</span></span></span><span class="bl-ar">→</span></a>
-<div class="nav-wrap"><div class="nav" id="mainNav">
-<button class="nb active" data-target="s-wake">Wake</button><button class="nb" data-target="s-morning">Morning</button><button class="nb" data-target="s-shower">Shower</button><button class="nb" data-target="s-lens">Lens</button><button class="nb" data-target="s-skin-am">AM Skin</button><button class="nb" data-target="s-commute">Commute</button><button class="nb" data-target="s-school">Lab</button><button class="nb" data-target="s-home">Return</button><button class="nb" data-target="s-exercise">Workout</button><button class="nb" data-target="s-shower-pm">PM Shower</button><button class="nb" data-target="s-skin-pm">PM Skin</button><button class="nb" data-target="s-massage">Massage</button><button class="nb" data-target="s-sleep">Sleep</button><button class="nb" data-target="s-buy">Notes</button>
-</div></div>
-<main>
-<section class="section" id="s-wake"><div class="sec-head"><div class="sec-t">Wake Up</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Get up at alarm</div><div class="in">Move within 5 seconds. No snooze.</div></div></div></section>
-<section class="section" id="s-morning"><div class="sec-head"><div class="sec-t">Morning Routine</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Oil pulling (5 min)</div><div class="in">1 tsp coconut oil.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Brush teeth</div><div class="in">Including tongue scraping.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Check weather</div><div class="in">Bring umbrella if rain expected.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Morning hydration</div></div></div></section>
-<section class="section" id="s-shower"><div class="sec-head"><div class="sec-t">Shower & Hair</div></div><div class="card-lbl">Shower</div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Lukewarm shower</div><div class="in">Hot water destroys lipid barrier. End with cold water.</div></div></div><div class="card-lbl">Hair — Daily</div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Shampoo → Conditioner (2–3 min) → Cold rinse</div><div class="in">Mid-lengths to ends only. Never on scalp.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Blow dry → Moroccan hair oil</div><div class="in">Apply oil before blow drying. Ends only.</div></div></div><div class="card-lbl">Hair Mask Day <span class="b">2–3×/wk</span></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Shampoo → Hair mask → Cold rinse → Oil</div><div class="in">Skip conditioner on hair mask days.</div></div></div><div class="callout">Hair mask + conditioner do the same job. Using all three makes hair heavy.</div><div class="card-lbl">Body</div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Body lotion — while skin is damp</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Exfoliate <span class="b b-n">1–2×/wk</span></div><div class="in">Daily exfoliation damages the skin barrier.</div></div></div></section>
-<section class="section" id="s-lens"><div class="sec-head"><div class="sec-t">Lens & Accessories</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Insert lenses + rewetting drops</div><div class="in">Preservative-free single-use vials. Max 8 hours.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Accessories</div><div class="in">Watch, rings, necklace.</div></div></div></section>
-<section class="section" id="s-skin-am"><div class="sec-head"><div class="sec-t">AM Skincare</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">① Mild acidic cleanser</div><div class="in">pH 5.5 foam cleanser.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">② Toner</div><div class="in">Whatever's gentle and hydrating.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">③ Serum</div><div class="in">Layer both, thinner one first.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">④ Moisturizer</div></div></div><div class="item" data-key="Sunscreen" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑤ Sunscreen <span class="b b-r">NON-NEGOTIABLE</span></div><div class="in">SPF50+ PA++++.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑥ Primer</div><div class="in">Right before makeup.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑦ Makeup</div></div></div><div class="card-lbl">Deodorant & Body Spray</div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Apply deodorant</div><div class="in">Only when skin is completely dry.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Body spray</div><div class="in">SPF reapply, midday/over makeup.</div></div></div></section>
-<section class="section" id="s-commute"><div class="sec-head"><div class="sec-t">Commute</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Review today's plan</div><div class="in">Todoist + Mindlist + Notion Calendar.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Morning mindset</div><div class="in">One intention or 30 sec visualization.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Music or podcast</div><div class="in">Volume under 60%.</div></div></div></section>
-<section class="section" id="s-school"><div class="sec-head"><div class="sec-t">Lab</div></div><div class="day-hd"><div class="day-letter">A</div><div><div class="day-name">Morning Block</div><div class="day-time">09:00 — 13:00</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Research</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Lunch — 12:00</div><div class="in">Eat light. Stop at 80% full.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Floss + Brush teeth</div><div class="in">Before brushing.</div></div></div><div class="item" data-key="AM Supp" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">AM Supplements</div><div class="in">Vitamin C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen.</div></div></div><div class="day-hd"><div class="day-letter">B</div><div><div class="day-name">Afternoon Block</div><div class="day-time">13:00 — 18:00</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Research</div></div></div><div class="day-hd"><div class="day-letter">C</div><div><div class="day-name">Evening Block</div><div class="day-time">18:00 — 23:00</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Dinner — 19:30</div><div class="in">Eat light.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Semiconductor study</div><div class="in">Pomodoro / Deep work.</div></div></div><div class="item" data-key="PM Supp" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">PM Supplements — with dinner</div><div class="in">NAC, Magnesium, Zinc, B complex, Probiotics.</div></div></div></section>
-<section class="section" id="s-home"><div class="sec-head"><div class="sec-t">Return Commute</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Remove lenses</div><div class="in">Right when you get home.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">English vocab</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Konkuk lecture</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Decompress</div><div class="in">Drama, film, music, or reading.</div></div></div></section>
-<section class="section" id="s-exercise"><div class="sec-head"><div class="sec-t">Work Out</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Strength training <span class="b b-g">3×/week</span></div><div class="in">Squat, deadlift, pull-up, bench press.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Cardio <span class="b b-g">3–4×/week</span></div><div class="in">20–30 min.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Stretching + foam rolling</div><div class="in">Daily 10 min.</div></div></div></section>
-<section class="section" id="s-shower-pm"><div class="sec-head"><div class="sec-t">PM Shower & Back</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Shower — within 30 min of work out</div><div class="in">Rinse conditioner last.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Back brush</div><div class="in">While washing.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Back acne treatment</div><div class="in">Acnon or BHA body wash.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Niacinamide — underarms</div><div class="in">Fades discoloration over time.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Driclor <span class="b b-n">2–3×/week</span></div><div class="in">Completely dry underarms.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Scalp care — PDRN ampoule</div><div class="in">On towel-dried scalp.</div></div></div></section>
-<section class="section" id="s-skin-pm"><div class="sec-head"><div class="sec-t">PM Skincare</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">① Double cleanse</div><div class="in">Oil cleanser / balm → mild acidic foam.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">② Toner</div><div class="in">HA + niacinamide.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">③ Serum</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">④ Retinol <span class="b">3–4×/wk</span></div><div class="in">PM only.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑤ Moisturizer</div><div class="in">Thicker than morning.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">⑥ Lip care</div><div class="in">Lip balm or sleeping mask.</div></div></div></section>
-<section class="section" id="s-massage"><div class="sec-head"><div class="sec-t">Massage & Dental Care</div></div><div class="card-lbl">Massage</div><div class="item" data-key="Massage" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Jaw + eye + scalp massager</div><div class="in">4×/wk. Lymph flow route. Scalp included.</div></div></div><div class="card-lbl">Dental Care</div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Floss</div><div class="in">Before brushing.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Brush teeth — PM</div><div class="in">2+ min.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Whitening treatment</div><div class="in">Strips or pen, per product.</div></div></div><div class="item" data-key="Retainer" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Retainer — clean and insert</div><div class="in">Insert after brushing.</div></div></div></section>
-<section class="section" id="s-sleep"><div class="sec-head"><div class="sec-t">Wind Down & Sleep</div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Check pillowcase</div><div class="in">2×/wk.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Phone off 30 min before bed</div><div class="in">Dim warm lights.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Set tomorrow's alarm</div><div class="in">One alarm, no snooze.</div></div></div><div class="item" onclick="tog(this)"><div class="cb"><span class="tick">✓</span></div><div class="ib"><div class="im">Magnesium glycinate — before bed</div><div class="in">200–400mg.</div></div></div></section>
-<div id="sheetBackdrop" onclick="closeNotes()"></div><section class="section" id="s-buy" aria-hidden="true"><div class="sec-head"><div class="sec-t">Wish List & Notes</div><button class="sheet-close" type="button" onclick="closeNotes()">×</button></div><div class="buy-wrap"><div class="buy-row"><input class="buy-input" id="buyInput" placeholder="Add item, press enter" onkeydown="if(event.key==='Enter')addBuy()"><button class="buy-add" onclick="addBuy()">Add</button></div><div id="buyItems"></div><div class="buy-empty" id="buyEmpty">Nothing yet</div></div></section>
-</main></div>
-<div class="dock"><button class="primary" onclick="saveToNotion()">Save</button><button onclick="openNotes()">Notes</button><button onclick="if(confirm('Reset all checks?')){document.querySelectorAll('.item.done').forEach(e=>e.classList.remove('done'));saveChecks();updateProg()}">Reset</button></div>
+.key{border-radius:14px;padding:11px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);background:rgba(255,255,255,.5);text-align:center}
+.key i{width:22px;height:22px;border-radius:8px;border:1.5px solid rgba(0,0,0,.16);background:rgba(255,255,255,.6);display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:900;color:transparent}
+.key.on{background:var(--grad);color:#fff}
+.key.on i{background:#fff;border-color:#fff;color:var(--grad)}
+.listcard{border-radius:20px;padding:6px 18px 8px}
+.shead{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 0 10px;border-bottom:1px solid var(--line2)}
+.shead h2{font-family:var(--serif);font-size:21px;font-weight:600}
+.shead small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ink3);margin-top:3px}
+.shead .arrows{display:flex;gap:6px}
+.shead .arrows button{width:34px;height:34px;border-radius:12px;background:rgba(255,255,255,.6);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:14px;color:var(--ink2)}
+.grp{padding:12px 0 6px;font-family:var(--mono);font-size:9px;color:#6b6b67;letter-spacing:.1em;text-transform:uppercase}
+.it{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);width:100%}
+.it:last-child{border-bottom:0}
+.knob{width:18px;height:18px;flex:0 0 18px;border-radius:6px;border:1.5px solid rgba(0,0,0,.16);background:rgba(255,255,255,.5);position:relative;margin-top:3px;transition:background .2s}
+.it.done .knob{background:var(--grad);border-color:var(--grad)}
+.it.done .knob::after{content:"";position:absolute;left:5px;top:1.5px;width:4px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.t{font-family:var(--serif);font-size:16px;font-weight:500;line-height:1.3}
+.n{font-family:var(--mono);font-size:9.5px;color:var(--ink3);margin-top:4px;line-height:1.6}
+.it.done .t{color:var(--ink3);text-decoration:line-through;text-decoration-color:rgba(0,0,0,.25)}
+.tag{display:inline-block;font-family:var(--mono);font-size:8.5px;padding:2px 7px;border-radius:6px;margin-left:6px;border:1px solid var(--line2);color:var(--ink2);vertical-align:middle;text-transform:uppercase;letter-spacing:.04em}
+.tag.must{color:#fff;background:var(--ember);border-color:var(--ember)}
+.dock{position:fixed;left:50%;bottom:calc(14px + var(--safe-b));transform:translateX(-50%);width:min(420px,calc(100vw - 32px));display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--grad);border:1px solid rgba(255,255,255,.6);border-radius:16px;overflow:hidden;box-shadow:0 10px 28px rgba(40,46,50,.24);z-index:20}
+.dock a,.dock button{display:block;text-align:center;min-height:48px;line-height:48px;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;text-decoration:none}
+.dock .a{background:rgba(255,255,255,.1)}
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
+.sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,105%);width:min(460px,100vw);max-height:78svh;overflow:auto;background:rgba(246,246,244,.94);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border-top:1px solid rgba(255,255,255,.7);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + var(--safe-b));transition:transform .24s cubic-bezier(.2,.8,.2,1);z-index:40;box-shadow:0 -8px 30px rgba(40,46,50,.12);visibility:hidden}
+.open .backdrop{opacity:1;pointer-events:auto}
+.open .sheet{transform:translate(-50%,0);visibility:visible}
+.sheet h3{font-family:var(--serif);font-size:20px;font-weight:600;display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--line2)}
+.sheet h3 button{font-size:20px;width:28px;height:28px;text-align:center}
+.add{display:flex;border-bottom:1px solid var(--line)}
+.add input{flex:1;min-width:0;background:none;border:0;color:var(--ink);font-family:var(--serif);font-size:16px;padding:14px 0;outline:0}
+.add input::placeholder{color:var(--ink3)}
+.add button{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;color:#6b6b67;padding-left:14px}
+.buy{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.buy .knob{margin-top:0}
+.buy .t{flex:1;font-size:15px;color:var(--ink2)}
+.buy.done .t{color:var(--ink3);text-decoration:line-through}
+.buy .x{color:var(--ink3);font-size:16px;width:28px;text-align:center}
+.empty{padding:14px 0;color:var(--ink3);font-family:var(--mono);font-size:10px}
+.allclear{text-align:center;padding:24px 10px 6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink3);display:none}
+.allclear b{display:block;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);letter-spacing:0;margin-bottom:4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ── glass pass ── */
+:root{--bg:#D4D4D1;--ember:#e0504a;--glass-fill:linear-gradient(150deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,.34) 55%,rgba(255,255,255,.22) 100%);
+--glass-blur:blur(34px) saturate(190%);--glass-edge:rgba(255,255,255,.75);
+--glass-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.3),inset 1px 0 0 rgba(255,255,255,.35),0 1px 2px rgba(40,46,50,.06),0 16px 40px -8px rgba(40,46,50,.18)}
+.scene{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(180deg,#DCDCD9 0%,#CFCFCC 100%)}
+.scene i{position:absolute;border-radius:50%;filter:blur(50px)}
+.scene i:nth-child(1){width:70vw;height:70vw;max-width:420px;max-height:420px;left:-18%;top:-6%;background:#F4F4F1;opacity:.95}
+.scene i:nth-child(2){width:60vw;height:60vw;max-width:360px;max-height:360px;right:-20%;top:28%;background:#A9AAA6;opacity:.55}
+.scene i:nth-child(3){width:55vw;height:55vw;max-width:340px;max-height:340px;left:-10%;bottom:-8%;background:#C3C9CE;opacity:.8}
+.scene i:nth-child(4){width:34vw;height:34vw;max-width:200px;max-height:200px;right:6%;top:6%;background:#e0504a;opacity:.13}
+.scene::after{content:"";position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+body{background:transparent}
+.glass,.dialcard{position:relative;background:var(--glass-fill);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);overflow:hidden}
+.glass::before,.dialcard::before{content:"";position:absolute;left:0;right:0;top:0;height:46%;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0));pointer-events:none}
+.glass>*,.dialcard>*{position:relative}
+.dialcard{border-radius:30px}
+.keys,.listcard{border-radius:24px}
+.key{background:linear-gradient(160deg,rgba(255,255,255,.7),rgba(255,255,255,.35));border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 10px -4px rgba(40,46,50,.15)}
+.key.on{background:linear-gradient(160deg,#4a4a47,#2f2f2d);border-color:rgba(255,255,255,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 6px 14px -4px rgba(40,46,50,.4)}
+.knob{background:rgba(255,255,255,.65);box-shadow:inset 0 1px 1px rgba(0,0,0,.06)}
+.shead .arrows button{background:linear-gradient(160deg,rgba(255,255,255,.8),rgba(255,255,255,.4));border:1px solid rgba(255,255,255,.8);box-shadow:inset 0 1px 0 #fff,0 3px 8px -3px rgba(40,46,50,.2)}
+.dock{background:rgba(52,52,50,.62);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);border:1px solid rgba(255,255,255,.35);border-radius:20px;gap:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 14px 34px -6px rgba(30,32,34,.4)}
+.dock .a{background:rgba(255,255,255,.12)}
+.sheet{background:linear-gradient(170deg,rgba(255,255,255,.78),rgba(240,240,238,.66));backdrop-filter:blur(36px) saturate(190%);-webkit-backdrop-filter:blur(36px) saturate(190%);border-top:1px solid rgba(255,255,255,.9);box-shadow:inset 0 1px 0 #fff,0 -10px 34px rgba(40,46,50,.14)}
+.backdrop{background:rgba(60,62,64,.22);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.center::before{content:"";position:absolute;inset:-6%;border-radius:50%;background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.75),rgba(255,255,255,.18) 70%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 8px 20px -10px rgba(40,46,50,.25);z-index:-1}
+.center{z-index:0}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass,.dialcard{background:rgba(245,245,243,.92)}}
+
+/* ── pass b: no box behind dial, softer colors ── */
+:root{--grad:#6f7d8c;--ember:#4f86d9;--on:#fff}
+.dialcard{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;overflow:visible;padding:4px 0 0;margin:8px 0 14px}
+.dialcard::before{display:none}
+.scene i:nth-child(4){background:var(--ember);opacity:.12}
+.key.on{background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,0) 60%),var(--grad);color:var(--on);border-color:rgba(255,255,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 14px -5px rgba(40,46,50,.3)}
+.key.on i{background:var(--on);border-color:var(--on);color:var(--grad)}
+.it.done .knob,.buy .knob[style*="grad"]{background:var(--grad)!important;border-color:var(--grad)!important;box-shadow:0 2px 6px -2px rgba(40,46,50,.3)}
+.it.done .knob::after{border-color:var(--on)}
+.top .r b{color:var(--ink)}
+.dock{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.8);box-shadow:inset 0 1px 0 #fff,0 14px 34px -8px rgba(40,46,50,.28);padding:4px;gap:4px}
+.dock a,.dock button{color:var(--ink2);border-radius:15px;min-height:44px;line-height:44px}
+.dock .a{background:var(--grad);color:var(--on);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+
+/* ── pass c: plain background, white time ring ── */
+.scene{background:linear-gradient(180deg,#DADAD7 0%,#CDCDCA 100%)}
+.scene::after{display:none}
+.dial .base{filter:drop-shadow(0 1px 1.5px rgba(40,46,50,.14))}
+
+/* ── pass d: soft bluish wash back (smooth, no blotches), flatter ── */
+.scene{background:
+  radial-gradient(120% 70% at 85% 35%,rgba(176,190,206,.55),rgba(176,190,206,0) 70%),
+  radial-gradient(90% 60% at 10% 90%,rgba(186,198,212,.45),rgba(186,198,212,0) 70%),
+  linear-gradient(180deg,#DEDEDB 0%,#D2D3D1 100%)}
+.dial .base{filter:none}
+.center::before{background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(40,46,50,.06)}
+.glass::before{display:none}
+:root{--glass-fill:rgba(255,255,255,.5);--glass-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 14px -6px rgba(40,46,50,.12)}
+.key{background:rgba(255,255,255,.6);box-shadow:none}
+.key.on{background:var(--grad);box-shadow:none}
+.shead .arrows button{background:rgba(255,255,255,.7);box-shadow:none}
+.it.done .knob,.buy .knob[style*="grad"]{box-shadow:none}
+.dock{box-shadow:0 6px 18px -8px rgba(40,46,50,.25)}
+.dock .a{box-shadow:none}
+:root{--grad:#a6a5a0;--ember:#94938d;--needle:#3b3a37;--on:#fff}
+
+/* ── lower blocks, pass b ── */
+.keys2{margin:2px 0 22px}
+.khead{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 12px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.khead b{color:var(--ink2);font-weight:600}
+.krow{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.key2{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:2px 0}
+.key2 i{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.85);position:relative;transition:background .2s,border-color .2s;box-shadow:0 2px 8px -4px rgba(40,46,50,.18)}
+.key2 i::after{content:"";position:absolute;left:19px;top:14px;width:7px;height:14px;border:solid transparent;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.key2.on i{background:var(--grad);border-color:var(--grad)}
+.key2.on i::after{border-color:#fff}
+.key2 span{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.key2.on span{color:var(--ink)}
+.listcard{padding:18px 18px 6px}
+.shead2{padding-bottom:4px}
+.sh-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.sh-top h2{font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.1}
+.sh-cnt{font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.shead2 small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink3);margin-top:5px}
+.segbar{display:flex;gap:3px;margin:14px 0 4px}
+.segbar i{flex:1;height:4px;border-radius:2px;background:rgba(0,0,0,.08);transition:background .2s}
+.segbar i.on{background:var(--grad)}
+.grp{padding:18px 0 4px;color:var(--ink3)}
+.it{padding:13px 0;border-bottom:1px solid rgba(0,0,0,.055)}
+.it .t{font-size:16.5px}
+.it.done .t{text-decoration:none;color:var(--ink3)}
+.it.done .n{opacity:.6}
+.knob{border-radius:50%;width:20px;height:20px;flex-basis:20px;margin-top:1px;border:1.5px solid rgba(0,0,0,.18);background:rgba(255,255,255,.6)}
+.it.done .knob::after{left:6px;top:2.5px}
+.sibs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px -8px 0;padding:12px 0 6px;border-top:1px solid rgba(0,0,0,.08)}
+.sibs button{display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px}
+.sibs button:active{background:rgba(255,255,255,.5)}
+.sibs #next{justify-content:flex-end;text-align:right}
+.sibs b{display:block;font-family:var(--serif);font-size:15px;font-weight:600;line-height:1.2}
+.sibs small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--ink3);margin-top:3px}
+.sibs .dir{font-family:var(--mono);color:var(--ink3);font-size:14px}
+
+.viewsw{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
+.bodylink{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-4px 0 18px;padding:13px 18px;border-radius:20px;color:var(--ink);text-decoration:none}
+.bodylink b{display:block;font-family:var(--serif);font-size:16px;font-weight:600}
+.bodylink small{display:block;margin-top:3px;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink3)}
+.bodylink .ar{font-family:var(--mono);color:var(--ink3)}
+.tonow{pointer-events:auto;margin-top:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line2);border-radius:999px;padding:4px 10px;background:rgba(255,255,255,.6)}
+.dock button:disabled{opacity:.7}
+</style></head><body><div class="scene" aria-hidden="true"></div><div id="app">
+<div class="wrap">
+<header class="top"><div><b>S#01 / Baseline</b><span id="tDate"></span><a class="viewsw" href="classic.html">Classic view</a></div><div class="r"><b id="pct">0%</b><span id="sum"></span></div></header>
+<div class="dialcard"><div class="dial"><svg viewBox="-190 -190 380 380" id="svg" aria-label="하루 루틴 시계"></svg>
+<div class="center"><div class="time" id="cTime"></div><div class="name" id="cName"></div><div class="cnt" id="cCnt"></div><div id="cNow"></div></div></div></div>
+<section class="keys glass" aria-label="Key habits"><div class="keys-head"><span>Key Habits</span><b id="kCount">0/5</b></div><div class="keys-row" id="keys"></div></section>
+<a class="bodylink glass" href="body_map.html"><span><b>Body Map</b><small>부위별 개선 · 눈 · 두피 · 입술</small></span><span class="ar">→</span></a>
+<section class="listcard glass"><div class="shead2"><div class="sh-top"><h2 id="lTitle"></h2><span class="sh-cnt" id="lCnt"></span></div><small id="lTime"></small><div class="segbar" id="segbar"></div></div>
+<div id="list"></div><nav class="sibs"><button id="prev" aria-label="이전 시간대"><span class="dir">←</span><span><b id="pName"></b><small id="pTime"></small></span></button><button id="next" aria-label="다음 시간대"><span><b id="nName"></b><small id="nTime"></small></span><span class="dir">→</span></button></nav></section>
+<div class="allclear" id="allclear"><b>All done.</b>Set tomorrow's alarm and sleep.</div>
+</div>
+<nav class="dock"><button class="a" id="saveBtn">Save</button><button id="openBuy">Notes</button><button id="resetBtn">Reset</button></nav>
+<div class="backdrop" id="bd"></div>
+<section class="sheet" id="sheet" aria-label="살 것 목록"><h3>Buy List<button id="closeBuy" aria-label="닫기">×</button></h3>
+<div class="add"><input id="buyIn" placeholder="Add item" enterkeyhint="done"><button id="buyAdd">Add</button></div>
+<div id="buys"></div></section>
+</div>
 <script>
-if('scrollRestoration' in history){history.scrollRestoration='manual';}
-window.scrollTo(0,0);const d=new Date();document.getElementById('tDate').textContent=`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-function tog(el){el.classList.toggle('done');saveChecks();updateProg()}
-function saveChecks(){const items=document.querySelectorAll('.section .item');localStorage.setItem('routine_v4',JSON.stringify([...items].map(i=>i.classList.contains('done'))));}
-function loadChecks(){const state=JSON.parse(localStorage.getItem('routine_v4')||'[]');document.querySelectorAll('.section .item').forEach((item,i)=>{if(state[i])item.classList.add('done')});}
-const keyItems=[...document.querySelectorAll('.item[data-key]')];
-function renderKeys(){const row=document.getElementById('keysRow');if(!row)return;if(!row.children.length){keyItems.forEach(it=>{const b=document.createElement('button');b.type='button';b.className='kc';b.innerHTML='<span class="kc-box"><span class="tick">✓</span></span><span class="kc-t"></span>';b.querySelector('.kc-t').textContent=it.dataset.key;b.onclick=()=>tog(it);row.appendChild(b);it._kc=b;});}let n=0;keyItems.forEach(it=>{const on=it.classList.contains('done');it._kc.classList.toggle('on',on);if(on)n++;});document.getElementById('kCount').textContent=n+'/'+keyItems.length;}
-function updateProg(){renderKeys();const all=document.querySelectorAll('.section .item');const done=document.querySelectorAll('.section .item.done');const t=all.length,dn=done.length,pct=t?Math.round(dn/t*100):0;document.getElementById('pPct').textContent=pct+'%';document.getElementById('sDone').textContent=dn;document.getElementById('sLeft').textContent=t-dn;document.getElementById('sPct').textContent=pct+'%';document.querySelectorAll('.section').forEach(sec=>{const total=sec.querySelectorAll('.item').length;const sd=sec.querySelectorAll('.item.done').length;if(total)sec.querySelector('.sec-head').setAttribute('data-count',`${sd}/${total}`)});}
-const sections=document.querySelectorAll('.section:not(#s-buy)');const navBtns=document.querySelectorAll('.nb');let navLock=false;const obs=new IntersectionObserver(entries=>{if(navLock)return;entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;navBtns.forEach(b=>b.classList.toggle('active',b.dataset.target===id));const ab=document.querySelector(`.nb[data-target="${id}"]`);if(ab)ab.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});}});},{threshold:0.2,rootMargin:'-110px 0px -25% 0px'});sections.forEach(s=>obs.observe(s));
-function scrollToSection(id){const t=document.getElementById(id);if(!t)return;navLock=true;navBtns.forEach(b=>b.classList.toggle('active',b.dataset.target===id));const ab=document.querySelector(`.nb[data-target="${id}"]`);if(ab)ab.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});const topBar=document.querySelector('.top'),navBar=document.querySelector('.nav-wrap');const headerH=(topBar?topBar.offsetHeight:0)+(navBar?navBar.offsetHeight:0);const y=t.getBoundingClientRect().top+window.pageYOffset-headerH-10;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});const unlock=()=>{navLock=false;window.removeEventListener('scrollend',unlock);};if('onscrollend' in window){window.addEventListener('scrollend',unlock,{once:true});}else{clearTimeout(scrollToSection._t);scrollToSection._t=setTimeout(unlock,700);}}
-navBtns.forEach(btn=>btn.addEventListener('click',()=>{if(btn.dataset.target==='s-buy'){openNotes();return;}scrollToSection(btn.dataset.target);}));
-function openNotes(){const s=document.getElementById('s-buy'),b=document.getElementById('sheetBackdrop');s.classList.add('open');s.setAttribute('aria-hidden','false');b.classList.add('open');document.body.style.overflow='hidden';}
-function closeNotes(){const s=document.getElementById('s-buy'),b=document.getElementById('sheetBackdrop');s.classList.remove('open');s.setAttribute('aria-hidden','true');b.classList.remove('open');document.body.style.overflow='';}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNotes();});
-let buys=JSON.parse(localStorage.getItem('buys_v4')||'[]');const saveBuys=()=>localStorage.setItem('buys_v4',JSON.stringify(buys));
-function renderBuys(){const c=document.getElementById('buyItems'),e=document.getElementById('buyEmpty');c.innerHTML='';if(!buys.length){e.style.display='block';return}e.style.display='none';buys.forEach((item,i)=>{const el=document.createElement('div');el.className='buy-item'+(item.done?' bought':'');el.innerHTML=`<div class="cb" onclick="tgBuy(${i})"><span class="tick">✓</span></div><div class="buy-item-txt" onclick="tgBuy(${i})">${item.text}</div><button class="buy-del" onclick="delBuy(${i})">×</button>`;c.appendChild(el);});}
-function addBuy(){const inp=document.getElementById('buyInput'),v=inp.value.trim();if(!v)return;buys.push({text:v,done:false});inp.value='';saveBuys();renderBuys();}
-function tgBuy(i){buys[i].done=!buys[i].done;saveBuys();renderBuys();}function delBuy(i){buys.splice(i,1);saveBuys();renderBuys();}
-async function saveToNotion(){const items=document.querySelectorAll('.section .item');const checks={};const labels=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Konkuk Lecture','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','PM Toner','Serum PM','Retinol','Moisturizer PM','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];items.forEach((item,i)=>{if(labels[i])checks[labels[i]]=item.classList.contains('done');});const date=new Date();const dateStr=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;try{const res=await fetch('/api/notion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:dateStr,checks})});if(res.ok){alert('Saved!');}else{let msg='';try{const err=await res.json();msg=(err&&(err.message||JSON.stringify(err)))||('HTTP '+res.status);}catch(_){msg='HTTP '+res.status;}alert('Failed: '+msg);}}catch(e){alert('Error: '+e.message);}}
-loadChecks();updateProg();renderBuys();
-window.scrollTo(0,0);navBtns.forEach(b=>b.classList.toggle('active',b.dataset.target==='s-wake'));
-window.addEventListener('load',()=>window.scrollTo(0,0));
-</script>
-</body>
-</html>
+/* 시간은 기존 앱에 없던 값이라 추정치예요. 여기만 고치면 시계가 따라 바뀝니다. */
+const D=[
+{s:"06:45",e:"07:00",name:"Wake & morning",g:[
+ ["Wake up",[["Get up at alarm","Move within 5 seconds. No snooze."]]],
+ ["Morning routine",[["Oil pulling (5 min)","1 tsp coconut oil."],["Brush teeth","Including tongue scraping."],["Check weather","Bring umbrella if rain expected."],["Morning hydration",""]]]]},
+{s:"07:00",e:"07:20",name:"Shower & hair",g:[
+ ["Shower",[["Lukewarm shower","Hot water destroys lipid barrier. End with cold water."]]],
+ ["Hair, daily",[["Shampoo → Conditioner (2–3 min) → Cold rinse","Mid-lengths to ends only. Never on scalp."],["Blow dry → Moroccan hair oil","Apply oil before blow drying. Ends only."]]],
+ ["Hair mask day · 2–3×/wk",[["Shampoo → Hair mask → Cold rinse → Oil","Skip conditioner on hair mask days."]]],
+ ["Body",[["Body lotion, while skin is damp",""],["Exfoliate","Daily exfoliation damages the skin barrier.","1–2×/wk"]]]]},
+{s:"07:20",e:"07:45",name:"Lens & AM skin",g:[
+ ["Lens & accessories",[["Insert lenses + rewetting drops","Preservative-free single-use vials. Max 8 hours."],["Accessories","Watch, rings, necklace."]]],
+ ["AM skincare",[["① Mild acidic cleanser","pH 5.5 foam cleanser."],["② Toner","Whatever's gentle and hydrating."],["③ Serum","Layer both, thinner one first."],["④ Moisturizer",""],["⑤ Sunscreen","SPF50+ PA++++.","must","Sunscreen"],["⑥ Primer","Right before makeup."],["⑦ Makeup",""]]],
+ ["Deodorant & body spray",[["Apply deodorant","Only when skin is completely dry."],["Body spray","SPF reapply, midday/over makeup."]]]]},
+{s:"07:45",e:"09:00",name:"Commute",g:[
+ ["",[["Review today's plan","Todoist + Mindlist + Notion Calendar."],["Morning mindset","One intention or 30 sec visualization."],["Music or podcast","Volume under 60%."]]]]},
+{s:"09:00",e:"13:00",name:"Lab · morning",g:[
+ ["",[["Research",""],["Lunch at 12:00","Eat light. Stop at 80% full."],["Floss + brush teeth","After lunch."],["AM supplements","Vitamin C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen.","","AM Supp"]]]]},
+{s:"13:00",e:"18:00",name:"Lab · afternoon",g:[["",[["Research",""]]]]},
+{s:"18:00",e:"19:30",name:"Return",g:[
+ ["",[["Remove lenses","Right when you get home."],["English vocab",""],["Konkuk lecture",""],["Decompress","Drama, film, music, or reading."]]]]},
+{s:"19:30",e:"23:00",name:"Lab · evening",g:[
+ ["",[["Dinner at 19:30","Eat light."],["Semiconductor study","Pomodoro / deep work."],["PM supplements, with dinner","NAC, Magnesium, Zinc, B complex, Probiotics.","","PM Supp"]]]]},
+{s:"23:00",e:"23:20",name:"Work out",g:[
+ ["",[["Strength training","Squat, deadlift, pull-up, bench press.","3×/week"],["Cardio","20–30 min.","3–4×/week"],["Stretching + foam rolling","Daily 10 min."]]]]},
+{s:"23:20",e:"23:40",name:"PM shower & back",g:[
+ ["",[["Shower within 30 min of work out","Rinse conditioner last."],["Back brush","While washing."],["Back acne treatment","Acnon or BHA body wash."],["Niacinamide on underarms","Fades discoloration over time."],["Driclor","Completely dry underarms.","2–3×/week"],["Scalp care, PDRN ampoule","On towel-dried scalp."]]]]},
+{s:"23:40",e:"23:50",name:"PM skin",g:[
+ ["",[["① Double cleanse","Oil cleanser / balm → mild acidic foam."],["② Toner","HA + niacinamide."],["③ Serum",""],["④ Retinol","PM only.","3–4×/wk"],["⑤ Moisturizer","Thicker than morning."],["⑥ Lip care","Lip balm or sleeping mask."]]]]},
+{s:"23:50",e:"24:00",name:"Massage & dental",g:[
+ ["Massage",[["Jaw + eye + scalp massager","Lymph flow route. Scalp included.","4×/wk","Massage"]]],
+ ["Dental care",[["Floss","Before brushing."],["Brush teeth","2+ min."],["Whitening treatment","Strips or pen, per product."],["Retainer, clean and insert","Insert after brushing.","","Retainer"]]]]},
+{s:"24:00",e:"24:30",name:"Wind down",g:[
+ ["",[["Check pillowcase","2×/wk."],["Phone off 30 min before bed","Dim warm lights."],["Set tomorrow's alarm","One alarm, no snooze."],["Magnesium glycinate before bed","200–400mg."]]]]}];
+
+const toM=t=>+t.slice(0,2)*60+ +t.slice(3);
+const fmt=t=>+t.slice(0,2)>=24?String(+t.slice(0,2)-24).padStart(2,"0")+t.slice(2):t;
+D.forEach(d=>d.items=d.g.flatMap(g=>g[1]));
+const today=(()=>{const n=new Date();return `${n.getFullYear()}-${n.getMonth()+1}-${n.getDate()}`})();
+const KEY='routine_v4';
+/* classic view order: Return comes after Lab · evening there */
+const ORDER=[0,1,2,3,4,5,7,6,8,9,10,11,12];
+const FLAT=[];ORDER.forEach(i=>D[i].items.forEach((_,j)=>FLAT.push([i,j])));
+const load=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let S=D.map(d=>d.items.map(()=>false));
+function pull(){const a=load(KEY,[]);S=D.map(d=>d.items.map(()=>false));FLAT.forEach(([i,j],n)=>{if(a[n])S[i][j]=true})}
+function persist(){save(KEY,FLAT.map(([i,j])=>S[i][j]))}
+pull();
+const nowM=()=>{const n=new Date();return n.getHours()*60+n.getMinutes()};
+const inSeg=(d,m)=>(m>=toM(d.s)&&m<toM(d.e))||(m+1440>=toM(d.s)&&m+1440<toM(d.e));
+const curIdx=()=>D.findIndex(d=>inSeg(d,nowM()));
+const nearIdx=()=>{const c=curIdx();if(c>=0)return c;const n=D.findIndex(d=>toM(d.s)>nowM());return n<0?0:n};
+let sel=nearIdx();
+
+const R1=176,R0=114,ang=m=>m/1440*2*Math.PI-Math.PI/2,pt=(r,a)=>[(r*Math.cos(a)).toFixed(2),(r*Math.sin(a)).toFixed(2)];
+function arc(a0,a1,r0,r1){const L=a1-a0>Math.PI?1:0,[x0,y0]=pt(r1,a0),[x1,y1]=pt(r1,a1),[x2,y2]=pt(r0,a1),[x3,y3]=pt(r0,a0);return `M${x0} ${y0}A${r1} ${r1} 0 ${L} 1 ${x1} ${y1}L${x2} ${y2}A${r0} ${r0} 0 ${L} 0 ${x3} ${y3}Z`}
+
+function drawDial(){
+  const cur=curIdx();let h=`<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,0,0,.09)" stroke-width="2"/></pattern></defs>`;
+  for(let i=0;i<24;i++){const a=ang(i*60),[x0,y0]=pt(R1+5,a),[x1,y1]=pt(R1+(i%6?10:15),a);h+=`<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="rgba(0,0,0,${i%6?.18:.45})" stroke-width="${i%6?1:1.6}"/>`}
+  [[0,'0'],[6,'6'],[12,'12'],[18,'18']].forEach(([hh,l])=>{const[x,y]=pt(R0-15,ang(hh*60));h+=`<text x="${x}" y="${y}" fill="#9b9b9b" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" dominant-baseline="middle">${l}</text>`});
+  // sleep
+  h+=`<path d="${arc(ang(toM(D.at(-1).e))+.01,ang(toM(D[0].s)+1440)-.01,R0,R1)}" fill="rgba(255,255,255,.42)"/>`;
+  const[sx,sy]=pt((R0+R1)/2,ang(((toM(D.at(-1).e)+toM(D[0].s)+1440)/2)%1440));h+=`<text x="${sx}" y="${sy}" fill="#5f5f5c" font-size="10" font-weight="600" font-family="JetBrains Mono,monospace" letter-spacing="1.2" text-anchor="middle" dominant-baseline="middle">SLEEP</text>`;
+  D.forEach((d,i)=>{const a0=ang(toM(d.s))+.01,a1=ang(toM(d.e))-.01,f=S[i].filter(Boolean).length/S[i].length;
+    const base=i===sel?.2:i===cur?.13:.075;
+    h+=`<g class="seg" data-i="${i}" tabindex="0" role="button" aria-label="${d.name}, ${fmt(d.s)}부터 ${fmt(d.e)}"><path class="base" d="${arc(a0,a1,R0,R1)}" fill="rgba(0,0,0,${base})"/>${f?`<path d="${arc(a0,a1,R0,R0+(R1-R0)*f)}" style="fill:var(--grad)" opacity="${f===1?1:.88}"/>`:''}</g>`});
+  if(D[sel]){const d=D[sel];h+=`<path d="${arc(ang(toM(d.s))+.01,ang(toM(d.e))-.01,R1+2,R1+5)}" style="fill:var(--grad)"/>`}
+  const a=ang(nowM()),[hx,hy]=pt(R1+8,a),[bx,by]=pt(R0-4,a);
+  h+=`<line x1="${bx}" y1="${by}" x2="${hx}" y2="${hy}" style="stroke:var(--needle)" stroke-width="2.5" stroke-linecap="round"/><circle cx="${hx}" cy="${hy}" r="5" style="fill:var(--needle)"/>`;
+  svg.innerHTML=h;
+  svg.querySelectorAll('.seg').forEach(g=>{const go=()=>{sel=+g.dataset.i;render()};g.onclick=go;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}}});
+}
+const keyMap=[];D.forEach((d,i)=>d.items.forEach((x,j)=>{if(x[3])keyMap.push({k:x[3],i,j})}));
+function render(){
+  const d=D[sel],cur=curIdx(),dn=S[sel].filter(Boolean).length;
+  cTime.textContent=`${fmt(d.s)}–${fmt(d.e)}`;cName.textContent=d.name;
+  cCnt.textContent=dn===d.items.length?'complete':`${dn} / ${d.items.length} done`;
+  cNow.innerHTML=sel===cur?'<span class="now">Now</span>':(cur>=0?'<button class="tonow" id="toNow">Back to now</button>':'');const tn=document.getElementById('toNow');if(tn)tn.onclick=()=>{sel=nearIdx();render()};
+  lTitle.textContent=d.name;lTime.textContent=`${fmt(d.s)} — ${fmt(d.e)}`;lCnt.textContent=`${dn}/${d.items.length}`;segbar.innerHTML=S[sel].map(x=>`<i class="${x?'on':''}"></i>`).join('');const pv=D[(sel+D.length-1)%D.length],nx=D[(sel+1)%D.length];pName.textContent=pv.name;pTime.textContent=fmt(pv.s);nName.textContent=nx.name;nTime.textContent=fmt(nx.s);
+  let j=0;
+  list.innerHTML=d.g.map(([label,its])=>`${label?`<div class="grp"><span>${label}</span></div>`:''}${its.map(x=>{const k=j++;const tag=x[2]==='must'?'<span class="tag must">Non-negotiable</span>':x[2]?`<span class="tag">${x[2]}</span>`:'';return `<button class="it ${S[sel][k]?'done':''}" data-j="${k}" aria-pressed="${S[sel][k]}"><span class="knob"></span><span><div class="t">${x[0]}${tag}</div>${x[1]?`<div class="n">${x[1]}</div>`:''}</span></button>`}).join('')}`).join('');
+  list.querySelectorAll('.it').forEach(b=>b.onclick=()=>{const k=+b.dataset.j;S[sel][k]=!S[sel][k];persist();render()});
+  keys.innerHTML=keyMap.map((m,n)=>`<button class="key ${S[m.i][m.j]?'on':''}" data-n="${n}" aria-pressed="${S[m.i][m.j]}"><i>✓</i>${m.k}</button>`).join('');
+  keys.querySelectorAll('.key').forEach(b=>b.onclick=()=>{const m=keyMap[+b.dataset.n];S[m.i][m.j]=!S[m.i][m.j];persist();render()});
+  const all=S.flat(),a=all.filter(Boolean).length;sum.textContent=`${a} / ${all.length} complete`;pct.textContent=Math.round(a/all.length*100)+'%';kCount.textContent=keyMap.filter(m=>S[m.i][m.j]).length+'/'+keyMap.length;
+  allclear.style.display=a===all.length?'block':'none';
+  drawDial();
+}
+prev.onclick=()=>{sel=(sel+D.length-1)%D.length;render()};
+next.onclick=()=>{sel=(sel+1)%D.length;render()};
+
+
+/* 살 것 */
+let buys=load('buys_v4',[]);
+function renderBuys(){buysEl.innerHTML=buys.length?buys.map((b,i)=>`<div class="buy ${b.done?'done':''}"><button class="knob" data-i="${i}" aria-label="샀음 표시" style="${b.done?'background:var(--grad);border-color:var(--grad)':''}"></button><span class="t">${b.text.replace(/</g,'&lt;')}</span><button class="x" data-x="${i}" aria-label="지우기">×</button></div>`).join(''):'<div class="empty">Nothing to buy.</div>';
+  buysEl.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{buys[b.dataset.i].done=!buys[b.dataset.i].done;save('buys_v4',buys);renderBuys()});
+  buysEl.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{buys.splice(b.dataset.x,1);save('buys_v4',buys);renderBuys()})}
+const buysEl=document.getElementById('buys');
+function addBuy(){const v=buyIn.value.trim();if(!v)return;buys.push({text:v,done:false});buyIn.value='';save('buys_v4',buys);renderBuys()}
+buyAdd.onclick=addBuy;buyIn.onkeydown=e=>{if(e.key==='Enter')addBuy()};
+openBuy.onclick=()=>{app.classList.add('open');setTimeout(()=>buyIn.focus(),250)};
+const close=()=>app.classList.remove('open');closeBuy.onclick=close;bd.onclick=close;document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+
+function sky(){const n=new Date();tDate.textContent=`${n.getFullYear()}.${String(n.getMonth()+1).padStart(2,'0')}.${String(n.getDate()).padStart(2,'0')}`}
+
+
+/* save to Notion: same labels & endpoint as classic view */
+const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Konkuk Lecture','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','PM Toner','Serum PM','Retinol','Moisturizer PM','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
+async function saveToNotion(){const checks={};FLAT.forEach(([i,j],n)=>{if(LABELS[n])checks[LABELS[n]]=S[i][j]});
+ const d=new Date(),dateStr=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+ saveBtn.disabled=true;saveBtn.textContent='Saving';
+ try{const res=await fetch('/api/notion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:dateStr,checks})});
+  if(res.ok){saveBtn.textContent='Saved';}else{let msg='';try{const err=await res.json();msg=(err&&(err.message||JSON.stringify(err)))||('HTTP '+res.status)}catch(_){msg='HTTP '+res.status}saveBtn.textContent='Save';alert('Failed: '+msg)}}
+ catch(e){saveBtn.textContent='Save';alert('Error: '+e.message)}
+ finally{saveBtn.disabled=false;setTimeout(()=>{if(saveBtn.textContent==='Saved')saveBtn.textContent='Save'},1600)}}
+saveBtn.onclick=saveToNotion;
+resetBtn.onclick=()=>{if(confirm('Reset all checks?')){S=D.map(d=>d.items.map(()=>false));persist();render()}};
+window.addEventListener('storage',e=>{if(e.key===KEY){pull();render()}if(e.key==='buys_v4'){buys=load('buys_v4',[]);renderBuys()}});
+window.addEventListener('pageshow',()=>{pull();buys=load('buys_v4',[]);renderBuys();render()});
+sky();renderBuys();render();
+setInterval(()=>{sky();drawDial()},60000);
+</script></body></html>
