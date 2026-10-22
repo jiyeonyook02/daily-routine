@@ -45,9 +45,9 @@ export default async function handler(req, res) {
   // 평일은 Daily Log, 토요일·공휴일은 Weekend Log, 일요일은 Baek Log 로 따로 저장
   const type = day && day.type;
   const dbId = type === 'Saturday'
-    ? (process.env.NOTION_WEEKEND_DB_ID || 'b0c0211e31a542eb8a3e1f528eeab84d')
+    ? (process.env.NOTION_WEEKEND_DB_ID || '401d6b58c4ff81e6a03ff6c1cd9e163a')
     : type === 'Sunday'
-      ? (process.env.NOTION_BAEK_DB_ID || 'a7be156feaf24a038c715b9fe739c4bc')
+      ? (process.env.NOTION_BAEK_DB_ID || '401d6b58c4ff8187829be446a9ff585f')
       : process.env.NOTION_DB_ID;
 
   const headers = {
