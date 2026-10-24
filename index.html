@@ -268,7 +268,7 @@ const WD=[
  ["",[["Research",""],["Lunch at 12:00","Eat light. Stop at 80% full."],["Floss + brush teeth","After lunch."],["AM supplements","Vitamin C, Omega-3, D3+K2, CoQ10, Astaxanthin, Collagen.","","AM Supp"]]]]},
 {s:"13:00",e:"18:00",name:"Lab · afternoon",g:[["",[["Research",""]]]]},
 {s:"18:00",e:"19:30",name:"Return",g:[
- ["",[["Remove lenses","Right when you get home."],["English vocab",""],["Konkuk lecture",""],["Decompress","Drama, film, music, or reading."]]]]},
+ ["",[["Remove lenses","Right when you get home."],["English vocab",""],["Reading",""],["Decompress","Drama, film, music, or reading."]]]]},
 {s:"19:30",e:"23:00",name:"Lab · evening",g:[
  ["",[["Dinner at 19:30","Eat light."],["Semiconductor study","Pomodoro / deep work."],["PM supplements, with dinner","NAC, Magnesium, Zinc, B complex, Probiotics.","","PM Supp"]]]]},
 {s:"23:00",e:"23:20",name:"Work out",g:[
@@ -287,7 +287,7 @@ const toM=t=>+t.slice(0,2)*60+ +t.slice(3);
 const fmt=t=>+t.slice(0,2)>=24?String(+t.slice(0,2)-24).padStart(2,"0")+t.slice(2):t;
 const prep=arr=>{arr.forEach(d=>d.items=d.g.flatMap(g=>g[1]));return arr};
 prep(WD);
-const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Konkuk Lecture','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','PM Toner','Serum PM','Retinol','Moisturizer PM','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
+const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Reading','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','PM Toner','Serum PM','Retinol','Moisturizer PM','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
 /* classic view / Notion order: Return comes after Lab · evening there */
 [0,1,2,3,4,5,7,6,8,9,10,11,12].flatMap(i=>WD[i].items).forEach((x,n)=>x.L=LABELS[n]);
 
