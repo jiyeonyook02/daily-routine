@@ -302,7 +302,7 @@ const MODES={
   {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",midA]]},
   {s:"13:00",e:"18:00",name:"Day B",block:'B',g:[]},
   {s:"18:00",e:"23:00",name:"Day C",block:'C',g:[["",midC]]},...tail]),
- sun:prep([...head,{s:"09:00",e:"23:00",name:"Baek",baek:true,g:[["",[...midA,...midC]]]},...tail])};
+ sun:prep([...head,{s:"09:00",e:"23:00",name:"Baek",baek:true,g:[["",[...midA,...midC.filter(x=>x.L!=='English Vocab')]]]},...tail])};
 const DAYTYPE={weekday:'Weekday',sat:'Saturday',sun:'Sunday'};
 
 /* each day type keeps its own checks; weekday shares routine_v4 with the classic view */
