@@ -398,7 +398,7 @@ function arc(a0,a1,r0,r1){const L=a1-a0>Math.PI?1:0,[x0,y0]=pt(r1,a0),[x1,y1]=pt
 function drawDial(){
   const cur=curIdx();let h='';
   for(let i=0;i<24;i++){const a=ang(i*60),[x0,y0]=pt(R1+5,a),[x1,y1]=pt(R1+(i%6?10:15),a);h+=`<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="rgba(0,0,0,${i%6?.18:.45})" stroke-width="${i%6?1:1.6}"/>`}
-  [[0,'0'],[6,'6'],[12,'12'],[18,'18']].forEach(([hh,l])=>{const[x,y]=pt(R0-15,ang(hh*60));h+=`<text x="${x}" y="${y}" fill="#9b9b9b" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" dominant-baseline="middle">${l}</text>`});
+  [[0,'0'],[6,'6'],[12,'12'],[18,'18']].forEach(([hh,l])=>{const[x,y]=pt(R0-10,ang(hh*60));h+=`<text x="${x}" y="${y}" fill="#9b9b9b" font-size="9" font-family="JetBrains Mono,monospace" text-anchor="middle" dominant-baseline="middle">${l}</text>`});
   h+=`<path d="${arc(ang(toM(D.at(-1).e))+.01,ang(toM(D[0].s)+1440)-.01,R0,R1)}" fill="rgba(255,255,255,.42)"/>`;
   D.forEach((d,i)=>{const a0=ang(toM(d.s))+.01,a1=ang(toM(d.e))-.01,[dn,tt]=cnt(i),f=tt?dn/tt:0;
     const base=i===sel?.2:i===cur?.13:.075;
