@@ -225,9 +225,64 @@ body{background:transparent}
 .note1 input{width:100%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.6);border-radius:12px;padding:11px 12px;font-family:var(--serif);font-size:16px;color:var(--ink);outline:0}
 .note1 input:focus{border-color:var(--grad)}
 .bodylink{margin:18px 0 0}
-</style></head><body><div class="scene" aria-hidden="true"></div><div id="app">
+
+/* ── optional looks: Obsidian (Cupertino) / Notion + font choice. Classic stays the default ── */
+.lookbtn{margin-left:10px}
+.lk-sec{padding:14px 0 10px;border-bottom:1px solid var(--line)}
+.lk-sec span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.lk-seg{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.05)}
+.lk-seg button{flex:1 0 auto;padding:9px 10px;border-radius:9px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
+.lk-seg button.on{background:var(--grad);color:var(--on)}
+.open-look #lookSheet{transform:translate(-50%,0);visibility:visible}
+html.obs{--bg:#FFFFFF;--ink:#1D1D1F;--ink2:#6E6E73;--ink3:#8E8E93;--line:rgba(0,0,0,.07);--line2:rgba(0,0,0,.12);--grad:#007AFF;--ember:#FF3B30;--needle:#007AFF;--on:#fff;--t-card:#FFFFFF;--t-card2:#F2F2F7;--t-edge:#E5E5EA;--t-page:#F2F2F7}
+html.ntn{--bg:#FFFFFF;--ink:#37352F;--ink2:#787774;--ink3:#91918E;--line:rgba(55,53,47,.08);--line2:rgba(55,53,47,.16);--grad:#2383E2;--ember:#EB5757;--needle:#37352F;--on:#fff;--t-card:#FFFFFF;--t-card2:#F7F7F5;--t-edge:#EDEDEC;--t-page:#FFFFFF}
+@media (prefers-color-scheme:dark){
+html.obs{--bg:#1C1C1E;--ink:#F5F5F7;--ink2:#AEAEB2;--ink3:#8E8E93;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.16);--grad:#0A84FF;--needle:#0A84FF;--t-card:#2C2C2E;--t-card2:#3A3A3C;--t-edge:#38383A;--t-page:#1C1C1E;color-scheme:dark}
+html.ntn{--bg:#191919;--ink:#D4D4D4;--ink2:#9B9B9B;--ink3:#7F7F7F;--line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.14);--needle:#D4D4D4;--t-card:#191919;--t-card2:#252525;--t-edge:#2F2F2F;--t-page:#191919;color-scheme:dark}}
+html.side{background:var(--t-page)}html.side body{background:transparent}
+html.side .scene{background:var(--t-page)!important}
+html.side .scene i,html.side .scene::after{display:none}
+html.side .glass,html.side .sheet{background:var(--t-card)!important;backdrop-filter:none;-webkit-backdrop-filter:none;border:1px solid var(--t-edge);box-shadow:none}
+html.side .glass::before{display:none}
+html.side .kt,html.side .key,html.side .key2 i,html.side .chip,html.side .note1 input,html.side .sv-row button,html.side .shead .arrows button,html.side .knob{background:var(--t-card2);border-color:var(--t-edge);box-shadow:none}
+html.side .kt.on,html.side .key2.on i,html.side .chip.on{background:var(--grad);border-color:var(--grad)}
+html.side .segbar i{background:var(--line2)}html.side .segbar i.on{background:var(--grad)}
+html.side .it{border-bottom-color:var(--line)}
+html.side .center::before{background:var(--t-card);box-shadow:0 0 0 1px var(--t-edge)}
+html.side .tag{border-color:var(--line2)}
+html.side .lk-seg{background:var(--t-card2)}
+/* Obsidian (Cupertino): grouped cards on a light grey page, macOS segmented control, floating blurred dock */
+html.obs .glass{border-radius:14px;border-color:transparent}
+html.obs .modes{background:var(--t-card2);border:0;border-radius:9px;padding:2px}
+html.obs .modes button{border-radius:7px;font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none}
+html.obs .modes button[aria-selected=true]{background:var(--t-card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04)}
+html.obs .dock{background:color-mix(in srgb,var(--t-card) 72%,transparent);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:.5px solid var(--t-edge);border-radius:16px}
+html.obs .dock .a{background:var(--grad);color:#fff;border-radius:12px}
+html.obs .kt{border-radius:12px}
+/* Notion: flat document, no cards, grey selection, cover band */
+html.ntn .glass{border:0;border-radius:0;padding-left:2px;padding-right:2px}
+html.ntn .keys{border-top:1px solid var(--t-edge);border-bottom:1px solid var(--t-edge)}
+html.ntn .scene{background:linear-gradient(var(--ntn-cover,#EAE4DD) 0 120px,var(--t-page) 120px)!important}
+@media (prefers-color-scheme:dark){html.ntn .scene{background:linear-gradient(#2E2A26 0 120px,var(--t-page) 120px)!important}}
+html.ntn .top{padding-top:96px}
+html.ntn .modes{background:transparent;border:0;border-bottom:1px solid var(--t-edge);border-radius:0;padding:0 0 0;gap:14px;grid-template-columns:repeat(3,auto);justify-content:start}
+html.ntn .modes button{border-radius:0;padding:8px 0;font-family:var(--serif);font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink2)}
+html.ntn .modes button[aria-selected=true]{background:transparent;color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink)}
+html.ntn .kt,html.ntn .chip{border-radius:4px}
+html.ntn .kt.on,html.ntn .chip.on{background:var(--t-card2);border-color:var(--t-edge);color:var(--ink)}
+html.ntn .kt.on .kt-name{color:var(--ink)}html.ntn .kt.on .kt-time{color:var(--ink2)}
+html.ntn .kt.on i{background:var(--grad);border-color:var(--grad)}html.ntn .kt.on i::after{border-color:#fff}
+html.ntn .dock{background:var(--t-card);border:1px solid var(--t-edge);border-radius:8px;box-shadow:0 4px 12px rgba(15,15,15,.08)}
+html.ntn .dock .a{background:var(--grad);color:#fff;border-radius:5px}
+html.ntn .knob{border-radius:3px}
+/* fonts */
+html.f-sf{--serif:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Noto Sans KR",sans-serif;--mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Noto Sans KR",sans-serif}
+html.f-ntn{--serif:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif;--mono:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif}
+html.f-sf body *,html.f-ntn body *{font-family:var(--serif)!important}
+html.f-sf text,html.f-ntn text{font-family:var(--serif)!important}
+</style><script>try{const u=JSON.parse(localStorage.getItem('baseline:ui')||'{}'),c=document.documentElement.classList;if(u.t==='obsidian')c.add('obs','side');if(u.t==='notion')c.add('ntn','side');if(u.f==='sf')c.add('f-sf');if(u.f==='ntn')c.add('f-ntn')}catch(e){}</script></head><body><div class="scene" aria-hidden="true"></div><div id="app">
 <div class="wrap">
-<header class="top"><div><b>S#01 / Baseline</b><span id="tDate"></span><a class="viewsw" href="classic.html">Classic view</a></div><div class="r"><b id="pct">0%</b><span id="sum"></span></div></header>
+<header class="top"><div><b>S#01 / Baseline</b><span id="tDate"></span><a class="viewsw" href="classic.html">Classic view</a><button class="viewsw lookbtn" id="lookBtn" type="button">Look</button></div><div class="r"><b id="pct">0%</b><span id="sum"></span></div></header>
 <div class="modes" role="tablist" aria-label="Day type"><button data-m="weekday" role="tab">Weekday</button><button data-m="sat" role="tab">Sat · Holiday</button><button data-m="sun" role="tab">Sunday</button></div>
 <div class="dialcard"><div class="dial"><svg viewBox="-190 -190 380 380" id="svg" aria-label="하루 루틴 시계"></svg>
 <div class="center"><div class="time" id="cTime"></div><div class="name" id="cName"></div><div class="cnt" id="cCnt"></div><div id="cNow"></div></div></div></div>
@@ -243,6 +298,10 @@ body{background:transparent}
 <div class="sv-row"><button id="dPrev" aria-label="하루 전">←</button><div class="sv-date"><b id="dLabel"></b><small id="dHint"></small></div><button id="dNext" aria-label="하루 뒤">→</button></div>
 <div class="sv-sum" id="dSum"></div>
 <button class="sv-go" id="doSave">Save</button></section>
+<section class="sheet" id="lookSheet" aria-label="Look"><h3>Look<button id="closeLook" aria-label="닫기">×</button></h3>
+<div class="lk-sec"><span>Theme</span><div class="lk-seg" id="lkT"></div></div>
+<div class="lk-sec"><span>Font</span><div class="lk-seg" id="lkF"></div></div>
+<p class="empty">Saved on this device only.</p></section>
 <section class="sheet" id="sheet" aria-label="Notes"><h3>Notes<button id="closeBuy" aria-label="닫기">×</button></h3>
 <div class="add"><input id="buyIn" placeholder="Add a note" enterkeyhint="done"><button id="buyAdd">Add</button></div>
 <div id="buys"></div></section>
@@ -427,4 +486,16 @@ window.addEventListener('storage',e=>{if(e.key===KEY||e.key===WSTORE[MODE]){pull
 window.addEventListener('pageshow',()=>{pull();buys=load('buys_v4',[]);renderBuys();render()});
 sky();renderBuys();render();
 setInterval(()=>{sky();drawDial()},60000);
+
+/* look: theme + font (this device only) */
+(function(){const K='baseline:ui';const get=()=>{try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}};
+const apply=u=>{const c=document.documentElement.classList;c.toggle('obs',u.t==='obsidian');c.toggle('ntn',u.t==='notion');c.toggle('side',u.t==='obsidian'||u.t==='notion');c.toggle('f-sf',u.f==='sf');c.toggle('f-ntn',u.f==='ntn')};
+const T=[['classic','Classic'],['obsidian','Obsidian'],['notion','Notion']],F=[['garamond','EB Garamond'],['sf','SF Pro'],['ntn','Notion Sans']];
+const paint=()=>{const u=get();lkT.innerHTML=T.map(([k,v])=>`<button type="button" data-k="t" data-v="${k}" class="${(u.t||'classic')===k?'on':''}">${v}</button>`).join('');lkF.innerHTML=F.map(([k,v])=>`<button type="button" data-k="f" data-v="${k}" class="${(u.f||'garamond')===k?'on':''}">${v}</button>`).join('')};
+const pick=e=>{const b=e.target.closest('button[data-k]');if(!b)return;const u=get();u[b.dataset.k]=b.dataset.v;try{localStorage.setItem(K,JSON.stringify(u))}catch(err){}apply(u);paint()};
+lkT.onclick=pick;lkF.onclick=pick;
+lookBtn.onclick=()=>{paint();app.classList.add('open','open-look')};
+closeLook.onclick=()=>app.classList.remove('open','open-look');
+bd.addEventListener('click',()=>app.classList.remove('open-look'));document.addEventListener('keydown',e=>{if(e.key==='Escape')app.classList.remove('open-look')});
+apply(get())})();
 </script></body></html>
