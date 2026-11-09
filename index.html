@@ -262,9 +262,9 @@ html.obs .kt{border-radius:12px}
 /* Notion: flat document, no cards, grey selection, cover band */
 html.ntn .glass{border:0;border-radius:0;padding-left:2px;padding-right:2px}
 html.ntn .keys{border-top:1px solid var(--t-edge);border-bottom:1px solid var(--t-edge)}
-html.ntn .scene{background:linear-gradient(var(--ntn-cover,#EAE4DD) 0 120px,var(--t-page) 120px)!important}
-@media (prefers-color-scheme:dark){html.ntn .scene{background:linear-gradient(#2E2A26 0 120px,var(--t-page) 120px)!important}}
-html.ntn .top{padding-top:96px}
+html.ntn .scene{background:linear-gradient(#EAE4DD 0 92px,var(--t-page) 92px)!important}
+@media (prefers-color-scheme:dark){html.ntn .scene{background:linear-gradient(#2E2A26 0 92px,var(--t-page) 92px)!important}}
+html.ntn .top{padding-top:100px}
 html.ntn .modes{background:transparent;border:0;border-bottom:1px solid var(--t-edge);border-radius:0;padding:0 0 0;gap:14px;grid-template-columns:repeat(3,auto);justify-content:start}
 html.ntn .modes button{border-radius:0;padding:8px 0;font-family:var(--serif);font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink2)}
 html.ntn .modes button[aria-selected=true]{background:transparent;color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink)}
@@ -275,6 +275,8 @@ html.ntn .kt.on i{background:var(--grad);border-color:var(--grad)}html.ntn .kt.o
 html.ntn .dock{background:var(--t-card);border:1px solid var(--t-edge);border-radius:8px;box-shadow:0 4px 12px rgba(15,15,15,.08)}
 html.ntn .dock .a{background:var(--grad);color:#fff;border-radius:5px}
 html.ntn .knob{border-radius:3px}
+/* time ring a little smaller, every look */
+.dial{width:min(320px,86%)}
 /* fonts */
 html.f-sf{--serif:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Noto Sans KR",sans-serif;--mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Noto Sans KR",sans-serif}
 html.f-ntn{--serif:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif;--mono:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif}
