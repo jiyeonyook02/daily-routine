@@ -434,7 +434,7 @@ const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'
 function extraHTML(d){
   const note=`<label class="note1"><span>One line</span><input id="dayNote" maxlength="120" placeholder="${d.baek?'What did you do with Baek?':'What did you do?'}" value="${esc(WE.note)}"></label>`;
   if(d.block)return `<div class="pick"><div class="pick-h">${d.name} was</div><div class="chips">${['Rest','Gathering','Study'].map(o=>`<button class="chip ${WE[d.block]===o?'on':''}" data-o="${o}" aria-pressed="${WE[d.block]===o}">${o}</button>`).join('')}</div>${note}</div>`;
-  if(d.baek)return `<div class="pick"><button class="it ${WE.baek?'done':''}" id="baekBtn" aria-pressed="${WE.baek}"><span class="knob"></span><span><div class="t">Met Baek</div></span></button>${note}</div>`;
+  if(d.baek)return `<div class="pick"><button class="it ${WE.baek?'done':''}" id="baekBtn" aria-pressed="${WE.baek}"><span class="knob"></span><span><div class="t">with Baek</div></span></button>${note}</div>`;
   return '';
 }
 function render(){
