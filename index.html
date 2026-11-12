@@ -282,6 +282,18 @@ html.obs.hlt{--bg:#F2F2F7;--ink:#000000;--ink2:#6C6C70;--ink3:#8E8E93;--line:rgb
 html.hlt .glass{border-radius:16px}
 html.hlt .ttl h1{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Noto Sans KR",sans-serif;font-weight:700;letter-spacing:-.02em}
 @media (prefers-color-scheme:dark){html.side .dial .base{fill:#FFFFFF;fill-opacity:.13}html.side .dial .base:nth-child(odd){fill-opacity:.18}}
+/* Health Pro: white page, white cards with soft shadow */
+html.obs.hlt.hpro{--bg:#FFFFFF;--t-page:#FFFFFF;--t-card:#FFFFFF;--t-card2:#F2F2F7;--t-edge:#ECECEF}
+html.hpro .glass{border:.5px solid var(--t-edge)!important;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05)!important}
+html.hpro .dock{box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.08)}
+@media (prefers-color-scheme:dark){html.obs.hlt.hpro{--bg:#000000;--t-page:#000000;--t-card:#1C1C1E;--t-card2:#2C2C2E;--t-edge:#2C2C2E}html.hpro .glass{box-shadow:none!important}}
+.lk-acc{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.lk-acc button{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;border:1px solid var(--line2);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.lk-acc button i{width:12px;height:12px;border-radius:50%;background:var(--sw)}
+.lk-acc button[data-v=""] i{border:1.5px dashed var(--ink3)}
+.lk-acc button.on{border-color:var(--ink);color:var(--ink)}
+.lk-acc label{position:relative;width:30px;height:30px;border-radius:50%;border:1px solid var(--line2);background:conic-gradient(#F2785C,#FF9F0A,#34C759,#AF52DE,#FF2D55,#F2785C);overflow:hidden}
+.lk-acc label input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
 /* time ring a little smaller, every look */
 .dial{width:min(320px,86%)}
 /* fonts */
@@ -289,7 +301,7 @@ html.f-sf{--serif:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue
 html.f-ntn{--serif:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif;--mono:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif}
 html.f-sf body *,html.f-ntn body *{font-family:var(--serif)!important}
 html.f-sf text,html.f-ntn text{font-family:var(--serif)!important}
-</style><script>try{const u=JSON.parse(localStorage.getItem('baseline:ui')||'{}'),c=document.documentElement.classList;if(u.t==='obsidian')c.add('obs','side');if(u.t==='health')c.add('obs','hlt','side');if(u.t==='notion')c.add('ntn','side');if(u.f==='sf')c.add('f-sf');if(u.f==='ntn')c.add('f-ntn')}catch(e){}</script></head><body><div class="scene" aria-hidden="true"></div><div id="app">
+</style><script>try{const u=JSON.parse(localStorage.getItem('baseline:ui')||'{}'),c=document.documentElement.classList;if(u.t==='obsidian')c.add('obs','side');if(u.t==='health')c.add('obs','hlt','side');if(u.t==='healthpro')c.add('obs','hlt','hpro','side');if(u.a){document.documentElement.style.setProperty('--grad',u.a);document.documentElement.style.setProperty('--needle',u.a)}if(u.t==='notion')c.add('ntn','side');if(u.f==='sf')c.add('f-sf');if(u.f==='ntn')c.add('f-ntn')}catch(e){}</script></head><body><div class="scene" aria-hidden="true"></div><div id="app">
 <div class="wrap">
 <header class="top"><div><b>S#01 / Baseline</b><span id="tDate"></span><a class="viewsw" href="classic.html">Classic view</a><button class="viewsw lookbtn" id="lookBtn" type="button">Look</button></div><div class="r"><b id="pct">0%</b><span id="sum"></span></div></header>
 <div class="modes" role="tablist" aria-label="Day type"><button data-m="weekday" role="tab">Weekday</button><button data-m="sat" role="tab">Sat · Holiday</button><button data-m="sun" role="tab">Sunday</button></div>
@@ -310,6 +322,7 @@ html.f-sf text,html.f-ntn text{font-family:var(--serif)!important}
 <section class="sheet" id="lookSheet" aria-label="Look"><h3>Look<button id="closeLook" aria-label="닫기">×</button></h3>
 <div class="lk-sec"><span>Theme</span><div class="lk-seg" id="lkT"></div></div>
 <div class="lk-sec"><span>Font</span><div class="lk-seg" id="lkF"></div></div>
+<div class="lk-sec"><span>Point colour</span><div class="lk-acc" id="lkA"></div></div>
 <p class="empty">Saved on this device only.</p></section>
 <section class="sheet" id="sheet" aria-label="Notes"><h3>Notes<button id="closeBuy" aria-label="닫기">×</button></h3>
 <div class="add"><input id="buyIn" placeholder="Add a note" enterkeyhint="done"><button id="buyAdd">Add</button></div>
@@ -498,11 +511,11 @@ setInterval(()=>{sky();drawDial()},60000);
 
 /* look: theme + font (this device only) */
 (function(){const K='baseline:ui';const get=()=>{try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}};
-const apply=u=>{const c=document.documentElement.classList;c.toggle('obs',u.t==='obsidian'||u.t==='health');c.toggle('hlt',u.t==='health');c.toggle('ntn',u.t==='notion');c.toggle('side',u.t==='obsidian'||u.t==='notion'||u.t==='health');c.toggle('f-sf',u.f==='sf');c.toggle('f-ntn',u.f==='ntn')};
-const T=[['classic','Classic'],['obsidian','Obsidian'],['notion','Notion'],['health','Health']],F=[['garamond','EB Garamond'],['sf','SF Pro'],['ntn','Notion Sans']];
-const paint=()=>{const u=get();lkT.innerHTML=T.map(([k,v])=>`<button type="button" data-k="t" data-v="${k}" class="${(u.t||'classic')===k?'on':''}">${v}</button>`).join('');lkF.innerHTML=F.map(([k,v])=>`<button type="button" data-k="f" data-v="${k}" class="${(u.f||'garamond')===k?'on':''}">${v}</button>`).join('')};
+const apply=u=>{const c=document.documentElement.classList,hp=u.t==='healthpro';c.toggle('obs',u.t==='obsidian'||u.t==='health'||hp);c.toggle('hlt',u.t==='health'||hp);c.toggle('hpro',hp);c.toggle('ntn',u.t==='notion');c.toggle('side',u.t==='obsidian'||u.t==='notion'||u.t==='health'||hp);const rs=document.documentElement.style;if(u.a){rs.setProperty('--grad',u.a);rs.setProperty('--needle',u.a)}else{rs.removeProperty('--grad');rs.removeProperty('--needle')}c.toggle('f-sf',u.f==='sf');c.toggle('f-ntn',u.f==='ntn')};
+const T=[['classic','Classic'],['obsidian','Obsidian'],['notion','Notion'],['health','Health'],['healthpro','Health Pro']],A=[['','Theme'],['#F2785C','S#00'],['#7E0000','S#01']],F=[['garamond','EB Garamond'],['sf','SF Pro'],['ntn','Notion Sans']];
+const paint=()=>{const u=get();lkT.innerHTML=T.map(([k,v])=>`<button type="button" data-k="t" data-v="${k}" class="${(u.t||'classic')===k?'on':''}">${v}</button>`).join('');lkF.innerHTML=F.map(([k,v])=>`<button type="button" data-k="f" data-v="${k}" class="${(u.f||'garamond')===k?'on':''}">${v}</button>`).join('');lkA.innerHTML=A.map(([k,v])=>`<button type="button" data-k="a" data-v="${k}" class="${(u.a||'')===k?'on':''}" style="--sw:${k||'transparent'}"><i></i>${v}</button>`).join('')+`<label title="Pick any colour"><input type="color" id="lkAc" value="${u.a||'#7E0000'}" aria-label="Custom point colour"></label>`;lkAc.oninput=e=>{const u=get();u.a=e.target.value;try{localStorage.setItem(K,JSON.stringify(u))}catch(err){}apply(u)};lkAc.onchange=()=>paint()};
 const pick=e=>{const b=e.target.closest('button[data-k]');if(!b)return;const u=get();u[b.dataset.k]=b.dataset.v;try{localStorage.setItem(K,JSON.stringify(u))}catch(err){}apply(u);paint()};
-lkT.onclick=pick;lkF.onclick=pick;
+lkT.onclick=pick;lkF.onclick=pick;lkA.onclick=e=>{if(e.target.closest('label'))return;pick(e)};
 lookBtn.onclick=()=>{paint();app.classList.add('open','open-look')};
 closeLook.onclick=()=>app.classList.remove('open','open-look');
 bd.addEventListener('click',()=>app.classList.remove('open-look'));document.addEventListener('keydown',e=>{if(e.key==='Escape')app.classList.remove('open-look')});
