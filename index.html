@@ -341,7 +341,7 @@ const WD=[
  ["Body",[["Body lotion, while skin is damp",""],["Exfoliate","Daily exfoliation damages the skin barrier.","1–2×/wk"]]]]},
 {s:"07:20",e:"07:45",name:"Lens & AM skin",g:[
  ["Lens & accessories",[["Insert lenses + rewetting drops","Preservative-free single-use vials. Max 8 hours."],["Accessories","Watch, rings, necklace."]]],
- ["AM skincare",[["① Mild acidic cleanser","pH 5.5 foam cleanser."],["② Toner","Whatever's gentle and hydrating."],["③ Serum","Layer both, thinner one first."],["④ Moisturizer",""],["⑤ Sunscreen","SPF50+ PA++++.","must","Sunscreen"],["⑥ Lip SPF","SPF 30+ lip balm after sunscreen. Again after lunch."],["⑦ Primer","Right before makeup."],["⑧ Makeup",""]]],
+ ["AM skincare",[["① Cleanser","The Face Shop 미감수 브라이트 클렌징 폼."],["② Toner","식물나라 뽀얀쌀 맑은톤 토너."],["③ Serum","COSRX 6 Peptide Skin Booster (watery) → Biodance Collagen Peptide Serum."],["④ Moisturizer","CNP 프로폴리스 앰플 샷 크림."],["⑤ Sunscreen","Amini 데일리 저자극 수분 선크림 (SPF50+ PA+++).","must","Sunscreen"],["⑥ Lip SPF","Karl&Hans SPF50+ lip balm. Again after lunch."],["⑦ Primer","Losy Kim CCF 로즈 밀크 에센스 프렙, right before makeup."],["⑧ Makeup",""]]],
  ["Deodorant & body spray",[["Apply deodorant","Only when skin is completely dry."],["Body spray","SPF reapply, midday/over makeup."]]]]},
 {s:"07:45",e:"09:00",name:"Commute",g:[
  ["",[["Review today's plan","Todoist + Mindlist + Notion Calendar."],["Morning mindset","One intention or 30 sec visualization."],["Music or podcast","Volume under 60%."]]]]},
@@ -357,7 +357,7 @@ const WD=[
 {s:"23:20",e:"23:40",name:"PM shower & back",g:[
  ["",[["Shower within 30 min of work out","Rinse conditioner last."],["Back brush","While washing."],["Back acne treatment","Acnon or BHA body wash."],["Niacinamide on underarms","Fades discoloration over time."],["Driclor","Completely dry underarms.","2–3×/week"],["Scalp care, PDRN ampoule","On towel-dried scalp."]]]]},
 {s:"23:40",e:"23:50",name:"PM skin",g:[
- ["",[["① Double cleanse","Oil cleanser / balm → mild acidic foam."],["② Toner","HA + niacinamide."],["③ Serum",""],["④ Retinol","PM only.","3–4×/wk"],["⑤ Moisturizer","Thicker than morning."],["⑥ Lip Vaseline","Thick layer right before bed."]]]]},
+ ["",[["① Double cleanse","Senka All Clear Water (cotton pad) → 미감수 foam."],["② Reedle Shot 100","Wed · Sat. First on dry bare skin, wait until absorbed. No glycolic or retinol that night.","2×/wk"],["③ Glycolic 7%","Mon · Thu. The Ordinary toning solution on a cotton pad, no rinse.","2×/wk"],["④ Toner","식물나라 뽀얀쌀 맑은톤 토너."],["⑤ Serum","Same as morning: COSRX 6 Peptide → Biodance."],["⑥ Retinol","Tue · Fri · Sun. The Ordinary Retinol 0.5% in Squalane.","3×/wk"],["⑦ Moisturizer","CNP 프로폴리스 앰플 샷 크림."],["⑧ Spot care","Acnon on breakouts only.","as needed"],["⑨ Lip Vaseline","Thick layer right before bed."]]]]},
 {s:"23:50",e:"24:00",name:"Massage & dental",g:[
  ["Massage",[["Jaw + eye + scalp massager","Lymph flow route. Scalp included.","4×/wk","Massage"]]],
  ["Dental care",[["Floss","Before brushing."],["Brush teeth","2+ min."],["Whitening treatment","Strips or pen, per product."],["Retainer, clean and insert","Insert after brushing.","","Retainer"]]]]},
@@ -368,7 +368,7 @@ const toM=t=>+t.slice(0,2)*60+ +t.slice(3);
 const fmt=t=>+t.slice(0,2)>=24?String(+t.slice(0,2)-24).padStart(2,"0")+t.slice(2):t;
 const prep=arr=>{arr.forEach(d=>d.items=d.g.flatMap(g=>g[1]));return arr};
 prep(WD);
-const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Lip SPF','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Reading','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','PM Toner','Serum PM','Retinol','Moisturizer PM','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
+const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Lip SPF','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Reading','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','Reedle Shot','Glycolic','PM Toner','Serum PM','Retinol','Moisturizer PM','Spot Care','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
 /* classic view / Notion order: Return comes after Lab · evening there */
 [0,1,2,3,4,5,7,6,8,9,10,11,12].flatMap(i=>WD[i].items).forEach((x,n)=>x.L=LABELS[n]);
 
@@ -393,7 +393,7 @@ let KEY='routine_v4';
 const load=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 let CK={},WE={};
-function pull(){KEY=STORE[MODE];const a=load(KEY,[]);/* v5: 'Lip SPF' inserted after Sunscreen (index 18); shift checks saved before that */if(a.length===61){a.splice(18,0,false);save(KEY,a)}CK={};LABELS.forEach((l,n)=>{if(a[n])CK[l]=true});WE=Object.assign({A:'',B:'',C:'',baek:false,note:''},WSTORE[MODE]?load(WSTORE[MODE],{}):{})}
+function pull(){KEY=STORE[MODE];const a=load(KEY,[]);/* v5: 'Lip SPF' inserted after Sunscreen (index 18); shift checks saved before that */if(a.length===61){a.splice(18,0,false);save(KEY,a)}/* v6: Reedle Shot + Glycolic after Double Cleanse (48), Spot Care after Moisturizer PM (54) */if(a.length===62){a.splice(48,0,false,false);a.splice(54,0,false);save(KEY,a)}CK={};LABELS.forEach((l,n)=>{if(a[n])CK[l]=true});WE=Object.assign({A:'',B:'',C:'',baek:false,note:''},WSTORE[MODE]?load(WSTORE[MODE],{}):{})}
 function persist(){save(KEY,LABELS.map(l=>!!CK[l]))}
 function persistWE(){if(WSTORE[MODE])save(WSTORE[MODE],WE)}
 const nowM=()=>{const n=new Date();return n.getHours()*60+n.getMinutes()};
