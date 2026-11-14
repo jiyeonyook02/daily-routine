@@ -371,6 +371,9 @@ prep(WD);
 const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning Hydration','Shower','Hair Care - Shampoo','Hair Care - Oil','Hair Mask','Body Lotion','Exfoliate','Insert Lenses','Accessories','AM Cleanser','AM Toner','Serum AM','Moisturizer AM','Sunscreen','Lip SPF','Primer','Makeup','Deodorant','Body Spray','Review Plan','Morning Mindset','Music Podcast','Research A','Lunch','Lunch Dental','AM Supplements','Research B','Dinner','Semiconductor Study','PM Supplements','Remove Lenses','English Vocab','Reading','Decompress','Strength Training','Cardio','Stretching','PM Shower','Back Brush','Back Acne','Niacinamide Underarms','Driclor','Scalp Care PDRN','Double Cleanse','Reedle Shot','Glycolic','PM Toner','Serum PM','Retinol','Moisturizer PM','Spot Care','Lip Care','Jaw Eye Massager','Floss PM','Brush Teeth PM','Teeth Whitening','Retainer','Pillowcase','Phone Off','Set Alarm','Magnesium'];
 /* classic view / Notion order: Return comes after Lab · evening there */
 [0,1,2,3,4,5,7,6,8,9,10,11,12].flatMap(i=>WD[i].items).forEach((x,n)=>x.L=LABELS[n]);
+/* not habits yet (not bought): keep labels for saved-check indexes, hide from lists */
+const HIDE=new Set(['Niacinamide Underarms','Driclor']);
+WD.forEach(d=>{d.g=d.g.map(([l,its])=>[l,its.filter(x=>!HIDE.has(x.L))]).filter(g=>g[1].length);d.items=d.g.flatMap(g=>g[1])});
 
 /* weekend: same routines, Lab and commute swapped for day blocks */
 const sec=n=>WD.find(d=>d.name===n), pick=(n,t)=>sec(n).items.find(x=>x[0].startsWith(t));
