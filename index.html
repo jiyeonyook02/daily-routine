@@ -379,16 +379,20 @@ WD.forEach(d=>{d.g=d.g.map(([l,its])=>[l,its.filter(x=>!HIDE.has(x.L))]).filter(
 const sec=n=>WD.find(d=>d.name===n), pick=(n,t)=>sec(n).items.find(x=>x[0].startsWith(t));
 const midA=[pick('Lab · morning','Lunch'),pick('Lab · morning','Floss'),pick('Lab · morning','AM supp')];
 const midC=[pick('Lab · evening','Dinner'),pick('Lab · evening','PM supp'),...sec('Return').items];
-const head=[WD[0],WD[1],WD[2],{s:"07:45",e:"09:00",name:"Slow morning",g:WD[3].g}], tail=WD.slice(8);
+/* lenses: weekends only (Sat·Holiday, Sun) — put in when the day starts, out when home */
+const lensIn=pick('Lens & AM skin','Insert lenses'), lensOut=pick('Return','Remove lenses');
+const noLens=g=>g.map(([l,its])=>[l,its.filter(x=>x!==lensIn&&x!==lensOut)]).filter(g=>g[1].length);
+const head=WD.slice(0,3).map(d=>d.name==='Lens & AM skin'?{...d,g:noLens(d.g)}:d).concat({s:"07:45",e:"09:00",name:"Slow morning",g:WD[3].g}), tail=WD.slice(8);
 const MODES={
  weekday:WD,
  sat:prep([...head,
-  {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",midA]]},
+  {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",[lensIn,...midA]]]},
   {s:"13:00",e:"18:00",name:"Day B",block:'B',g:[]},
   {s:"18:00",e:"23:00",name:"Day C",block:'C',g:[["",midC.filter(x=>x.L==='Remove Lenses'||!sec('Return').items.includes(x))]]},...tail]),
  sun:prep([...head,
-  {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",midA]]},
+  {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",[lensIn,...midA]]]},
   {s:"13:00",e:"23:00",name:"Baek",baek:true,g:[["",midC.filter(x=>!['English Vocab','Reading','Decompress'].includes(x.L))]]},...tail])};
+[sec('Lens & AM skin'),sec('Return')].forEach(d=>{d.g=noLens(d.g);d.items=d.g.flatMap(g=>g[1])});
 const DAYTYPE={weekday:'Weekday',sat:'Saturday',sun:'Sunday'};
 
 /* each day type keeps its own checks; weekday shares routine_v4 with the classic view */
