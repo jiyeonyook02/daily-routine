@@ -375,6 +375,9 @@ const LABELS=['Wake Up','Oil Pulling','Brush Teeth AM','Check Weather','Morning 
 const HIDE=new Set(['Niacinamide Underarms','Driclor']);
 WD.forEach(d=>{d.g=d.g.map(([l,its])=>[l,its.filter(x=>!HIDE.has(x.L))]).filter(g=>g[1].length);d.items=d.g.flatMap(g=>g[1])});
 
+/* PM skin goes inside Massage & dental, after dental (labels already assigned above) */
+{const sk=WD.findIndex(d=>d.name==='PM skin'),md=WD.find(d=>d.name==='Massage & dental');
+ md.s=WD[sk].s;md.g=[...md.g,...WD[sk].g.map(([l,its])=>[l||'PM skin',its])];md.items=md.g.flatMap(g=>g[1]);WD.splice(sk,1)}
 /* weekend: same routines, Lab and commute swapped for day blocks */
 const sec=n=>WD.find(d=>d.name===n), pick=(n,t)=>sec(n).items.find(x=>x[0].startsWith(t));
 const midA=[pick('Lab · morning','Lunch'),pick('Lab · morning','Floss'),pick('Lab · morning','AM supp')];
