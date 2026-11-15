@@ -385,8 +385,10 @@ const MODES={
  sat:prep([...head,
   {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",midA]]},
   {s:"13:00",e:"18:00",name:"Day B",block:'B',g:[]},
-  {s:"18:00",e:"23:00",name:"Day C",block:'C',g:[["",midC.filter(x=>!sec('Return').items.includes(x))]]},...tail]),
- sun:prep([...head,{s:"09:00",e:"23:00",name:"Baek",baek:true,g:[["",[...midA,...midC.filter(x=>x.L!=='English Vocab')]]]},...tail])};
+  {s:"18:00",e:"23:00",name:"Day C",block:'C',g:[["",midC.filter(x=>x.L==='Remove Lenses'||!sec('Return').items.includes(x))]]},...tail]),
+ sun:prep([...head,
+  {s:"09:00",e:"13:00",name:"Day A",block:'A',g:[["",midA]]},
+  {s:"13:00",e:"23:00",name:"Baek",baek:true,g:[["",midC.filter(x=>x.L!=='English Vocab')]]},...tail])};
 const DAYTYPE={weekday:'Weekday',sat:'Saturday',sun:'Sunday'};
 
 /* each day type keeps its own checks; weekday shares routine_v4 with the classic view */
@@ -499,7 +501,7 @@ async function saveToNotion(){
  const checks={};D.forEach(d=>d.items.forEach(x=>{checks[x.L]=!!CK[x.L]}));
  const day={type:DAYTYPE[MODE]};
  if(MODE==='sat')Object.assign(day,{A:WE.A,B:WE.B,C:WE.C,note:WE.note});
- if(MODE==='sun')Object.assign(day,{baek:WE.baek,note:WE.note});
+ if(MODE==='sun')Object.assign(day,{A:WE.A,baek:WE.baek,note:WE.note});
  doSave.disabled=true;doSave.textContent='Saving';
  try{const res=await fetch('/api/notion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:ymd(saveDate),checks,day})});
   if(res.ok){doSave.textContent='Saved';setTimeout(closeSaveSheet,700)}else{let msg='';try{const err=await res.json();msg=(err&&(err.message||JSON.stringify(err)))||('HTTP '+res.status)}catch(_){msg='HTTP '+res.status}doSave.textContent='Save';doSave.disabled=false;alert('Failed: '+msg)}}
