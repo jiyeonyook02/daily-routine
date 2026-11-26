@@ -287,6 +287,31 @@ html.obs.hlt.hpro{--bg:#FFFFFF;--t-page:#FFFFFF;--t-card:#FFFFFF;--t-card2:#F2F2
 html.hpro .glass{border:.5px solid var(--t-edge)!important;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05)!important}
 html.hpro .dock{box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.08)}
 @media (prefers-color-scheme:dark){html.obs.hlt.hpro{--bg:#000000;--t-page:#000000;--t-card:#1C1C1E;--t-card2:#2C2C2E;--t-edge:#2C2C2E}html.hpro .glass{box-shadow:none!important}}
+/* Things look: airy white page, one blue, square checks, blue section headings (builds on the Obsidian layout) */
+html.obs.thg{--bg:#FFFFFF;--ink:#2B2F36;--ink2:#6B7280;--ink3:#8A919C;--line:rgba(20,30,50,.07);--line2:rgba(20,30,50,.13);--grad:#1A6DF0;--ember:#EF4444;--needle:#1A6DF0;--on:#fff;--t-card:#FFFFFF;--t-card2:#F5F6F8;--t-edge:#E6E8EC;--t-page:#FFFFFF}
+@media (prefers-color-scheme:dark){html.obs.thg{--bg:#1C1D20;--ink:#ECEDEF;--ink2:#A6ABB4;--ink3:#868B94;--line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.14);--grad:#4C8DFF;--needle:#4C8DFF;--t-card:#232428;--t-card2:#2E3036;--t-edge:#34363C;--t-page:#1C1D20;color-scheme:dark}}
+html.thg .glass{border-radius:10px;border:1px solid var(--t-edge)!important;box-shadow:none}
+html.thg .dialcard{background:var(--t-card)!important;border:1px solid var(--t-edge)!important;box-shadow:none!important;border-radius:12px}
+html.thg .top b{letter-spacing:.02em;text-transform:none;font-size:13px}
+html.thg .modes{background:var(--t-card2);border:0;border-radius:999px;padding:3px}
+html.thg .modes button{border-radius:999px;font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none}
+html.thg .modes button[aria-selected=true]{background:var(--grad);color:#fff;box-shadow:none}
+html.thg .keys-head,html.thg .grp{font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink3)}
+html.thg .grp{padding:16px 0 6px;border-bottom:1px solid var(--t-edge)}
+html.thg .sh-top h2,html.thg .shead h2{color:var(--grad);font-weight:700;font-size:20px;letter-spacing:-.01em}
+html.thg .shead2{border-bottom:1px solid var(--t-edge);padding-bottom:10px;margin-bottom:2px}
+html.thg .sh-cnt,html.thg .shead2 small{font-family:var(--serif);letter-spacing:0}
+html.thg .knob{border-radius:5px;background:var(--t-card)}
+html.thg .it{border-bottom-color:var(--line)}
+html.thg .kt,html.thg .key{border-radius:10px}
+html.thg .kt.on,html.thg .key.on,html.thg .key2.on i{background:var(--grad);border-color:var(--grad)}
+html.thg .tag{font-family:var(--serif);letter-spacing:0;text-transform:none;border-radius:999px;background:var(--t-card2);border-color:transparent;color:var(--ink2)}
+html.thg .tag.must{background:var(--ember);color:#fff}
+html.thg .sibs{border-top-color:var(--t-edge)}
+html.thg .dock{background:var(--t-card);border:1px solid var(--t-edge);border-radius:14px;box-shadow:0 6px 20px rgba(20,30,50,.08)}
+html.thg .dock a,html.thg .dock button{color:var(--ink);font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none;font-weight:500}
+html.thg .dock .a{background:var(--grad);color:#fff;border-radius:10px}
+html.thg .center .now{background:var(--grad)}
 .lk-acc{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .lk-acc button{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;border:1px solid var(--line2);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
 .lk-acc button i{width:12px;height:12px;border-radius:50%;background:var(--sw)}
@@ -301,7 +326,7 @@ html.f-sf{--serif:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue
 html.f-ntn{--serif:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif;--mono:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Noto Sans KR",sans-serif}
 html.f-sf body *,html.f-ntn body *{font-family:var(--serif)!important}
 html.f-sf text,html.f-ntn text{font-family:var(--serif)!important}
-</style><script>try{const u=JSON.parse(localStorage.getItem('baseline:ui')||'{}'),c=document.documentElement.classList;if(u.t==='obsidian')c.add('obs','side');if(u.t==='health')c.add('obs','hlt','side');if(u.t==='healthpro')c.add('obs','hlt','hpro','side');if(u.a){document.documentElement.style.setProperty('--grad',u.a);document.documentElement.style.setProperty('--needle',u.a)}if(u.t==='notion')c.add('ntn','side');if(u.f==='sf')c.add('f-sf');if(u.f==='ntn')c.add('f-ntn')}catch(e){}</script></head><body><div class="scene" aria-hidden="true"></div><div id="app">
+</style><script>try{const u=JSON.parse(localStorage.getItem('baseline:ui')||'{}'),c=document.documentElement.classList;if(u.t==='obsidian')c.add('obs','side');if(u.t==='health')c.add('obs','hlt','side');if(u.t==='healthpro')c.add('obs','hlt','hpro','side');if(u.a){document.documentElement.style.setProperty('--grad',u.a);document.documentElement.style.setProperty('--needle',u.a)}if(u.t==='notion')c.add('ntn','side');if(u.t==='things')c.add('obs','thg','side');if(u.f==='sf')c.add('f-sf');if(u.f==='ntn')c.add('f-ntn')}catch(e){}</script></head><body><div class="scene" aria-hidden="true"></div><div id="app">
 <div class="wrap">
 <header class="top"><div><b>S#01 / Baseline</b><span id="tDate"></span><a class="viewsw" href="classic.html">Classic view</a><button class="viewsw lookbtn" id="lookBtn" type="button">Look</button></div><div class="r"><b id="pct">0%</b><span id="sum"></span></div></header>
 <div class="modes" role="tablist" aria-label="Day type"><button data-m="weekday" role="tab">Weekday</button><button data-m="sat" role="tab">Sat · Holiday</button><button data-m="sun" role="tab">Sunday</button></div>
@@ -525,8 +550,8 @@ setInterval(()=>{sky();drawDial()},60000);
 
 /* look: theme + font (this device only) */
 (function(){const K='baseline:ui';const get=()=>{try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}};
-const apply=u=>{const c=document.documentElement.classList,hp=u.t==='healthpro';c.toggle('obs',u.t==='obsidian'||u.t==='health'||hp);c.toggle('hlt',u.t==='health'||hp);c.toggle('hpro',hp);c.toggle('ntn',u.t==='notion');c.toggle('side',u.t==='obsidian'||u.t==='notion'||u.t==='health'||hp);const rs=document.documentElement.style;if(u.a){rs.setProperty('--grad',u.a);rs.setProperty('--needle',u.a)}else{rs.removeProperty('--grad');rs.removeProperty('--needle')}c.toggle('f-sf',u.f==='sf');c.toggle('f-ntn',u.f==='ntn')};
-const T=[['classic','Classic'],['obsidian','Obsidian'],['notion','Notion'],['health','Health'],['healthpro','Health Pro']],A=[['','Theme'],['#F2785C','S#00'],['#7E0000','S#01']],F=[['garamond','EB Garamond'],['sf','SF Pro'],['ntn','Notion Sans']];
+const apply=u=>{const c=document.documentElement.classList,hp=u.t==='healthpro';c.toggle('obs',u.t==='obsidian'||u.t==='health'||hp||u.t==='things');c.toggle('thg',u.t==='things');c.toggle('hlt',u.t==='health'||hp);c.toggle('hpro',hp);c.toggle('ntn',u.t==='notion');c.toggle('side',u.t==='obsidian'||u.t==='notion'||u.t==='health'||hp||u.t==='things');const rs=document.documentElement.style;if(u.a){rs.setProperty('--grad',u.a);rs.setProperty('--needle',u.a)}else{rs.removeProperty('--grad');rs.removeProperty('--needle')}c.toggle('f-sf',u.f==='sf');c.toggle('f-ntn',u.f==='ntn')};
+const T=[['classic','Classic'],['obsidian','Obsidian'],['notion','Notion'],['health','Health'],['healthpro','Health Pro'],['things','Things']],A=[['','Theme'],['#F2785C','S#00'],['#7E0000','S#01']],F=[['garamond','EB Garamond'],['sf','SF Pro'],['ntn','Notion Sans']];
 const paint=()=>{const u=get();lkT.innerHTML=T.map(([k,v])=>`<button type="button" data-k="t" data-v="${k}" class="${(u.t||'classic')===k?'on':''}">${v}</button>`).join('');lkF.innerHTML=F.map(([k,v])=>`<button type="button" data-k="f" data-v="${k}" class="${(u.f||'garamond')===k?'on':''}">${v}</button>`).join('');lkA.innerHTML=A.map(([k,v])=>`<button type="button" data-k="a" data-v="${k}" class="${(u.a||'')===k?'on':''}" style="--sw:${k||'transparent'}"><i></i>${v}</button>`).join('')+`<label title="Pick any colour"><input type="color" id="lkAc" value="${u.a||'#7E0000'}" aria-label="Custom point colour"></label>`;lkAc.oninput=e=>{const u=get();u.a=e.target.value;try{localStorage.setItem(K,JSON.stringify(u))}catch(err){}apply(u)};lkAc.onchange=()=>paint()};
 const pick=e=>{const b=e.target.closest('button[data-k]');if(!b)return;const u=get();u[b.dataset.k]=b.dataset.v;try{localStorage.setItem(K,JSON.stringify(u))}catch(err){}apply(u);paint()};
 lkT.onclick=pick;lkF.onclick=pick;lkA.onclick=e=>{if(e.target.closest('label'))return;pick(e)};
